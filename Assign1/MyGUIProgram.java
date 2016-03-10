@@ -5,11 +5,10 @@ import java.awt.Frame;  // Using Frame class in package java.awt
 public class MyGUIProgram extends Frame {
  
    // Constructor to setup the GUI components
-   public MyGUIProgram() { ...... }
+   public MyGUIProgram() {}
 
    // Other methods
-   ......
-   ......
+
 
    // The entry main() method
    public static void main(String[] args) {
