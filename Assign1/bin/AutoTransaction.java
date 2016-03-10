@@ -14,5 +14,21 @@ import java.sql.*; // Java package for accessing Oracle
 import java.io.*; // Java package includes Console for getting password from user and printing to screen
 
 public class AutoTransaction {
+	private String Buyer;
+	private String Seller;
+	private String Date;
+	private String Price;
 	
+	public AutoTransaction(String buyer, String seller, String date, String price) {
+		super();
+		Buyer = buyer;
+		Seller = seller;
+		Date = date;
+		Price = price;
+	}
+	
+	public void MakeTransaction() {
+		// Do Java/SQL stuff here.
+		
+	}
 }

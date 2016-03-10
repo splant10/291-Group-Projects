@@ -20,6 +20,7 @@ public class GroupProject1 {
 	private JTextField textSeller;
 	private JTextField textDate;
 	private JTextField textPrice;
+	
 
 	/**
 	 * Launch the application.
@@ -54,7 +55,7 @@ public class GroupProject1 {
 		frame.getContentPane().setLayout(null);
 		
 		textUserName = new JTextField();
-		textUserName.setBounds(12, 33, 221, 19);
+		textUserName.setBounds(12, 33, 177, 19);
 		frame.getContentPane().add(textUserName);
 		textUserName.setColumns(10);
 		
@@ -63,11 +64,11 @@ public class GroupProject1 {
 		frame.getContentPane().add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(245, 12, 100, 15);
+		lblPassword.setBounds(201, 12, 100, 15);
 		frame.getContentPane().add(lblPassword);
 		
 		textPassword = new JPasswordField();
-		textPassword.setBounds(245, 33, 229, 19);
+		textPassword.setBounds(201, 33, 177, 19);
 		frame.getContentPane().add(textPassword);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -129,5 +130,9 @@ public class GroupProject1 {
 		JButton btnCompleteTransaction = new JButton("Complete Transaction");
 		btnCompleteTransaction.setBounds(106, 221, 233, 61);
 		tabTransaction.add(btnCompleteTransaction);
+		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.setBounds(388, 33, 86, 19);
+		frame.getContentPane().add(btnLogin);
 	}
 }
