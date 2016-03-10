@@ -8,12 +8,18 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
 
 public class GroupProject1 {
 
 	private JFrame frame;
 	private JTextField textUserName;
 	private JPasswordField textPassword;
+	private JTextField textOwner;
+	private JTextField textSeller;
+	private JTextField textDate;
+	private JTextField textPrice;
 
 	/**
 	 * Launch the application.
@@ -82,5 +88,46 @@ public class GroupProject1 {
 		
 		JPanel tabTransaction = new JPanel();
 		tabbedPane.addTab("Auto Transaction", null, tabTransaction, null);
+		tabTransaction.setLayout(null);
+		
+		textOwner = new JTextField();
+		textOwner.setBounds(12, 27, 209, 19);
+		tabTransaction.add(textOwner);
+		textOwner.setColumns(10);
+		
+		textSeller = new JTextField();
+		textSeller.setBounds(233, 27, 212, 19);
+		tabTransaction.add(textSeller);
+		textSeller.setColumns(10);
+		
+		JLabel lblBuyer = new JLabel("Buyer");
+		lblBuyer.setBounds(12, 12, 70, 15);
+		tabTransaction.add(lblBuyer);
+		
+		JLabel lblSeller = new JLabel("Seller");
+		lblSeller.setBounds(235, 12, 70, 15);
+		tabTransaction.add(lblSeller);
+		
+		textDate = new JTextField();
+		textDate.setBounds(12, 79, 209, 19);
+		tabTransaction.add(textDate);
+		textDate.setColumns(10);
+		
+		JLabel lblDate = new JLabel("Date");
+		lblDate.setBounds(12, 64, 70, 15);
+		tabTransaction.add(lblDate);
+		
+		textPrice = new JTextField();
+		textPrice.setBounds(12, 129, 114, 19);
+		tabTransaction.add(textPrice);
+		textPrice.setColumns(10);
+		
+		JLabel lblPrice = new JLabel("Price");
+		lblPrice.setBounds(12, 110, 70, 15);
+		tabTransaction.add(lblPrice);
+		
+		JButton btnCompleteTransaction = new JButton("Complete Transaction");
+		btnCompleteTransaction.setBounds(106, 221, 233, 61);
+		tabTransaction.add(btnCompleteTransaction);
 	}
 }
