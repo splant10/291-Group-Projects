@@ -1,3 +1,8 @@
+// Spencer Plant
+// CMPUT 291 - Group Assignment 1
+// This is gonna be one HUGE class. If it weren't for time constraints, would probably use MVC
+// Actual classes for transactions, registrations, etc, will be handled themselves though
+
 package bin;
 
 import java.awt.Color;
@@ -30,7 +35,7 @@ public class GroupProject1 {
 
     // The driver to use for connection
     private static String m_driverName = "oracle.jdbc.driver.OracleDriver";
-    private Connection m_con;
+    private static Connection m_con;
     private boolean loggedIn = false;
     
 	
@@ -58,6 +63,20 @@ public class GroupProject1 {
 			System.err.print("ClassNotFoundException: ");
             System.err.println(e.getMessage());
 		}
+		
+		// Make sure to close SQL connection when program exits!
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+				try {
+					m_con.close();
+					System.out.println("connection closed!");
+				}
+				catch(Exception e) {
+					// only happens when not logged in and close the program.
+					System.out.println("no connection to close!");
+				}
+            }        
+		});
 	}
 
 	/**
