@@ -1,5 +1,6 @@
 package bin;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,6 +11,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.sql.*; // Java package for accessing Oracle
 
 public class GroupProject1 {
 
@@ -21,7 +25,15 @@ public class GroupProject1 {
 	private JTextField textDate;
 	private JTextField textPrice;
 	
+	// The URL we are connecting to
+    private String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 
+    // The driver to use for connection
+    private static String m_driverName = "oracle.jdbc.driver.OracleDriver";
+    private Connection m_con;
+    private boolean loggedIn = false;
+    
+	
 	/**
 	 * Launch the application.
 	 */
@@ -36,6 +48,16 @@ public class GroupProject1 {
 				}
 			}
 		});
+		try
+		{
+    	    Class drvClass = Class.forName(m_driverName); 
+            // DriverManager.registerDriver((Driver)drvClass.newInstance());- not needed. 
+            // This is automatically done by Class.forName().
+		} catch(Exception e)
+		{
+			System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+		}
 	}
 
 	/**
@@ -131,7 +153,43 @@ public class GroupProject1 {
 		btnCompleteTransaction.setBounds(106, 221, 233, 61);
 		tabTransaction.add(btnCompleteTransaction);
 		
-		JButton btnLogin = new JButton("Login");
+		final JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// Attempt to log in
+				if (!loggedIn) {
+					try {
+						// Establish a connection
+						String pw = new String(textPassword.getPassword());
+						m_con = DriverManager.getConnection(m_url, textUserName.getText(), pw);
+						loggedIn = true;
+						btnLogin.setText("Logout");
+						Color green = new Color(0,255,0);
+						textUserName.setBackground(green);
+						textPassword.setBackground(green);
+					} catch(Exception e) {
+						System.out.println(e);
+						Color red = new Color(255,0,0);
+						textUserName.setBackground(red);
+						textPassword.setBackground(red);
+					}
+				} else {
+					try {
+						m_con.close();
+					}
+					catch(Exception e) {
+						// shouldn't be reached
+					}
+					loggedIn = false;
+					btnLogin.setText("Login");
+					Color white = new Color(255,255,255);
+					textUserName.setBackground(white);
+					textPassword.setBackground(white);
+					textUserName.setText("");
+					textPassword.setText("");
+				}
+			}
+		});
 		btnLogin.setBounds(388, 33, 86, 19);
 		frame.getContentPane().add(btnLogin);
 	}
