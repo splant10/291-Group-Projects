@@ -13,16 +13,17 @@ import java.util.*;
 import java.sql.*; // Java package for accessing Oracle
 import java.io.*; // Java package includes Console for getting password from user and printing to screen
 
+// 
 public class AutoTransaction extends GroupProject1 {
-	private String Buyer;
-	private String Seller;
+	private String BuyerSIN;
+	private String SellerSIN;
 	private String Date;
 	private String Price;
 	
-	public AutoTransaction(String buyer, String seller, String date, String price) {
+	public AutoTransaction(String buyerSin, String sellerSin, String date, String price) {
 		super();
-		Buyer = buyer;
-		Seller = seller;
+		BuyerSIN = buyerSin;
+		SellerSIN = sellerSin;
 		Date = date;
 		Price = price;
 	}

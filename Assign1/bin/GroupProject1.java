@@ -25,10 +25,10 @@ public class GroupProject1 {
 	private JFrame frame;
 	private JTextField textUserName;
 	private JPasswordField textPassword;
-	private JTextField textOwner;
-	private JTextField textSeller;
-	private JTextField textDate;
-	private JTextField textPrice;
+	private JTextField textTransactionBuyer;
+	private JTextField textTransactionSeller;
+	private JTextField textTransactionDate;
+	private JTextField textTransactionPrice;
 	
 	// The URL we are connecting to
     private String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
@@ -53,6 +53,8 @@ public class GroupProject1 {
 				}
 			}
 		});
+		
+		// load the Oracle driver
 		try
 		{
     	    Class drvClass = Class.forName(m_driverName); 
@@ -95,23 +97,25 @@ public class GroupProject1 {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		// Username text field for logging in
 		textUserName = new JTextField();
 		textUserName.setBounds(12, 33, 177, 19);
 		frame.getContentPane().add(textUserName);
 		textUserName.setColumns(10);
-		
-		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(12, 12, 100, 15);
-		frame.getContentPane().add(lblUsername);
-		
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setBounds(201, 12, 100, 15);
-		frame.getContentPane().add(lblPassword);
-		
+		// Password text field for logging in
 		textPassword = new JPasswordField();
 		textPassword.setBounds(201, 33, 177, 19);
 		frame.getContentPane().add(textPassword);
 		
+		// Labels for username and password fields
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setBounds(12, 12, 100, 15);
+		frame.getContentPane().add(lblUsername);
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setBounds(201, 12, 100, 15);
+		frame.getContentPane().add(lblPassword);
+		
+		// Make tabs for the different application programs
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(12, 64, 462, 339);
 		frame.getContentPane().add(tabbedPane);
@@ -131,46 +135,46 @@ public class GroupProject1 {
 		JPanel tabTransaction = new JPanel();
 		tabbedPane.addTab("Auto Transaction", null, tabTransaction, null);
 		tabTransaction.setLayout(null);
-		
-		textOwner = new JTextField();
-		textOwner.setBounds(12, 27, 209, 19);
-		tabTransaction.add(textOwner);
-		textOwner.setColumns(10);
-		
-		textSeller = new JTextField();
-		textSeller.setBounds(233, 27, 212, 19);
-		tabTransaction.add(textSeller);
-		textSeller.setColumns(10);
-		
-		JLabel lblBuyer = new JLabel("Buyer");
-		lblBuyer.setBounds(12, 12, 70, 15);
-		tabTransaction.add(lblBuyer);
-		
-		JLabel lblSeller = new JLabel("Seller");
-		lblSeller.setBounds(235, 12, 70, 15);
-		tabTransaction.add(lblSeller);
-		
-		textDate = new JTextField();
-		textDate.setBounds(12, 79, 209, 19);
-		tabTransaction.add(textDate);
-		textDate.setColumns(10);
-		
-		JLabel lblDate = new JLabel("Date");
-		lblDate.setBounds(12, 64, 70, 15);
-		tabTransaction.add(lblDate);
-		
-		textPrice = new JTextField();
-		textPrice.setBounds(12, 129, 114, 19);
-		tabTransaction.add(textPrice);
-		textPrice.setColumns(10);
-		
-		JLabel lblPrice = new JLabel("Price");
-		lblPrice.setBounds(12, 110, 70, 15);
-		tabTransaction.add(lblPrice);
-		
-		JButton btnCompleteTransaction = new JButton("Complete Transaction");
-		btnCompleteTransaction.setBounds(106, 221, 233, 61);
-		tabTransaction.add(btnCompleteTransaction);
+			//
+			textTransactionBuyer = new JTextField();
+			textTransactionBuyer.setBounds(12, 27, 209, 19);
+			tabTransaction.add(textTransactionBuyer);
+			textTransactionBuyer.setColumns(10);
+			
+			textTransactionSeller = new JTextField();
+			textTransactionSeller.setBounds(233, 27, 212, 19);
+			tabTransaction.add(textTransactionSeller);
+			textTransactionSeller.setColumns(10);
+			
+			JLabel lblBuyer = new JLabel("Buyer SIN");
+			lblBuyer.setBounds(12, 12, 70, 15);
+			tabTransaction.add(lblBuyer);
+			
+			JLabel lblSeller = new JLabel("Seller SIN");
+			lblSeller.setBounds(235, 12, 70, 15);
+			tabTransaction.add(lblSeller);
+			
+			textTransactionDate = new JTextField();
+			textTransactionDate.setBounds(12, 79, 209, 19);
+			tabTransaction.add(textTransactionDate);
+			textTransactionDate.setColumns(10);
+			
+			JLabel lblDate = new JLabel("Date");
+			lblDate.setBounds(12, 64, 70, 15);
+			tabTransaction.add(lblDate);
+			
+			textTransactionPrice = new JTextField();
+			textTransactionPrice.setBounds(12, 129, 114, 19);
+			tabTransaction.add(textTransactionPrice);
+			textTransactionPrice.setColumns(10);
+			
+			JLabel lblPrice = new JLabel("Price");
+			lblPrice.setBounds(12, 110, 70, 15);
+			tabTransaction.add(lblPrice);
+			
+			JButton btnTransactionComplete = new JButton("Complete Transaction");
+			btnTransactionComplete.setBounds(106, 221, 233, 61);
+			tabTransaction.add(btnTransactionComplete);
 		
 		final JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
