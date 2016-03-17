@@ -30,7 +30,8 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.SqlDateModel;
 
-import javax.swing.JRadioButton; // Java package for accessing Oracle
+import javax.swing.JRadioButton;
+import javax.swing.JTextPane; // Java package for accessing Oracle
 
 public class GroupProject1 {
 
@@ -145,9 +146,30 @@ public class GroupProject1 {
 		frame.getContentPane().add(lblPassword);
 		
 		// Make tabs for the different application programs
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setEnabled(false);
 		tabbedPane.setBounds(12, 64, 462, 540);
 		frame.getContentPane().add(tabbedPane);
+		
+		JPanel tabMain = new JPanel();
+		tabbedPane.addTab("Home", null, tabMain, null);
+		tabMain.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Welcome to our Project 1");
+		lblNewLabel.setBounds(135, 28, 189, 15);
+		tabMain.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Please log in above to use our app");
+		lblNewLabel_1.setBounds(104, 102, 260, 15);
+		tabMain.add(lblNewLabel_1);
+		
+		JLabel lblSpencerPlant = new JLabel("Spencer Plant");
+		lblSpencerPlant.setBounds(173, 153, 121, 15);
+		tabMain.add(lblSpencerPlant);
+		
+		JLabel lblAliMirza = new JLabel("Ali Mirza");
+		lblAliMirza.setBounds(195, 180, 111, 15);
+		tabMain.add(lblAliMirza);
 		
 		JPanel tabRegistration = new JPanel();
 		tabbedPane.addTab("Vehicle Registration", null, tabRegistration, null);
@@ -619,6 +641,9 @@ public class GroupProject1 {
 			btnTransactionComplete.setBounds(106, 221, 233, 61);
 			tabTransaction.add(btnTransactionComplete);
 		
+		// Login to SQLPlus server on click of Login Button
+		// Login button turns into logout button once successfully logged in
+	    // Logout closes connection to SQLPlus
 		final JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -633,6 +658,7 @@ public class GroupProject1 {
 						Color green = new Color(0,255,0);
 						textUserName.setBackground(green);
 						textPassword.setBackground(green);
+						tabbedPane.setEnabled(true);
 					} catch(Exception e) {
 						System.out.println(e);
 						Color red = new Color(255,0,0);
@@ -641,6 +667,8 @@ public class GroupProject1 {
 					}
 				} else {
 					try {
+						tabbedPane.setSelectedIndex(0);
+						tabbedPane.setEnabled(false);
 						m_con.close();
 					}
 					catch(Exception e) {
