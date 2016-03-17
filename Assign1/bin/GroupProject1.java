@@ -20,9 +20,16 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.*;
+import java.util.Properties;
+
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
+
 import javax.swing.JRadioButton; // Java package for accessing Oracle
 
 public class GroupProject1 {
@@ -283,6 +290,19 @@ public class GroupProject1 {
 			genderGroup.add(rdbtnVRegistrationMale);
 			genderGroup.add(rdbtnVRegistrationFemale);
 			
+			// Make a calendar picker for owner birthday
+			// Retrieved from http://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
+			// March 17
+			SqlDateModel model = new SqlDateModel();
+			Properties p = new Properties();
+			p.put("text.today", "Today");
+			p.put("text.month", "Month");
+			p.put("text.year", "Year");
+			JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+			JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+			 
+			tabRegistration.add(datePicker);
+			datePicker.setBounds(305, 239, 120, 30);
 
 		// End layout code for the Vehicle Registration Tab //
 		
