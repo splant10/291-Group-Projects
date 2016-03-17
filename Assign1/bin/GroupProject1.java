@@ -237,9 +237,9 @@ public class GroupProject1 {
 			lblVRegistrationOHeight.setBounds(302, 130, 70, 15);
 			tabRegistration.add(lblVRegistrationOHeight);
 			
-			JLabel lblNewLabel = new JLabel("--------Owner Information--------");
-			lblNewLabel.setBounds(77, 104, 343, 15);
-			tabRegistration.add(lblNewLabel);
+			JLabel lblVRegistrationOwner = new JLabel("--------Owner Information--------");
+			lblVRegistrationOwner.setBounds(77, 104, 343, 15);
+			tabRegistration.add(lblVRegistrationOwner);
 			
 			textField = new JTextField();
 			textField.setEditable(false);
@@ -315,7 +315,7 @@ public class GroupProject1 {
 			JButton btnRegister = new JButton("Register");
 			btnRegister.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					VehicleRegistration vehicleRegistration = new VehicleRegistration("1114", "Toyota", "1999", "3", "red", "1");
+					VehicleRegistration vehicleRegistration = new VehicleRegistration("1114", "Toyota", "1999", "3", "red", "1", "12347");
 					vehicleRegistration.Run();
 				}
 			});
@@ -497,8 +497,7 @@ public class GroupProject1 {
 			tabLicenceRegistration.add(lblDLRegistrationOHeight);
 
 			JLabel lblNewLabelDL = new JLabel("Owner Information:");
-			lblNewLabel.setBounds(12, 104, 233, 15);
-			
+			lblNewLabelDL.setBounds(12, 104, 233, 15);
 			
 			tabLicenceRegistration.add(lblNewLabelDL);
 
