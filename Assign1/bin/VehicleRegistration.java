@@ -28,24 +28,15 @@ public class VehicleRegistration extends GroupProject1 {
 		
 	//  change the following parameters to connect to other databases
 
-
-        // information for the new row, including a local file name of the image
-        String file1 = "window-sm.jpg";
-	  String title ="Window";
-	  String place ="Utah";
-	  int pid = 100;
-
-
-        try {
+       try {
         	if (GroupProject1.m_con != null) {
-        		PreparedStatement stmt = GroupProject1.m_con.prepareStatement("insert into vehicle values (" + serial_no + ", '" + title+ "', '" + place + "', ?)" );
+        		//PreparedStatement stmt = GroupProject1.m_con.prepareStatement("insert into vehicle values (" + serial_no + ", '" + title+ "', '" + place + "', ?)" );
 
                   // execute the insert statement
-                  stmt.executeUpdate();
+                  //stmt.executeUpdate();
                   System.out.println( "the execution succeeds");
-                  GroupProject1.m_con.commit();
-                  GroupProject1.m_con.close();
-                  stmt.clearParameters();
+                  //GroupProject1.m_con.commit();
+                  //stmt.clearParameters();
                 // Set the first parameter 
         	}
         } catch( Exception ex ) { 
