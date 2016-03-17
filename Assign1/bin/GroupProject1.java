@@ -59,6 +59,8 @@ public class GroupProject1 {
     private JTextField textVRegistrationOEye;
     private JTextField textVRegistrationOHair;
     private JTextField textVRegistrationOAddress;
+    private JTextField textDLRegistrationNum;
+    private JTextField textDLRegistrationClass;
     
 	
 	/**
@@ -151,7 +153,6 @@ public class GroupProject1 {
 			textVRegistrationVID.setBounds(12, 28, 114, 19);
 			tabRegistration.add(textVRegistrationVID);
 			textVRegistrationVID.setColumns(10);
-			
 			
 			JLabel lblVRegistrationVID = new JLabel("Vehicle Serial #");
 			lblVRegistrationVID.setBounds(12, 12, 114, 15);
@@ -316,7 +317,7 @@ public class GroupProject1 {
 			
 			JRadioButton rdbtnVRegistrationFemale = new JRadioButton("F");
 			rdbtnVRegistrationFemale.setEnabled(false);
-			rdbtnVRegistrationFemale.setBounds(223, 239, 149, 23);
+			rdbtnVRegistrationFemale.setBounds(223, 239, 61, 23);
 			tabRegistration.add(rdbtnVRegistrationFemale);
 			
 			ButtonGroup genderGroup = new ButtonGroup();
@@ -341,18 +342,165 @@ public class GroupProject1 {
 			btnRegister.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					VehicleRegistration vehicleRegistration = new VehicleRegistration(textVRegistrationVID.getText(), textVRegistrationMake.getText(), textVRegistrationModel.getText(), textVRegistrationYear.getText(), textVRegistrationColor.getText(),String.valueOf(spinVRegistrationTypeID.getValue().toString().toCharArray()[0]), textVRegistrationOwnerSIN.getText());
+
 					vehicleRegistration.Run();
 				}
 			});
 			btnRegister.setBounds(158, 287, 117, 25);
 			tabRegistration.add(btnRegister);
 			datePicker.setBounds(305, 239, 120, 30);
+			tabRegistration.add(datePicker);
 
 		// End layout code for the Vehicle Registration Tab //
 		
 		JPanel tabLicenceRegistration = new JPanel();
 		tabbedPane.addTab("Driver Licence Registration", null, tabLicenceRegistration, null);
+		tabLicenceRegistration.setLayout(null);
 		
+		// Begin layout code for Driver's Licence Registration Tab //
+			JLabel lblDLRegistrationNum = new JLabel("Licence Number");
+			lblDLRegistrationNum.setBounds(12, 12, 119, 15);
+			tabLicenceRegistration.add(lblDLRegistrationNum);
+			
+			textDLRegistrationNum = new JTextField();
+			textDLRegistrationNum.setBounds(12, 34, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationNum);
+			textDLRegistrationNum.setColumns(10);
+			
+			textDLRegistrationClass = new JTextField();
+			textDLRegistrationClass.setBounds(165, 34, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationClass);
+			textDLRegistrationClass.setColumns(10);
+			
+			JLabel lblDLRegistrationClass = new JLabel("Class");
+			lblDLRegistrationClass.setBounds(165, 12, 70, 15);
+			tabLicenceRegistration.add(lblDLRegistrationClass);
+			
+			// Make calendar pickers for issuing date and expiry date
+			// Retrieved from http://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
+			// March 17 - p defined above
+			SqlDateModel model2 = new SqlDateModel();
+			JDatePanelImpl issuingDatePanel = new JDatePanelImpl(model2, p);
+			JDatePickerImpl issuingPicker = new JDatePickerImpl(issuingDatePanel, new DateLabelFormatter());
+			tabLicenceRegistration.add(issuingPicker);
+			issuingPicker.setBounds(12, 90, 120, 30);
+			
+			SqlDateModel model3 = new SqlDateModel(); // need to specify new model for each calendar, else
+													  // all the calendars will match.
+			JDatePanelImpl expiryDatePanel = new JDatePanelImpl(model3, p);
+			JDatePickerImpl expiringPicker = new JDatePickerImpl(expiryDatePanel, new DateLabelFormatter());
+			tabLicenceRegistration.add(expiringPicker);
+			expiringPicker.setBounds(165, 90, 120, 30);
+			
+			JLabel lblIssuingDate = new JLabel("Issuing Date");
+			lblIssuingDate.setBounds(12, 65, 119, 15);
+			tabLicenceRegistration.add(lblIssuingDate);
+			
+			JLabel lblExpiryDate = new JLabel("Expiry Date");
+			lblExpiryDate.setBounds(165, 65, 114, 15);
+			tabLicenceRegistration.add(lblExpiryDate);
+			
+			JTextField textDLRegistrationOwnerSIN = new JTextField();
+			textDLRegistrationOwnerSIN.setBounds(12, 147, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationOwnerSIN);
+			textDLRegistrationOwnerSIN.setColumns(10);
+
+			JLabel lblDLRegistrationOwnerSIN = new JLabel("SIN");
+			lblDLRegistrationOwnerSIN.setBounds(12, 130, 114, 15);
+			tabLicenceRegistration.add(lblDLRegistrationOwnerSIN);
+
+			JTextField textDLRegistrationOName = new JTextField();
+			textDLRegistrationOName.setEditable(false);
+			textDLRegistrationOName.setBounds(158, 147, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationOName);
+			textDLRegistrationOName.setColumns(10);
+
+			JLabel lblOwnerNameDL = new JLabel("Name");
+			lblOwnerNameDL.setBounds(158, 130, 114, 15);
+			tabLicenceRegistration.add(lblOwnerNameDL);
+
+			JTextField textDLRegistrationOHeight = new JTextField();
+			textDLRegistrationOHeight.setEditable(false);
+			textDLRegistrationOHeight.setBounds(302, 147, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationOHeight);
+			textDLRegistrationOHeight.setColumns(10);
+
+			JLabel lblDLRegistrationOHeight = new JLabel("Height");
+			lblDLRegistrationOHeight.setBounds(302, 130, 70, 15);
+			tabLicenceRegistration.add(lblDLRegistrationOHeight);
+
+			JLabel lblNewLabelDL = new JLabel("Owner Information:");
+			lblNewLabel.setBounds(12, 104, 233, 15);
+			tabLicenceRegistration.add(lblNewLabelDL);
+
+			JTextField textField = new JTextField();
+			textField.setEditable(false);
+			textField.setBounds(12, 194, 114, 19);
+			tabLicenceRegistration.add(textField);
+			textField.setColumns(10);
+
+			JLabel lblDLRegistrationOWeight = new JLabel("Weight");
+			lblDLRegistrationOWeight.setBounds(12, 178, 70, 15);
+			tabLicenceRegistration.add(lblDLRegistrationOWeight);
+
+			JTextField textDLRegistrationOEye = new JTextField();
+			textDLRegistrationOEye.setEditable(false);
+			textDLRegistrationOEye.setBounds(158, 194, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationOEye);
+			textDLRegistrationOEye.setColumns(10);
+
+			JLabel lblDLRegistrationOEye = new JLabel("Eye Color");
+			lblDLRegistrationOEye.setBounds(158, 178, 70, 15);
+			tabLicenceRegistration.add(lblDLRegistrationOEye);
+
+			JTextField textDLRegistrationOHair = new JTextField();
+			textDLRegistrationOHair.setEditable(false);
+			textDLRegistrationOHair.setBounds(302, 194, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationOHair);
+			textDLRegistrationOHair.setColumns(10);
+
+			JLabel lblDLRegistrationOHair = new JLabel("Hair Color");
+			lblDLRegistrationOHair.setBounds(302, 178, 92, 15);
+			tabLicenceRegistration.add(lblDLRegistrationOHair);
+
+			JTextField textDLRegistrationOAddress = new JTextField();
+			textDLRegistrationOAddress.setEditable(false);
+			textDLRegistrationOAddress.setBounds(12, 241, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationOAddress);
+			textDLRegistrationOAddress.setColumns(10);
+
+			JLabel lblDLRegistrationOAddress = new JLabel("Address");
+			lblDLRegistrationOAddress.setBounds(12, 225, 70, 15);
+			tabLicenceRegistration.add(lblDLRegistrationOAddress);
+
+			JLabel lblDLRegistrationOGender = new JLabel("Gender");
+			lblDLRegistrationOGender.setBounds(158, 225, 70, 15);
+			tabLicenceRegistration.add(lblDLRegistrationOGender);
+
+			JRadioButton rdbtnDLRegistrationMale = new JRadioButton("M");
+			rdbtnDLRegistrationMale.setEnabled(false);
+			rdbtnDLRegistrationMale.setBounds(158, 239, 56, 23);
+			tabLicenceRegistration.add(rdbtnDLRegistrationMale);
+
+			JRadioButton rdbtnDLRegistrationFemale = new JRadioButton("F");
+			rdbtnDLRegistrationFemale.setEnabled(false);
+			rdbtnDLRegistrationFemale.setBounds(223, 239, 61, 23);
+			tabLicenceRegistration.add(rdbtnDLRegistrationFemale);
+
+			ButtonGroup genderGroupDL = new ButtonGroup();
+			genderGroupDL.add(rdbtnDLRegistrationMale);
+			genderGroupDL.add(rdbtnDLRegistrationFemale);
+
+			// Make a calendar picker for owner birthday
+			// Retrieved from http://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
+			// March 17
+			SqlDateModel model4 = new SqlDateModel();
+			JDatePanelImpl birthdatePanelDL = new JDatePanelImpl(model4, p);
+			JDatePickerImpl datePickerDL = new JDatePickerImpl(birthdatePanelDL, new DateLabelFormatter());
+			datePickerDL.setBounds(305, 239, 120, 30);
+			tabLicenceRegistration.add(datePickerDL);
+		
+		// End layout code for Driver's Licence Registration Tab //
 		JPanel tabViolationRecord = new JPanel();
 		tabbedPane.addTab("Violation Record", null, tabViolationRecord, null);
 		
