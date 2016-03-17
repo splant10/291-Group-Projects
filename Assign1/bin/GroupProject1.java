@@ -35,12 +35,8 @@ public class GroupProject1 {
 	private JTextField textTransactionDate;
 	private JTextField textTransactionPrice;
 	
-	// The URL we are connecting to
-    private String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 
-    // The driver to use for connection
-    private static String m_driverName = "oracle.jdbc.driver.OracleDriver";
-    private static Connection m_con;
+    public static Connection m_con;
     private boolean loggedIn = false;
     private JTextField textVRegistrationVID;
     private JTextField textVRegistrationMake;
@@ -74,7 +70,7 @@ public class GroupProject1 {
 		// load the Oracle driver
 		try
 		{
-    	    Class drvClass = Class.forName(m_driverName); 
+    	    Class drvClass = Class.forName(Constants.drivername); 
             // DriverManager.registerDriver((Driver)drvClass.newInstance());- not needed. 
             // This is automatically done by Class.forName().
 		} catch(Exception e)
@@ -351,7 +347,7 @@ public class GroupProject1 {
 					try {
 						// Establish a connection
 						String pw = new String(textPassword.getPassword());
-						m_con = DriverManager.getConnection(m_url, textUserName.getText(), pw);
+						m_con = DriverManager.getConnection(Constants.dbstring, textUserName.getText(), pw);
 						loggedIn = true;
 						btnLogin.setText("Logout");
 						Color green = new Color(0,255,0);
