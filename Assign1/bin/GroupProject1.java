@@ -150,6 +150,7 @@ public class GroupProject1 {
 			tabRegistration.add(textVRegistrationVID);
 			textVRegistrationVID.setColumns(10);
 			
+			
 			JLabel lblVRegistrationVID = new JLabel("Vehicle Serial #");
 			lblVRegistrationVID.setBounds(12, 12, 114, 15);
 			tabRegistration.add(lblVRegistrationVID);
@@ -194,7 +195,7 @@ public class GroupProject1 {
 			lblVRegistrationTypeID.setBounds(302, 59, 70, 15);
 			tabRegistration.add(lblVRegistrationTypeID);
 			
-			JSpinner spinVRegistrationTypeID = new JSpinner();
+			final JSpinner spinVRegistrationTypeID = new JSpinner();
 			spinVRegistrationTypeID.setModel(new SpinnerListModel(new String[] {"1, Sedan", "2, Coupe", "3, Sport", "4, Hatchback", "5, Truck", "6, Mini Van", "7, Semi", "8, SUV"}));
 			spinVRegistrationTypeID.setBounds(302, 73, 114, 20);
 			tabRegistration.add(spinVRegistrationTypeID);
@@ -306,7 +307,7 @@ public class GroupProject1 {
 			JButton btnRegister = new JButton("Register");
 			btnRegister.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					VehicleRegistration vehicleRegistration = new VehicleRegistration("1114", "Toyota", "1999", "3", "red", "1");
+					VehicleRegistration vehicleRegistration = new VehicleRegistration(textVRegistrationVID.getText(), textVRegistrationMake.getText(), textVRegistrationModel.getText(), textVRegistrationYear.getText(), textVRegistrationColor.getText(),String.valueOf(spinVRegistrationTypeID.getValue().toString().toCharArray()[0]));
 					vehicleRegistration.Run();
 				}
 			});
