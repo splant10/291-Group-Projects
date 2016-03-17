@@ -302,6 +302,16 @@ public class GroupProject1 {
 			JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 			 
 			tabRegistration.add(datePicker);
+			
+			JButton btnRegister = new JButton("Register");
+			btnRegister.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					VehicleRegistration vehicleRegistration = new VehicleRegistration("1114", "Toyota", "1999", "3", "red", "1");
+					vehicleRegistration.Run();
+				}
+			});
+			btnRegister.setBounds(158, 287, 117, 25);
+			tabRegistration.add(btnRegister);
 			datePicker.setBounds(305, 239, 120, 30);
 
 		// End layout code for the Vehicle Registration Tab //

@@ -30,10 +30,10 @@ public class VehicleRegistration extends GroupProject1 {
 
        try {
         	if (GroupProject1.m_con != null) {
-        		//PreparedStatement stmt = GroupProject1.m_con.prepareStatement("insert into vehicle values (" + serial_no + ", '" + title+ "', '" + place + "', ?)" );
+        		PreparedStatement stmt = GroupProject1.m_con.prepareStatement("insert into vehicle values ( '" + serial_no + "', '" + maker + "', '" + model + "', '" + year + "', '" + color + "', " + type_id + ")" );
 
                   // execute the insert statement
-                  //stmt.executeUpdate();
+                  stmt.executeUpdate();
                   System.out.println( "the execution succeeds");
                   //GroupProject1.m_con.commit();
                   //stmt.clearParameters();
