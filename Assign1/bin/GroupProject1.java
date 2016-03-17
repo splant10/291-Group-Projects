@@ -30,9 +30,7 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.SqlDateModel;
 
-import javax.swing.JRadioButton;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent; // Java package for accessing Oracle
+import javax.swing.JRadioButton; // Java package for accessing Oracle
 
 public class GroupProject1 {
 
@@ -55,12 +53,19 @@ public class GroupProject1 {
     private JTextField textVRegistrationOwnerSIN;
     private JTextField textVRegistrationOName;
     private JTextField textVRegistrationOHeight;
-    private JTextField textVRegistrationOWeight;
+    private JTextField textField;
     private JTextField textVRegistrationOEye;
     private JTextField textVRegistrationOHair;
     private JTextField textVRegistrationOAddress;
     private JTextField textDLRegistrationNum;
     private JTextField textDLRegistrationClass;
+    private JTextField textVRegistrationSecSIN;
+    private JTextField textVRegistrationSecName;
+    private JTextField textVRegistrationSecHeight;
+    private JTextField textVRegistrationSecWeight;
+    private JTextField textVRegistrationSecEye;
+    private JTextField textVRegistrationSecHair;
+    private JTextField textVRegistrationSecAddr;
     
 	
 	/**
@@ -117,7 +122,7 @@ public class GroupProject1 {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 488, 488);
+		frame.setBounds(100, 100, 488, 642);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -141,7 +146,7 @@ public class GroupProject1 {
 		
 		// Make tabs for the different application programs
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(12, 64, 462, 386);
+		tabbedPane.setBounds(12, 64, 462, 540);
 		frame.getContentPane().add(tabbedPane);
 		
 		JPanel tabRegistration = new JPanel();
@@ -198,42 +203,12 @@ public class GroupProject1 {
 			lblVRegistrationTypeID.setBounds(302, 59, 70, 15);
 			tabRegistration.add(lblVRegistrationTypeID);
 			
-			final JSpinner spinVRegistrationTypeID = new JSpinner();
+			JSpinner spinVRegistrationTypeID = new JSpinner();
 			spinVRegistrationTypeID.setModel(new SpinnerListModel(new String[] {"1, Sedan", "2, Coupe", "3, Sport", "4, Hatchback", "5, Truck", "6, Mini Van", "7, Semi", "8, SUV"}));
 			spinVRegistrationTypeID.setBounds(302, 73, 114, 20);
 			tabRegistration.add(spinVRegistrationTypeID);
 			
 			textVRegistrationOwnerSIN = new JTextField();
-			textVRegistrationOwnerSIN.addFocusListener(new FocusAdapter() {
-				@Override
-				public void focusLost(FocusEvent e) {
-					PreparedStatement stmt;
-					ResultSet rs;
-	            		try {
-							stmt = m_con.prepareStatement("select * from people where sin = " +  textVRegistrationOwnerSIN.getText());
-							rs = stmt.executeQuery();
-							if (m_con != null && rs.next()){
-		            			System.out.println("found");
-		            			textVRegistrationOName.setText(rs.getString("name"));
-		            			textVRegistrationOHeight.setText(rs.getString("height"));
-		            			textVRegistrationOWeight.setText(rs.getString("weight"));
-		            			textVRegistrationOEye.setText(rs.getString("eyecolor"));
-		            			textVRegistrationOHair.setText(rs.getString("haircolor"));
-		            			textVRegistrationOAddress.setText(rs.getString("addr"));
-		            			//genderGroup. = rs.getString("gender");
-		            			//textVRegistrationOBirthday = rs.getString("birthday");
-		            		}else {
-		            			System.out.println("Not found");
-		            		}
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-	            		
-	            		
-	        		
-				}
-			});
 			textVRegistrationOwnerSIN.setBounds(12, 147, 114, 19);
 			tabRegistration.add(textVRegistrationOwnerSIN);
 			textVRegistrationOwnerSIN.setColumns(10);
@@ -262,15 +237,15 @@ public class GroupProject1 {
 			lblVRegistrationOHeight.setBounds(302, 130, 70, 15);
 			tabRegistration.add(lblVRegistrationOHeight);
 			
-			JLabel lblNewLabel = new JLabel("Owner Information:");
-			lblNewLabel.setBounds(12, 104, 233, 15);
+			JLabel lblNewLabel = new JLabel("--------Owner Information--------");
+			lblNewLabel.setBounds(77, 104, 343, 15);
 			tabRegistration.add(lblNewLabel);
 			
-			textVRegistrationOWeight = new JTextField();
-			textVRegistrationOWeight.setEditable(false);
-			textVRegistrationOWeight.setBounds(12, 194, 114, 19);
-			tabRegistration.add(textVRegistrationOWeight);
-			textVRegistrationOWeight.setColumns(10);
+			textField = new JTextField();
+			textField.setEditable(false);
+			textField.setBounds(12, 194, 114, 19);
+			tabRegistration.add(textField);
+			textField.setColumns(10);
 			
 			JLabel lblVRegistrationOWeight = new JLabel("Weight");
 			lblVRegistrationOWeight.setBounds(12, 178, 70, 15);
@@ -324,7 +299,6 @@ public class GroupProject1 {
 			genderGroup.add(rdbtnVRegistrationMale);
 			genderGroup.add(rdbtnVRegistrationFemale);
 			
-			
 			// Make a calendar picker for owner birthday
 			// Retrieved from http://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
 			// March 17
@@ -341,15 +315,108 @@ public class GroupProject1 {
 			JButton btnRegister = new JButton("Register");
 			btnRegister.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					VehicleRegistration vehicleRegistration = new VehicleRegistration(textVRegistrationVID.getText(), textVRegistrationMake.getText(), textVRegistrationModel.getText(), textVRegistrationYear.getText(), textVRegistrationColor.getText(),String.valueOf(spinVRegistrationTypeID.getValue().toString().toCharArray()[0]), textVRegistrationOwnerSIN.getText());
-
+					VehicleRegistration vehicleRegistration = new VehicleRegistration("1114", "Toyota", "1999", "3", "red", "1");
 					vehicleRegistration.Run();
 				}
 			});
-			btnRegister.setBounds(158, 287, 117, 25);
+			btnRegister.setBounds(167, 458, 117, 25);
 			tabRegistration.add(btnRegister);
 			datePicker.setBounds(305, 239, 120, 30);
 			tabRegistration.add(datePicker);
+			
+			///********** Second owner Layout things *****************
+			textVRegistrationSecSIN = new JTextField();
+			textVRegistrationSecSIN.setColumns(10);
+			textVRegistrationSecSIN.setBounds(12, 322, 114, 19);
+			tabRegistration.add(textVRegistrationSecSIN);
+			
+			JLabel label = new JLabel("SIN");
+			label.setBounds(12, 306, 114, 15);
+			tabRegistration.add(label);
+			
+			JLabel lblSecondarOwnerInformation = new JLabel("--------Secondary Owner Information--------");
+			lblSecondarOwnerInformation.setBounds(77, 279, 339, 15);
+			tabRegistration.add(lblSecondarOwnerInformation);
+			
+			textVRegistrationSecName = new JTextField();
+			textVRegistrationSecName.setEditable(false);
+			textVRegistrationSecName.setColumns(10);
+			textVRegistrationSecName.setBounds(158, 322, 114, 19);
+			tabRegistration.add(textVRegistrationSecName);
+			
+			textVRegistrationSecHeight = new JTextField();
+			textVRegistrationSecHeight.setEditable(false);
+			textVRegistrationSecHeight.setColumns(10);
+			textVRegistrationSecHeight.setBounds(302, 322, 114, 19);
+			tabRegistration.add(textVRegistrationSecHeight);
+			
+			JLabel label_1 = new JLabel("Name");
+			label_1.setBounds(158, 306, 114, 15);
+			tabRegistration.add(label_1);
+			
+			JLabel label_2 = new JLabel("Height");
+			label_2.setBounds(302, 306, 70, 15);
+			tabRegistration.add(label_2);
+			
+			JLabel label_3 = new JLabel("Weight");
+			label_3.setBounds(12, 353, 70, 15);
+			tabRegistration.add(label_3);
+			
+			textVRegistrationSecWeight = new JTextField();
+			textVRegistrationSecWeight.setEditable(false);
+			textVRegistrationSecWeight.setColumns(10);
+			textVRegistrationSecWeight.setBounds(12, 375, 114, 19);
+			tabRegistration.add(textVRegistrationSecWeight);
+			
+			JLabel label_4 = new JLabel("Eye Color");
+			label_4.setBounds(158, 353, 70, 15);
+			tabRegistration.add(label_4);
+			
+			textVRegistrationSecEye = new JTextField();
+			textVRegistrationSecEye.setEditable(false);
+			textVRegistrationSecEye.setColumns(10);
+			textVRegistrationSecEye.setBounds(158, 375, 114, 19);
+			tabRegistration.add(textVRegistrationSecEye);
+			
+			JLabel label_5 = new JLabel("Hair Color");
+			label_5.setBounds(302, 353, 92, 15);
+			tabRegistration.add(label_5);
+			
+			textVRegistrationSecHair = new JTextField();
+			textVRegistrationSecHair.setEditable(false);
+			textVRegistrationSecHair.setColumns(10);
+			textVRegistrationSecHair.setBounds(302, 375, 114, 19);
+			tabRegistration.add(textVRegistrationSecHair);
+			
+			JLabel label_6 = new JLabel("Address");
+			label_6.setBounds(12, 405, 70, 15);
+			tabRegistration.add(label_6);
+			
+			textVRegistrationSecAddr = new JTextField();
+			textVRegistrationSecAddr.setEditable(false);
+			textVRegistrationSecAddr.setColumns(10);
+			textVRegistrationSecAddr.setBounds(12, 427, 114, 19);
+			tabRegistration.add(textVRegistrationSecAddr);
+			
+			JLabel label_7 = new JLabel("Gender");
+			label_7.setBounds(158, 405, 70, 15);
+			tabRegistration.add(label_7);
+			
+			JRadioButton rdbtnVRegistrationSecM = new JRadioButton("M");
+			rdbtnVRegistrationSecM.setEnabled(false);
+			rdbtnVRegistrationSecM.setBounds(158, 425, 56, 23);
+			tabRegistration.add(rdbtnVRegistrationSecM);
+			
+			JRadioButton rdbtnVRegistrationSecF = new JRadioButton("F");
+			rdbtnVRegistrationSecF.setEnabled(false);
+			rdbtnVRegistrationSecF.setBounds(211, 425, 61, 23);
+			tabRegistration.add(rdbtnVRegistrationSecF);
+			
+			ButtonGroup genderGroupSecond = new ButtonGroup();
+			genderGroupSecond.add(rdbtnVRegistrationSecM);
+			genderGroupSecond.add(rdbtnVRegistrationSecF);
+			
+			///**************************************************
 
 		// End layout code for the Vehicle Registration Tab //
 		
@@ -363,17 +430,17 @@ public class GroupProject1 {
 			tabLicenceRegistration.add(lblDLRegistrationNum);
 			
 			textDLRegistrationNum = new JTextField();
-			textDLRegistrationNum.setBounds(12, 34, 114, 19);
+			textDLRegistrationNum.setBounds(12, 28, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationNum);
 			textDLRegistrationNum.setColumns(10);
 			
 			textDLRegistrationClass = new JTextField();
-			textDLRegistrationClass.setBounds(165, 34, 114, 19);
+			textDLRegistrationClass.setBounds(158, 28, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationClass);
 			textDLRegistrationClass.setColumns(10);
 			
 			JLabel lblDLRegistrationClass = new JLabel("Class");
-			lblDLRegistrationClass.setBounds(165, 12, 70, 15);
+			lblDLRegistrationClass.setBounds(158, 12, 70, 15);
 			tabLicenceRegistration.add(lblDLRegistrationClass);
 			
 			// Make calendar pickers for issuing date and expiry date
@@ -383,14 +450,14 @@ public class GroupProject1 {
 			JDatePanelImpl issuingDatePanel = new JDatePanelImpl(model2, p);
 			JDatePickerImpl issuingPicker = new JDatePickerImpl(issuingDatePanel, new DateLabelFormatter());
 			tabLicenceRegistration.add(issuingPicker);
-			issuingPicker.setBounds(12, 90, 120, 30);
+			issuingPicker.setBounds(12, 80, 120, 30);
 			
 			SqlDateModel model3 = new SqlDateModel(); // need to specify new model for each calendar, else
 													  // all the calendars will match.
 			JDatePanelImpl expiryDatePanel = new JDatePanelImpl(model3, p);
 			JDatePickerImpl expiringPicker = new JDatePickerImpl(expiryDatePanel, new DateLabelFormatter());
 			tabLicenceRegistration.add(expiringPicker);
-			expiringPicker.setBounds(165, 90, 120, 30);
+			expiringPicker.setBounds(165, 80, 120, 30);
 			
 			JLabel lblIssuingDate = new JLabel("Issuing Date");
 			lblIssuingDate.setBounds(12, 65, 119, 15);
@@ -431,9 +498,11 @@ public class GroupProject1 {
 
 			JLabel lblNewLabelDL = new JLabel("Owner Information:");
 			lblNewLabel.setBounds(12, 104, 233, 15);
+			
+			
 			tabLicenceRegistration.add(lblNewLabelDL);
 
-			JTextField textField = new JTextField();
+			textField = new JTextField();
 			textField.setEditable(false);
 			textField.setBounds(12, 194, 114, 19);
 			tabLicenceRegistration.add(textField);
