@@ -30,7 +30,9 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.SqlDateModel;
 
-import javax.swing.JRadioButton; // Java package for accessing Oracle
+import javax.swing.JRadioButton;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent; // Java package for accessing Oracle
 
 public class GroupProject1 {
 
@@ -53,7 +55,7 @@ public class GroupProject1 {
     private JTextField textVRegistrationOwnerSIN;
     private JTextField textVRegistrationOName;
     private JTextField textVRegistrationOHeight;
-    private JTextField textField;
+    private JTextField textVRegistrationOWeight;
     private JTextField textVRegistrationOEye;
     private JTextField textVRegistrationOHair;
     private JTextField textVRegistrationOAddress;
@@ -201,6 +203,36 @@ public class GroupProject1 {
 			tabRegistration.add(spinVRegistrationTypeID);
 			
 			textVRegistrationOwnerSIN = new JTextField();
+			textVRegistrationOwnerSIN.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					PreparedStatement stmt;
+					ResultSet rs;
+	            		try {
+							stmt = m_con.prepareStatement("select * from people where sin = " +  textVRegistrationOwnerSIN.getText());
+							rs = stmt.executeQuery();
+							if (m_con != null && rs.next()){
+		            			System.out.println("found");
+		            			textVRegistrationOName.setText(rs.getString("name"));
+		            			textVRegistrationOHeight.setText(rs.getString("height"));
+		            			textVRegistrationOWeight.setText(rs.getString("weight"));
+		            			textVRegistrationOEye.setText(rs.getString("eyecolor"));
+		            			textVRegistrationOHair.setText(rs.getString("haircolor"));
+		            			textVRegistrationOAddress.setText(rs.getString("addr"));
+		            			//genderGroup. = rs.getString("gender");
+		            			//textVRegistrationOBirthday = rs.getString("birthday");
+		            		}else {
+		            			System.out.println("Not found");
+		            		}
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+	            		
+	            		
+	        		
+				}
+			});
 			textVRegistrationOwnerSIN.setBounds(12, 147, 114, 19);
 			tabRegistration.add(textVRegistrationOwnerSIN);
 			textVRegistrationOwnerSIN.setColumns(10);
@@ -233,11 +265,11 @@ public class GroupProject1 {
 			lblNewLabel.setBounds(12, 104, 233, 15);
 			tabRegistration.add(lblNewLabel);
 			
-			textField = new JTextField();
-			textField.setEditable(false);
-			textField.setBounds(12, 194, 114, 19);
-			tabRegistration.add(textField);
-			textField.setColumns(10);
+			textVRegistrationOWeight = new JTextField();
+			textVRegistrationOWeight.setEditable(false);
+			textVRegistrationOWeight.setBounds(12, 194, 114, 19);
+			tabRegistration.add(textVRegistrationOWeight);
+			textVRegistrationOWeight.setColumns(10);
 			
 			JLabel lblVRegistrationOWeight = new JLabel("Weight");
 			lblVRegistrationOWeight.setBounds(12, 178, 70, 15);
@@ -291,6 +323,7 @@ public class GroupProject1 {
 			genderGroup.add(rdbtnVRegistrationMale);
 			genderGroup.add(rdbtnVRegistrationFemale);
 			
+			
 			// Make a calendar picker for owner birthday
 			// Retrieved from http://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
 			// March 17
@@ -307,7 +340,7 @@ public class GroupProject1 {
 			JButton btnRegister = new JButton("Register");
 			btnRegister.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					VehicleRegistration vehicleRegistration = new VehicleRegistration(textVRegistrationVID.getText(), textVRegistrationMake.getText(), textVRegistrationModel.getText(), textVRegistrationYear.getText(), textVRegistrationColor.getText(),String.valueOf(spinVRegistrationTypeID.getValue().toString().toCharArray()[0]));
+					VehicleRegistration vehicleRegistration = new VehicleRegistration(textVRegistrationVID.getText(), textVRegistrationMake.getText(), textVRegistrationModel.getText(), textVRegistrationYear.getText(), textVRegistrationColor.getText(),String.valueOf(spinVRegistrationTypeID.getValue().toString().toCharArray()[0]), textVRegistrationOwnerSIN.getText());
 					vehicleRegistration.Run();
 				}
 			});
