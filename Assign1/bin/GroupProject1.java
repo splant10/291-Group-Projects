@@ -11,6 +11,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
@@ -992,10 +993,10 @@ public class GroupProject1 {
 					} catch (NumberFormatException exc) {
 						price = 0;
 					}
-					AutoTransaction at = new AutoTransaction(transaction_id, seller_id, buyer_id, vehicle_id, sellDate, price);
+					AutoTransaction at = new AutoTransaction(transaction_id, buyer_id, seller_id, vehicle_id, sellDate, price);
 					int result = at.MakeTransaction();
 					if (result==1) {
-						System.out.println("well that worked");
+						JOptionPane.showMessageDialog(frame, "Transaction completed.");
 					}
 				}
 			});
