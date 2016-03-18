@@ -57,6 +57,7 @@ public class GroupProject1 {
     private JTextField textVRegistrationOName;
     private JTextField textVRegistrationOHeight;
     private JTextField textField;
+    private JTextField textVRegistrationOWeight;
     private JTextField textVRegistrationOEye;
     private JTextField textVRegistrationOHair;
     private JTextField textVRegistrationOAddress;
@@ -268,8 +269,40 @@ public class GroupProject1 {
 			textVRegistrationOwnerSIN.addActionListener(new AbstractAction() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					PreparedStatement stmt;
+					ResultSet rs;
 					try {
+						System.out.println(textVRegistrationOwnerSIN.getText());
+						stmt = m_con.prepareStatement("select * from people where sin = " +  textVRegistrationOwnerSIN.getText());
+						rs = stmt.executeQuery();
+						if (m_con != null && rs.next()){
+	            			System.out.println("found");
+							textVRegistrationOName.setEditable(false);
+							textVRegistrationOHeight.setEditable(false);
+							textVRegistrationOWeight.setEditable(false);
+							textVRegistrationOEye.setEditable(false);
+							textVRegistrationOHair.setEditable(false);
+							textVRegistrationOAddress.setEditable(false);
+
+	            			
+	            			textVRegistrationOName.setText(rs.getString("name"));
+	            			textVRegistrationOHeight.setText(rs.getString("height"));
+	            			textVRegistrationOWeight.setText(rs.getString("weight"));
+	            			textVRegistrationOEye.setText(rs.getString("eyecolor"));
+	            			textVRegistrationOHair.setText(rs.getString("haircolor"));
+	            			textVRegistrationOAddress.setText(rs.getString("addr"));
+	            			//genderGroup. = rs.getString("gender");
+	            			//textVRegistrationOBirthday = rs.getString("birthday");
 						// try looking for and retrieving user info
+						}
+						else {
+							textVRegistrationOName.setEditable(true);
+							textVRegistrationOHeight.setEditable(true);
+							textVRegistrationOWeight.setEditable(true);
+							textVRegistrationOEye.setEditable(true);
+							textVRegistrationOHair.setEditable(true);
+							textVRegistrationOAddress.setEditable(true);
+						}
 					} catch (Exception err) {
 						// make text boxes fillable
 					}
@@ -304,11 +337,11 @@ public class GroupProject1 {
 			lblVRegistrationOwner.setBounds(77, 104, 343, 15);
 			tabRegistration.add(lblVRegistrationOwner);
 			
-			textField = new JTextField();
-			textField.setEditable(false);
-			textField.setBounds(12, 194, 114, 19);
-			tabRegistration.add(textField);
-			textField.setColumns(10);
+			textVRegistrationOWeight = new JTextField();
+			textVRegistrationOWeight.setEditable(false);
+			textVRegistrationOWeight.setBounds(12, 194, 114, 19);
+			tabRegistration.add(textVRegistrationOWeight);
+			textVRegistrationOWeight.setColumns(10);
 			
 			JLabel lblVRegistrationOWeight = new JLabel("Weight");
 			lblVRegistrationOWeight.setBounds(12, 178, 70, 15);
@@ -384,12 +417,23 @@ public class GroupProject1 {
 					String year = textVRegistrationYear.getText();
 					String color = textVRegistrationColor.getText();
 					int type_id = Character.getNumericValue(spinVRegistrationTypeID.getValue().toString().charAt(0));
+					Person owner = null;
+					Person secondaryOwner = null;
+					if (textVRegistrationOName.isEditable()) {
+						owner = new Person(textVRegistrationOwnerSIN.getText(),textVRegistrationOName.getText(), textVRegistrationOHeight.getText(), textVRegistrationOWeight.getText(), textVRegistrationOEye.getText(), textVRegistrationOHair.getText(), textVRegistrationOAddress.getText(), "", "");
+					}
+					if (textVRegistrationSecName.isEditable()){
+						secondaryOwner = new Person(textVRegistrationSecSIN.getText(),textVRegistrationSecName.getText(), textVRegistrationSecHeight.getText(), textVRegistrationSecWeight.getText(), textVRegistrationSecEye.getText(), textVRegistrationSecHair.getText(), textVRegistrationSecAddr.getText(), "", "");
+
+					}
 					VehicleRegistration vehicleRegistration = new VehicleRegistration(serial,
 							make,
 							model,
 							year,
 							color,
-							type_id);
+							type_id,
+							owner,
+							secondaryOwner);
 					vehicleRegistration.Run();
 				}
 			});
@@ -408,8 +452,40 @@ public class GroupProject1 {
 			textVRegistrationSecSIN.addActionListener(new AbstractAction() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					PreparedStatement stmt;
+					ResultSet rs;
 					try {
+						System.out.println(textVRegistrationSecSIN.getText());
+						stmt = m_con.prepareStatement("select * from people where sin = " +  textVRegistrationSecSIN.getText());
+						rs = stmt.executeQuery();
+						if (m_con != null && rs.next()){
+	            			System.out.println("found");
+							textVRegistrationSecName.setEditable(false);
+							textVRegistrationSecHeight.setEditable(false);
+							textVRegistrationSecWeight.setEditable(false);
+							textVRegistrationSecEye.setEditable(false);
+							textVRegistrationSecHair.setEditable(false);
+							textVRegistrationSecAddr.setEditable(false);
+
+	            			
+							textVRegistrationSecName.setText(rs.getString("name"));
+	            			textVRegistrationSecHeight.setText(rs.getString("height"));
+	            			textVRegistrationSecWeight.setText(rs.getString("weight"));
+	            			textVRegistrationSecEye.setText(rs.getString("eyecolor"));
+	            			textVRegistrationSecHair.setText(rs.getString("haircolor"));
+	            			textVRegistrationSecAddr.setText(rs.getString("addr"));
+	            			//genderGroup. = rs.getString("gender");
+	            			//textVRegistrationOBirthday = rs.getString("birthday");
 						// try looking for and retrieving user info
+						}
+						else {
+							textVRegistrationSecName.setEditable(true);
+							textVRegistrationSecHeight.setEditable(true);
+							textVRegistrationSecWeight.setEditable(true);
+							textVRegistrationSecEye.setEditable(true);
+							textVRegistrationSecHair.setEditable(true);
+							textVRegistrationSecAddr.setEditable(true);
+						}
 					} catch (Exception err) {
 						// make text boxes fillable
 					}
