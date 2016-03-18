@@ -12,9 +12,9 @@ public class VehicleRegistration extends GroupProject1 {
 	private String model;
 	private String year;
 	private String color;
-	private String type_id;
+	private int type_id;
 	
-	public VehicleRegistration(String serial_no, String maker, String model, String year, String color, String type_id, String sin){
+	public VehicleRegistration(String serial_no, String maker, String model, String year, String color, int type_id){
 		this.serial_no = serial_no;
 		this.maker = maker;
 		this.model = model;
@@ -26,22 +26,27 @@ public class VehicleRegistration extends GroupProject1 {
 	public void Run() {
 		// Do Java/SQL stuff here.
 		
-	//  change the following parameters to connect to other databases
-		
-		
-		
 
        try {
         	if (GroupProject1.m_con != null) {
-        		PreparedStatement stmt;
-
+        		// Create a statement object.
+    	      	// Changed to reflect changes made in the result set and to make these changes permanent to the database too
+        		Statement stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         		
         		if (!serial_no.equals("")){
-            		stmt = GroupProject1.m_con.prepareStatement("insert into vehicle values ( '" + serial_no + "', '" + maker + "', '" + model + "', '" + year + "', '" + color + "', " + type_id + ")" );
-            		stmt.executeUpdate();
+        			String insertStatement = "insert into vehicle values ( '" 
+		        		+ serial_no + "', '" 
+		        		+ maker + "', '" 
+		        		+ model + "', '" 
+		        		+ year + "', '" 
+		        		+ color + "', " 
+		        		+ type_id + ")";
+        			
+            		// stmt = GroupProject1.m_con.prepareStatement(insertStatement);
+            		stmt.executeUpdate(insertStatement);
         		}
 
-                  // execute the insert statement
+                  
                   
                   
                   

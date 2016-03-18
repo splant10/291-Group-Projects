@@ -225,7 +225,7 @@ public class GroupProject1 {
 			lblVRegistrationTypeID.setBounds(302, 59, 70, 15);
 			tabRegistration.add(lblVRegistrationTypeID);
 			
-			JSpinner spinVRegistrationTypeID = new JSpinner();
+			final JSpinner spinVRegistrationTypeID = new JSpinner();
 			spinVRegistrationTypeID.setModel(new SpinnerListModel(new String[] {"1, Sedan", "2, Coupe", "3, Sport", "4, Hatchback", "5, Truck", "6, Mini Van", "7, Semi", "8, SUV"}));
 			spinVRegistrationTypeID.setBounds(302, 73, 114, 20);
 			tabRegistration.add(spinVRegistrationTypeID);
@@ -259,7 +259,7 @@ public class GroupProject1 {
 			lblVRegistrationOHeight.setBounds(302, 130, 70, 15);
 			tabRegistration.add(lblVRegistrationOHeight);
 			
-			JLabel lblVRegistrationOwner = new JLabel("--------Owner Information--------");
+			JLabel lblVRegistrationOwner = new JLabel("--------Primary Owner Information--------");
 			lblVRegistrationOwner.setBounds(77, 104, 343, 15);
 			tabRegistration.add(lblVRegistrationOwner);
 			
@@ -337,7 +337,18 @@ public class GroupProject1 {
 			JButton btnRegister = new JButton("Register");
 			btnRegister.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					VehicleRegistration vehicleRegistration = new VehicleRegistration("1114", "Toyota", "1999", "3", "red", "1", "12347");
+					String serial = textVRegistrationVID.getText();
+					String make = textVRegistrationMake.getText();
+					String model = textVRegistrationModel.getText();
+					String year = textVRegistrationYear.getText();
+					String color = textVRegistrationColor.getText();
+					int type_id = Character.getNumericValue(spinVRegistrationTypeID.getValue().toString().charAt(0));
+					VehicleRegistration vehicleRegistration = new VehicleRegistration(serial,
+							make,
+							model,
+							year,
+							color,
+							type_id);
 					vehicleRegistration.Run();
 				}
 			});
@@ -667,13 +678,14 @@ public class GroupProject1 {
 					}
 				} else {
 					try {
-						tabbedPane.setSelectedIndex(0);
-						tabbedPane.setEnabled(false);
 						m_con.close();
 					}
 					catch(Exception e) {
-						// shouldn't be reached
+						// shouldn't be reached, unless connection has already closed
 					}
+					// Move to 'main' tab
+					tabbedPane.setSelectedIndex(0);
+					tabbedPane.setEnabled(false);
 					loggedIn = false;
 					btnLogin.setText("Login");
 					Color white = new Color(255,255,255);
