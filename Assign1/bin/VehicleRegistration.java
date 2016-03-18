@@ -9,7 +9,7 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class VehicleRegistration extends GroupProject1 {
-	private  String serial_no;
+	private String serial_no;
 	private String maker;
 	private String model;
 	private String year;
