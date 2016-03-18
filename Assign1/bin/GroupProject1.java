@@ -888,6 +888,55 @@ public class GroupProject1 {
 			tabTransaction.add(label_14);
 			
 			textTransactionBuyerSIN = new JTextField();
+			textTransactionBuyerSIN.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					PreparedStatement stmt;
+					ResultSet rs;
+					try {
+						System.out.println(textTransactionBuyerSIN.getText());
+						stmt = m_con.prepareStatement("select * from people where sin = " +  textTransactionBuyerSIN.getText());
+						rs = stmt.executeQuery();
+						if (m_con != null && rs.next()){
+	            			System.out.println("found");
+	            			textTransactionBuyerName.setEditable(false);
+	            			textTransactionBuyerHeight.setEditable(false);
+	            			textTransactionBuyerWeight.setEditable(false);
+	            			textTransactionBuyerEye.setEditable(false);
+	            			textTransactionBuyerHair.setEditable(false);
+	            			textTransactionBuyerAddr.setEditable(false);
+
+	            			
+							textTransactionBuyerName.setText(rs.getString("name"));
+							textTransactionBuyerHeight.setText(rs.getString("height"));
+							textTransactionBuyerWeight.setText(rs.getString("weight"));
+							textTransactionBuyerEye.setText(rs.getString("eyecolor"));
+							textTransactionBuyerHair.setText(rs.getString("haircolor"));
+							textTransactionBuyerAddr.setText(rs.getString("addr"));
+	            			//genderGroup. = rs.getString("gender");
+	            			//textVRegistrationOBirthday = rs.getString("birthday");
+						// try looking for and retrieving user info
+						}
+						else {
+							textTransactionBuyerName.setEditable(true);
+							textTransactionBuyerHeight.setEditable(true);
+							textTransactionBuyerWeight.setEditable(true);
+							textTransactionBuyerEye.setEditable(true);
+							textTransactionBuyerHair.setEditable(true);
+							textTransactionBuyerAddr.setEditable(true);
+							
+							textTransactionBuyerName.setText("");
+							textTransactionBuyerHeight.setText("");
+							textTransactionBuyerWeight.setText("");
+							textTransactionBuyerEye.setText("");
+							textTransactionBuyerHair.setText("");
+							textTransactionBuyerAddr.setText("");
+						}
+					} catch (Exception err) {
+						// make text boxes fillable
+					}
+				}
+			});
 			textTransactionBuyerSIN.setColumns(10);
 			textTransactionBuyerSIN.setBounds(12, 143, 114, 19);
 			tabTransaction.add(textTransactionBuyerSIN);
@@ -980,6 +1029,56 @@ public class GroupProject1 {
 			tabTransaction.add(label_23);
 			
 			textTransactionSellerSIN = new JTextField();
+			textTransactionSellerSIN.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					PreparedStatement stmt;
+					ResultSet rs;
+					try {
+						System.out.println(textTransactionSellerSIN.getText());
+						stmt = m_con.prepareStatement("select * from people where sin = " +  textTransactionSellerSIN.getText());
+						rs = stmt.executeQuery();
+						if (m_con != null && rs.next()){
+	            			System.out.println("found");
+	            			textTransactionSellerName.setEditable(false);
+	            			textTransactionSellerHeight.setEditable(false);
+	            			textTransactionSellerWeight.setEditable(false);
+	            			textTransactionSellerEye.setEditable(false);
+	            			textTransactionSellerHair.setEditable(false);
+	            			textTransactionSellerAddr.setEditable(false);
+
+	            			
+							textTransactionSellerName.setText(rs.getString("name"));
+							textTransactionSellerHeight.setText(rs.getString("height"));
+							textTransactionSellerWeight.setText(rs.getString("weight"));
+							textTransactionSellerEye.setText(rs.getString("eyecolor"));
+							textTransactionSellerHair.setText(rs.getString("haircolor"));
+							textTransactionSellerAddr.setText(rs.getString("addr"));
+	            			//genderGroup. = rs.getString("gender");
+	            			//textVRegistrationOBirthday = rs.getString("birthday");
+						// try looking for and retrieving user info
+						}
+						else {
+							textTransactionSellerName.setEditable(true);
+							textTransactionSellerHeight.setEditable(true);
+							textTransactionSellerWeight.setEditable(true);
+							textTransactionSellerEye.setEditable(true);
+							textTransactionSellerHair.setEditable(true);
+							textTransactionSellerAddr.setEditable(true);
+							
+							textTransactionSellerName.setText("");
+							textTransactionSellerHeight.setText("");
+							textTransactionSellerWeight.setText("");
+							textTransactionSellerEye.setText("");
+							textTransactionSellerHair.setText("");
+							textTransactionSellerAddr.setText("");
+						}
+					} catch (Exception err) {
+						// make text boxes fillable
+					}
+				}
+				
+			});
 			textTransactionSellerSIN.setColumns(10);
 			textTransactionSellerSIN.setBounds(12, 311, 114, 19);
 			tabTransaction.add(textTransactionSellerSIN);
