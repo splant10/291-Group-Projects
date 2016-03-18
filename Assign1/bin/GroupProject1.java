@@ -56,7 +56,10 @@ public class GroupProject1 {
     private JTextField textVRegistrationOwnerSIN;
     private JTextField textVRegistrationOName;
     private JTextField textVRegistrationOHeight;
-    private JTextField textField;
+    private JTextField textDLRegistrationOWeight;
+    private JTextField textDLRegistrationOEye;
+    private JTextField textDLRegistrationOHair;
+    private JTextField textDLRegistrationOAddress;
     private JTextField textVRegistrationOWeight;
     private JTextField textVRegistrationOEye;
     private JTextField textVRegistrationOHair;
@@ -70,6 +73,9 @@ public class GroupProject1 {
     private JTextField textVRegistrationSecEye;
     private JTextField textVRegistrationSecHair;
     private JTextField textVRegistrationSecAddr;
+    private JTextField textDLRegistrationOwnerSIN;
+    private JTextField textDLRegistrationOName;
+    private JTextField textDLRegistrationOHeight;
     private JTextField textField_1;
     private JTextField textField_2;
     private JTextField textField_3;
@@ -629,7 +635,56 @@ public class GroupProject1 {
 			lblExpiryDate.setBounds(165, 65, 114, 15);
 			tabLicenceRegistration.add(lblExpiryDate);
 			
-			JTextField textDLRegistrationOwnerSIN = new JTextField();
+			textDLRegistrationOwnerSIN = new JTextField();
+			textDLRegistrationOwnerSIN.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					PreparedStatement stmt;
+					ResultSet rs;
+					try {
+						System.out.println(textDLRegistrationOwnerSIN.getText());
+						stmt = m_con.prepareStatement("select * from people where sin = " +  textDLRegistrationOwnerSIN.getText());
+						rs = stmt.executeQuery();
+						if (m_con != null && rs.next()){
+	            			System.out.println("found");
+	            			textDLRegistrationOName.setEditable(false);
+							textDLRegistrationOHeight.setEditable(false);
+							textDLRegistrationOWeight.setEditable(false);
+							textDLRegistrationOEye.setEditable(false);
+							textDLRegistrationOHair.setEditable(false);
+							textDLRegistrationOAddress.setEditable(false);
+
+	            			
+							textDLRegistrationOName.setText(rs.getString("name"));
+							textDLRegistrationOHeight.setText(rs.getString("height"));
+							textDLRegistrationOWeight.setText(rs.getString("weight"));
+							textDLRegistrationOEye.setText(rs.getString("eyecolor"));
+							textDLRegistrationOHair.setText(rs.getString("haircolor"));
+							textDLRegistrationOAddress.setText(rs.getString("addr"));
+	            			//genderGroup. = rs.getString("gender");
+	            			//textVRegistrationOBirthday = rs.getString("birthday");
+						// try looking for and retrieving user info
+						}
+						else {
+							textDLRegistrationOName.setEditable(true);
+							textDLRegistrationOHeight.setEditable(true);
+							textDLRegistrationOWeight.setEditable(true);
+							textDLRegistrationOEye.setEditable(true);
+							textDLRegistrationOHair.setEditable(true);
+							textDLRegistrationOAddress.setEditable(true);
+							
+							textDLRegistrationOName.setText("");
+							textDLRegistrationOHeight.setText("");
+							textDLRegistrationOWeight.setText("");
+							textDLRegistrationOEye.setText("");
+							textDLRegistrationOHair.setText("");
+							textDLRegistrationOAddress.setText("");
+						}
+					} catch (Exception err) {
+						// make text boxes fillable
+					}
+				}
+				
+			});
 			textDLRegistrationOwnerSIN.setBounds(12, 147, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOwnerSIN);
 			textDLRegistrationOwnerSIN.setColumns(10);
@@ -638,7 +693,7 @@ public class GroupProject1 {
 			lblDLRegistrationOwnerSIN.setBounds(12, 130, 114, 15);
 			tabLicenceRegistration.add(lblDLRegistrationOwnerSIN);
 
-			JTextField textDLRegistrationOName = new JTextField();
+			textDLRegistrationOName = new JTextField();
 			textDLRegistrationOName.setEditable(false);
 			textDLRegistrationOName.setBounds(158, 147, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOName);
@@ -648,7 +703,7 @@ public class GroupProject1 {
 			lblOwnerNameDL.setBounds(158, 130, 114, 15);
 			tabLicenceRegistration.add(lblOwnerNameDL);
 
-			JTextField textDLRegistrationOHeight = new JTextField();
+			textDLRegistrationOHeight = new JTextField();
 			textDLRegistrationOHeight.setEditable(false);
 			textDLRegistrationOHeight.setBounds(302, 147, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOHeight);
@@ -663,17 +718,17 @@ public class GroupProject1 {
 			
 			tabLicenceRegistration.add(lblNewLabelDL);
 
-			textField = new JTextField();
-			textField.setEditable(false);
-			textField.setBounds(12, 194, 114, 19);
-			tabLicenceRegistration.add(textField);
-			textField.setColumns(10);
+			textDLRegistrationOWeight = new JTextField();
+			textDLRegistrationOWeight.setEditable(false);
+			textDLRegistrationOWeight.setBounds(12, 194, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationOWeight);
+			textDLRegistrationOWeight.setColumns(10);
 
 			JLabel lblDLRegistrationOWeight = new JLabel("Weight");
 			lblDLRegistrationOWeight.setBounds(12, 178, 70, 15);
 			tabLicenceRegistration.add(lblDLRegistrationOWeight);
 
-			JTextField textDLRegistrationOEye = new JTextField();
+			textDLRegistrationOEye = new JTextField();
 			textDLRegistrationOEye.setEditable(false);
 			textDLRegistrationOEye.setBounds(158, 194, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOEye);
@@ -683,7 +738,7 @@ public class GroupProject1 {
 			lblDLRegistrationOEye.setBounds(158, 178, 70, 15);
 			tabLicenceRegistration.add(lblDLRegistrationOEye);
 
-			JTextField textDLRegistrationOHair = new JTextField();
+			textDLRegistrationOHair = new JTextField();
 			textDLRegistrationOHair.setEditable(false);
 			textDLRegistrationOHair.setBounds(302, 194, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOHair);
@@ -693,7 +748,7 @@ public class GroupProject1 {
 			lblDLRegistrationOHair.setBounds(302, 178, 92, 15);
 			tabLicenceRegistration.add(lblDLRegistrationOHair);
 
-			JTextField textDLRegistrationOAddress = new JTextField();
+			textDLRegistrationOAddress = new JTextField();
 			textDLRegistrationOAddress.setEditable(false);
 			textDLRegistrationOAddress.setBounds(12, 241, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOAddress);
@@ -729,6 +784,14 @@ public class GroupProject1 {
 			JDatePickerImpl datePickerDL = new JDatePickerImpl(birthdatePanelDL, new DateLabelFormatter());
 			datePickerDL.setBounds(305, 239, 120, 30);
 			tabLicenceRegistration.add(datePickerDL);
+			
+			JButton licenceRegisterButton = new JButton("Register");
+			licenceRegisterButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			licenceRegisterButton.setBounds(168, 306, 117, 25);
+			tabLicenceRegistration.add(licenceRegisterButton);
 		
 		// End layout code for Driver's Licence Registration Tab //
 		JPanel tabViolationRecord = new JPanel();
