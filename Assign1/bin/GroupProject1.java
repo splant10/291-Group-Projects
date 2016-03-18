@@ -325,6 +325,8 @@ public class GroupProject1 {
 	            			textVRegistrationOAddress.setText(rs.getString("addr"));
 	            			textVRegistrationPrimGender.setText(rs.getString("gender"));
 	            			textVRegistrationPrimBirth.setText(rs.getString("birthday"));
+	            			textVRegistrationSecSIN.setEditable(true);
+	            			
 	            			//genderGroup. = rs.getString("gender");
 	            			//textVRegistrationOBirthday = rs.getString("birthday");
 						// try looking for and retrieving user info
