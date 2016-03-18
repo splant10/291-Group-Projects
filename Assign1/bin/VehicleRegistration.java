@@ -15,14 +15,18 @@ public class VehicleRegistration extends GroupProject1 {
 	private String year;
 	private String color;
 	private int type_id;
+	private Person owner;
+	private Person secondaryOwner;
 	
-	public VehicleRegistration(String serial_no, String maker, String model, String year, String color, int type_id){
+	public VehicleRegistration(String serial_no, String maker, String model, String year, String color, int type_id, Person owner, Person secondaryOwner){
 		this.serial_no = serial_no;
 		this.maker = maker;
 		this.model = model;
 		this.year = year;
 		this.color = color;
 		this.type_id = type_id;
+		this.owner = owner;
+		this.secondaryOwner = secondaryOwner;
 	}
 	
 	public void Run() {
@@ -46,6 +50,19 @@ public class VehicleRegistration extends GroupProject1 {
             		stmt.executeUpdate(insertStatement);
         		} else {
         			throw new Exception();
+        		}
+        		
+        		if (owner != null) {
+        			//Register new owner
+        			String insertStatement = "insert into people values ('" + owner.getSin() + "', '" + owner.getName() + "', " + owner.getHeight() + "," + owner.getWeight() + ", '" + owner.getEyecolor() + "', '" + owner.getHaircolor() + "', '" + owner.getAddr() + "' , '" + "m" + "', '" + "11-Nov-1999" + "')";
+        			stmt.executeUpdate(insertStatement);
+        		}
+        		
+        		if (secondaryOwner != null) {
+        			// Register new secondary owner
+        			String insertStatement = "insert into people values ('" + secondaryOwner.getSin() + "', '" + secondaryOwner.getName() + "', " + secondaryOwner.getHeight() + "," + secondaryOwner.getWeight() + ", '" + secondaryOwner.getEyecolor() + "', '" + secondaryOwner.getHaircolor() + "', '" + secondaryOwner.getAddr() + "' , '" + "f" + "', '" + "11-Nov-1999" + "')";
+        			stmt.executeUpdate(insertStatement);
+        			
         		}
         	}
         } catch( Exception ex ) { 
