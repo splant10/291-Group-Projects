@@ -32,7 +32,9 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.SqlDateModel;
 
 import javax.swing.JRadioButton;
-import javax.swing.JTextPane; // Java package for accessing Oracle
+import javax.swing.JTextPane;
+import javax.swing.JScrollBar; // Java package for accessing Oracle
+import javax.swing.JScrollPane;
 
 public class GroupProject1 {
 
@@ -70,21 +72,22 @@ public class GroupProject1 {
     private JTextField textField_2;
     private JTextField textField_3;
     private JTextField textField_4;
-    private JTextField textField_5;
-    private JTextField textField_6;
-    private JTextField textField_7;
+    private JTextField textTransactionBuyerSIN;
+    private JTextField textTransactionBuyerName;
+    private JTextField textTransactionBuyerHeight;
     private JTextField textField_8;
-    private JTextField textField_9;
-    private JTextField textField_10;
-    private JTextField textField_11;
-    private JTextField textField_12;
-    private JTextField textField_13;
-    private JTextField textField_14;
-    private JTextField textField_15;
-    private JTextField textField_16;
-    private JTextField textField_17;
-    private JTextField textField_18;
-    private JTextField textField_19;
+    private JTextField textTransactionBuyerWeight;
+    private JTextField textTransactionBuyerEye;
+    private JTextField textTransactionBuyerHair;
+    private JTextField textTransactionBuyerAddr;
+    private JTextField textTransactionSellerSIN;
+    private JTextField textTransactionSellerName;
+    private JTextField textTransactionSellerHeight;
+    private JTextField textTransactionSellerWeight;
+    private JTextField textTransactionSellerEye;
+    private JTextField textTransactionSellerHair;
+    private JTextField textTransactionSellerAddr;
+    private JTextField textSearchBar;
     
 	
 	/**
@@ -655,7 +658,33 @@ public class GroupProject1 {
 		
 		JPanel tabSearch = new JPanel();
 		tabbedPane.addTab("Search", null, tabSearch, null);
+		tabSearch.setLayout(null);
 		
+			// Search Layout things
+			textSearchBar = new JTextField();
+			textSearchBar.setBounds(12, 36, 297, 19);
+			tabSearch.add(textSearchBar);
+			textSearchBar.setColumns(10);
+			
+			JButton btnSearch = new JButton("Search");
+			btnSearch.setBounds(328, 33, 117, 25);
+			tabSearch.add(btnSearch);
+			
+			JLabel lblNewLabel_2 = new JLabel("Search");
+			lblNewLabel_2.setBounds(12, 12, 70, 15);
+			tabSearch.add(lblNewLabel_2);
+			
+			JTextArea textSearchResult = new JTextArea();
+			textSearchResult.setWrapStyleWord(true);
+			textSearchResult.setEditable(false);
+			textSearchResult.setBounds(12, 61, 433, 422);
+			JScrollPane scrollResults = new JScrollPane(textSearchResult, 
+					JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			scrollResults.setSize(430, 416);
+			scrollResults.setLocation(15, 67);
+			tabSearch.add(scrollResults);
+			// End Search Layout things
+			
 		JPanel tabTransaction = new JPanel();
 		tabbedPane.addTab("Auto Transaction", null, tabTransaction, null);
 		tabTransaction.setLayout(null);
@@ -712,30 +741,30 @@ public class GroupProject1 {
 		label_14.setBounds(12, 130, 114, 15);
 		tabTransaction.add(label_14);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(12, 147, 114, 19);
-		tabTransaction.add(textField_5);
+		textTransactionBuyerSIN = new JTextField();
+		textTransactionBuyerSIN.setColumns(10);
+		textTransactionBuyerSIN.setBounds(12, 147, 114, 19);
+		tabTransaction.add(textTransactionBuyerSIN);
 		
 		JLabel label_15 = new JLabel("Name");
 		label_15.setBounds(158, 130, 114, 15);
 		tabTransaction.add(label_15);
 		
-		textField_6 = new JTextField();
-		textField_6.setEditable(false);
-		textField_6.setColumns(10);
-		textField_6.setBounds(158, 147, 114, 19);
-		tabTransaction.add(textField_6);
+		textTransactionBuyerName = new JTextField();
+		textTransactionBuyerName.setEditable(false);
+		textTransactionBuyerName.setColumns(10);
+		textTransactionBuyerName.setBounds(158, 147, 114, 19);
+		tabTransaction.add(textTransactionBuyerName);
 		
 		JLabel label_16 = new JLabel("Height");
 		label_16.setBounds(302, 130, 70, 15);
 		tabTransaction.add(label_16);
 		
-		textField_7 = new JTextField();
-		textField_7.setEditable(false);
-		textField_7.setColumns(10);
-		textField_7.setBounds(302, 147, 114, 19);
-		tabTransaction.add(textField_7);
+		textTransactionBuyerHeight = new JTextField();
+		textTransactionBuyerHeight.setEditable(false);
+		textTransactionBuyerHeight.setColumns(10);
+		textTransactionBuyerHeight.setBounds(302, 147, 114, 19);
+		tabTransaction.add(textTransactionBuyerHeight);
 		
 		textField_8 = new JTextField();
 		textField_8.setColumns(10);
@@ -750,51 +779,51 @@ public class GroupProject1 {
 		label_18.setBounds(12, 178, 70, 15);
 		tabTransaction.add(label_18);
 		
-		textField_9 = new JTextField();
-		textField_9.setEditable(false);
-		textField_9.setColumns(10);
-		textField_9.setBounds(12, 194, 114, 19);
-		tabTransaction.add(textField_9);
+		textTransactionBuyerWeight = new JTextField();
+		textTransactionBuyerWeight.setEditable(false);
+		textTransactionBuyerWeight.setColumns(10);
+		textTransactionBuyerWeight.setBounds(12, 194, 114, 19);
+		tabTransaction.add(textTransactionBuyerWeight);
 		
 		JLabel label_19 = new JLabel("Eye Color");
 		label_19.setBounds(158, 178, 70, 15);
 		tabTransaction.add(label_19);
 		
-		textField_10 = new JTextField();
-		textField_10.setEditable(false);
-		textField_10.setColumns(10);
-		textField_10.setBounds(158, 194, 114, 19);
-		tabTransaction.add(textField_10);
+		textTransactionBuyerEye = new JTextField();
+		textTransactionBuyerEye.setEditable(false);
+		textTransactionBuyerEye.setColumns(10);
+		textTransactionBuyerEye.setBounds(158, 194, 114, 19);
+		tabTransaction.add(textTransactionBuyerEye);
 		
 		JLabel label_20 = new JLabel("Hair Color");
 		label_20.setBounds(302, 178, 92, 15);
 		tabTransaction.add(label_20);
 		
-		textField_11 = new JTextField();
-		textField_11.setEditable(false);
-		textField_11.setColumns(10);
-		textField_11.setBounds(302, 194, 114, 19);
-		tabTransaction.add(textField_11);
+		textTransactionBuyerHair = new JTextField();
+		textTransactionBuyerHair.setEditable(false);
+		textTransactionBuyerHair.setColumns(10);
+		textTransactionBuyerHair.setBounds(302, 194, 114, 19);
+		tabTransaction.add(textTransactionBuyerHair);
 		
-		JRadioButton radioButton = new JRadioButton("F");
-		radioButton.setEnabled(false);
-		radioButton.setBounds(223, 239, 61, 23);
-		tabTransaction.add(radioButton);
+		JRadioButton rdbtnTransactionBuyerF = new JRadioButton("F");
+		rdbtnTransactionBuyerF.setEnabled(false);
+		rdbtnTransactionBuyerF.setBounds(223, 239, 61, 23);
+		tabTransaction.add(rdbtnTransactionBuyerF);
 		
-		JRadioButton radioButton_1 = new JRadioButton("M");
-		radioButton_1.setEnabled(false);
-		radioButton_1.setBounds(158, 239, 56, 23);
-		tabTransaction.add(radioButton_1);
+		JRadioButton rdbtnTransactionBuyerM = new JRadioButton("M");
+		rdbtnTransactionBuyerM.setEnabled(false);
+		rdbtnTransactionBuyerM.setBounds(158, 239, 56, 23);
+		tabTransaction.add(rdbtnTransactionBuyerM);
 		
 		JLabel label_21 = new JLabel("Gender");
 		label_21.setBounds(158, 225, 70, 15);
 		tabTransaction.add(label_21);
 		
-		textField_12 = new JTextField();
-		textField_12.setEditable(false);
-		textField_12.setColumns(10);
-		textField_12.setBounds(12, 241, 114, 19);
-		tabTransaction.add(textField_12);
+		textTransactionBuyerAddr = new JTextField();
+		textTransactionBuyerAddr.setEditable(false);
+		textTransactionBuyerAddr.setColumns(10);
+		textTransactionBuyerAddr.setBounds(12, 241, 114, 19);
+		tabTransaction.add(textTransactionBuyerAddr);
 		
 		JLabel label_22 = new JLabel("Address");
 		label_22.setBounds(12, 225, 70, 15);
@@ -808,84 +837,84 @@ public class GroupProject1 {
 		label_23.setBounds(12, 299, 114, 15);
 		tabTransaction.add(label_23);
 		
-		textField_13 = new JTextField();
-		textField_13.setColumns(10);
-		textField_13.setBounds(12, 315, 114, 19);
-		tabTransaction.add(textField_13);
+		textTransactionSellerSIN = new JTextField();
+		textTransactionSellerSIN.setColumns(10);
+		textTransactionSellerSIN.setBounds(12, 315, 114, 19);
+		tabTransaction.add(textTransactionSellerSIN);
 		
 		JLabel label_24 = new JLabel("Name");
 		label_24.setBounds(158, 299, 114, 15);
 		tabTransaction.add(label_24);
 		
-		textField_14 = new JTextField();
-		textField_14.setEditable(false);
-		textField_14.setColumns(10);
-		textField_14.setBounds(158, 315, 114, 19);
-		tabTransaction.add(textField_14);
+		textTransactionSellerName = new JTextField();
+		textTransactionSellerName.setEditable(false);
+		textTransactionSellerName.setColumns(10);
+		textTransactionSellerName.setBounds(158, 315, 114, 19);
+		tabTransaction.add(textTransactionSellerName);
 		
 		JLabel label_25 = new JLabel("Height");
 		label_25.setBounds(302, 299, 70, 15);
 		tabTransaction.add(label_25);
 		
-		textField_15 = new JTextField();
-		textField_15.setEditable(false);
-		textField_15.setColumns(10);
-		textField_15.setBounds(302, 315, 114, 19);
-		tabTransaction.add(textField_15);
+		textTransactionSellerHeight = new JTextField();
+		textTransactionSellerHeight.setEditable(false);
+		textTransactionSellerHeight.setColumns(10);
+		textTransactionSellerHeight.setBounds(302, 315, 114, 19);
+		tabTransaction.add(textTransactionSellerHeight);
 		
 		JLabel label_26 = new JLabel("Weight");
 		label_26.setBounds(12, 346, 70, 15);
 		tabTransaction.add(label_26);
 		
-		textField_16 = new JTextField();
-		textField_16.setEditable(false);
-		textField_16.setColumns(10);
-		textField_16.setBounds(12, 368, 114, 19);
-		tabTransaction.add(textField_16);
+		textTransactionSellerWeight = new JTextField();
+		textTransactionSellerWeight.setEditable(false);
+		textTransactionSellerWeight.setColumns(10);
+		textTransactionSellerWeight.setBounds(12, 368, 114, 19);
+		tabTransaction.add(textTransactionSellerWeight);
 		
 		JLabel label_27 = new JLabel("Eye Color");
 		label_27.setBounds(158, 346, 70, 15);
 		tabTransaction.add(label_27);
 		
-		textField_17 = new JTextField();
-		textField_17.setEditable(false);
-		textField_17.setColumns(10);
-		textField_17.setBounds(158, 368, 114, 19);
-		tabTransaction.add(textField_17);
+		textTransactionSellerEye = new JTextField();
+		textTransactionSellerEye.setEditable(false);
+		textTransactionSellerEye.setColumns(10);
+		textTransactionSellerEye.setBounds(158, 368, 114, 19);
+		tabTransaction.add(textTransactionSellerEye);
 		
 		JLabel label_28 = new JLabel("Hair Color");
 		label_28.setBounds(302, 346, 92, 15);
 		tabTransaction.add(label_28);
 		
-		textField_18 = new JTextField();
-		textField_18.setEditable(false);
-		textField_18.setColumns(10);
-		textField_18.setBounds(302, 368, 114, 19);
-		tabTransaction.add(textField_18);
+		textTransactionSellerHair = new JTextField();
+		textTransactionSellerHair.setEditable(false);
+		textTransactionSellerHair.setColumns(10);
+		textTransactionSellerHair.setBounds(302, 368, 114, 19);
+		tabTransaction.add(textTransactionSellerHair);
 		
 		JLabel label_29 = new JLabel("Address");
 		label_29.setBounds(12, 398, 70, 15);
 		tabTransaction.add(label_29);
 		
-		textField_19 = new JTextField();
-		textField_19.setEditable(false);
-		textField_19.setColumns(10);
-		textField_19.setBounds(12, 420, 114, 19);
-		tabTransaction.add(textField_19);
+		textTransactionSellerAddr = new JTextField();
+		textTransactionSellerAddr.setEditable(false);
+		textTransactionSellerAddr.setColumns(10);
+		textTransactionSellerAddr.setBounds(12, 420, 114, 19);
+		tabTransaction.add(textTransactionSellerAddr);
 		
 		JLabel label_30 = new JLabel("Gender");
 		label_30.setBounds(158, 398, 70, 15);
 		tabTransaction.add(label_30);
 		
-		JRadioButton radioButton_2 = new JRadioButton("M");
-		radioButton_2.setEnabled(false);
-		radioButton_2.setBounds(158, 418, 56, 23);
-		tabTransaction.add(radioButton_2);
+		JRadioButton textTransactionSellerM = new JRadioButton("M");
+		textTransactionSellerM.setEnabled(false);
+		textTransactionSellerM.setBounds(158, 418, 56, 23);
+		tabTransaction.add(textTransactionSellerM);
 		
-		JRadioButton radioButton_3 = new JRadioButton("F");
-		radioButton_3.setEnabled(false);
-		radioButton_3.setBounds(211, 418, 61, 23);
-		tabTransaction.add(radioButton_3);
+		JRadioButton textTransactionSellerF = new JRadioButton("F");
+		textTransactionSellerF.setEnabled(false);
+		textTransactionSellerF.setBounds(211, 418, 61, 23);
+		tabTransaction.add(textTransactionSellerF);
 		
 		// Login to SQLPlus server on click of Login Button
 		// Login button turns into logout button once successfully logged in
@@ -939,5 +968,4 @@ public class GroupProject1 {
 			textPassword.setText("");
 		}
 	}
-
 }
