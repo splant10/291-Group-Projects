@@ -6,6 +6,8 @@ package bin;
 
 import java.sql.*;
 
+import javax.swing.JOptionPane;
+
 public class VehicleRegistration extends GroupProject1 {
 	private  String serial_no;
 	private String maker;
@@ -25,8 +27,6 @@ public class VehicleRegistration extends GroupProject1 {
 	
 	public void Run() {
 		// Do Java/SQL stuff here.
-		
-
        try {
         	if (GroupProject1.m_con != null) {
         		// Create a statement object.
@@ -44,19 +44,14 @@ public class VehicleRegistration extends GroupProject1 {
         			
             		// stmt = GroupProject1.m_con.prepareStatement(insertStatement);
             		stmt.executeUpdate(insertStatement);
+        		} else {
+        			throw new Exception();
         		}
-
-                  
-                  
-                  
-                  
         	}
         } catch( Exception ex ) { 
             System.out.println( ex.getMessage());
+            JOptionPane.showMessageDialog(frame, "Error. Check your vehicle registration info!");
         }
-       
-
-       
        
 	}
 	

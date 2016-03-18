@@ -15,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.AbstractAction;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -35,13 +36,11 @@ import javax.swing.JTextPane; // Java package for accessing Oracle
 
 public class GroupProject1 {
 
-	private JFrame frame;
+	protected JFrame frame;
 	private JTextField textUserName;
 	private JPasswordField textPassword;
-	private JTextField textTransactionBuyer;
-	private JTextField textTransactionSeller;
-	private JTextField textTransactionDate;
-	private JTextField textTransactionPrice;
+	private JButton btnLogin = new JButton("Login");
+	private JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	
 
     public static Connection m_con;
@@ -67,6 +66,25 @@ public class GroupProject1 {
     private JTextField textVRegistrationSecEye;
     private JTextField textVRegistrationSecHair;
     private JTextField textVRegistrationSecAddr;
+    private JTextField textField_1;
+    private JTextField textField_2;
+    private JTextField textField_3;
+    private JTextField textField_4;
+    private JTextField textField_5;
+    private JTextField textField_6;
+    private JTextField textField_7;
+    private JTextField textField_8;
+    private JTextField textField_9;
+    private JTextField textField_10;
+    private JTextField textField_11;
+    private JTextField textField_12;
+    private JTextField textField_13;
+    private JTextField textField_14;
+    private JTextField textField_15;
+    private JTextField textField_16;
+    private JTextField textField_17;
+    private JTextField textField_18;
+    private JTextField textField_19;
     
 	
 	/**
@@ -117,7 +135,7 @@ public class GroupProject1 {
 	public GroupProject1() {
 		initialize();
 	}
-
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -136,6 +154,12 @@ public class GroupProject1 {
 		textPassword = new JPasswordField();
 		textPassword.setBounds(201, 33, 177, 19);
 		frame.getContentPane().add(textPassword);
+		textPassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Attempt to log in
+				Login();
+			}
+		});
 		
 		// Labels for username and password fields
 		JLabel lblUsername = new JLabel("Username:");
@@ -146,7 +170,7 @@ public class GroupProject1 {
 		frame.getContentPane().add(lblPassword);
 		
 		// Make tabs for the different application programs
-		final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		
 		tabbedPane.setEnabled(false);
 		tabbedPane.setBounds(12, 64, 462, 540);
 		frame.getContentPane().add(tabbedPane);
@@ -234,6 +258,18 @@ public class GroupProject1 {
 			textVRegistrationOwnerSIN.setBounds(12, 147, 114, 19);
 			tabRegistration.add(textVRegistrationOwnerSIN);
 			textVRegistrationOwnerSIN.setColumns(10);
+			
+			// What to do when you hit enter on primary owner SIN box
+			textVRegistrationOwnerSIN.addActionListener(new AbstractAction() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						// try looking for and retrieving user info
+					} catch (Exception err) {
+						// make text boxes fillable
+					}
+				}
+			});
 			
 			JLabel lblVRegistrationOwnerSIN = new JLabel("SIN");
 			lblVRegistrationOwnerSIN.setBounds(12, 130, 114, 15);
@@ -362,6 +398,18 @@ public class GroupProject1 {
 			textVRegistrationSecSIN.setColumns(10);
 			textVRegistrationSecSIN.setBounds(12, 322, 114, 19);
 			tabRegistration.add(textVRegistrationSecSIN);
+			
+			// What to do when you hit enter on secondary owner SIN box
+			textVRegistrationSecSIN.addActionListener(new AbstractAction() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						// try looking for and retrieving user info
+					} catch (Exception err) {
+						// make text boxes fillable
+					}
+				}
+			});
 			
 			JLabel label = new JLabel("SIN");
 			label.setBounds(12, 306, 114, 15);
@@ -611,46 +659,233 @@ public class GroupProject1 {
 		JPanel tabTransaction = new JPanel();
 		tabbedPane.addTab("Auto Transaction", null, tabTransaction, null);
 		tabTransaction.setLayout(null);
-			
-			textTransactionBuyer = new JTextField();
-			textTransactionBuyer.setBounds(12, 27, 209, 19);
-			tabTransaction.add(textTransactionBuyer);
-			textTransactionBuyer.setColumns(10);
-			
-			textTransactionSeller = new JTextField();
-			textTransactionSeller.setBounds(233, 27, 212, 19);
-			tabTransaction.add(textTransactionSeller);
-			textTransactionSeller.setColumns(10);
-			
-			JLabel lblBuyer = new JLabel("Buyer SIN");
-			lblBuyer.setBounds(12, 12, 70, 15);
-			tabTransaction.add(lblBuyer);
-			
-			JLabel lblSeller = new JLabel("Seller SIN");
-			lblSeller.setBounds(235, 12, 70, 15);
-			tabTransaction.add(lblSeller);
-			
-			textTransactionDate = new JTextField();
-			textTransactionDate.setBounds(12, 79, 209, 19);
-			tabTransaction.add(textTransactionDate);
-			textTransactionDate.setColumns(10);
-			
-			JLabel lblDate = new JLabel("Date");
-			lblDate.setBounds(12, 64, 70, 15);
-			tabTransaction.add(lblDate);
-			
-			textTransactionPrice = new JTextField();
-			textTransactionPrice.setBounds(12, 129, 114, 19);
-			tabTransaction.add(textTransactionPrice);
-			textTransactionPrice.setColumns(10);
-			
-			JLabel lblPrice = new JLabel("Price");
-			lblPrice.setBounds(12, 110, 70, 15);
-			tabTransaction.add(lblPrice);
-			
-			JButton btnTransactionComplete = new JButton("Complete Transaction");
-			btnTransactionComplete.setBounds(106, 221, 233, 61);
-			tabTransaction.add(btnTransactionComplete);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(12, 28, 114, 19);
+		tabTransaction.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(158, 28, 114, 19);
+		tabTransaction.add(textField_2);
+		
+		JLabel label_8 = new JLabel("Vehicle Serial #");
+		label_8.setBounds(12, 12, 114, 15);
+		tabTransaction.add(label_8);
+		
+		JLabel label_9 = new JLabel("Make");
+		label_9.setBounds(158, 12, 70, 15);
+		tabTransaction.add(label_9);
+		
+		JLabel label_10 = new JLabel("Model");
+		label_10.setBounds(302, 12, 70, 15);
+		tabTransaction.add(label_10);
+		
+		JLabel label_11 = new JLabel("Year");
+		label_11.setBounds(12, 59, 70, 15);
+		tabTransaction.add(label_11);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(12, 73, 114, 19);
+		tabTransaction.add(textField_3);
+		
+		JLabel label_12 = new JLabel("Color");
+		label_12.setBounds(158, 59, 70, 15);
+		tabTransaction.add(label_12);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(158, 73, 114, 19);
+		tabTransaction.add(textField_4);
+		
+		JLabel label_13 = new JLabel("Type");
+		label_13.setBounds(302, 59, 70, 15);
+		tabTransaction.add(label_13);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setBounds(302, 73, 114, 20);
+		tabTransaction.add(spinner);
+		
+		JLabel label_14 = new JLabel("SIN");
+		label_14.setBounds(12, 130, 114, 15);
+		tabTransaction.add(label_14);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(12, 147, 114, 19);
+		tabTransaction.add(textField_5);
+		
+		JLabel label_15 = new JLabel("Name");
+		label_15.setBounds(158, 130, 114, 15);
+		tabTransaction.add(label_15);
+		
+		textField_6 = new JTextField();
+		textField_6.setEditable(false);
+		textField_6.setColumns(10);
+		textField_6.setBounds(158, 147, 114, 19);
+		tabTransaction.add(textField_6);
+		
+		JLabel label_16 = new JLabel("Height");
+		label_16.setBounds(302, 130, 70, 15);
+		tabTransaction.add(label_16);
+		
+		textField_7 = new JTextField();
+		textField_7.setEditable(false);
+		textField_7.setColumns(10);
+		textField_7.setBounds(302, 147, 114, 19);
+		tabTransaction.add(textField_7);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(302, 28, 114, 19);
+		tabTransaction.add(textField_8);
+		
+		JLabel lblbuyerInformation = new JLabel("--------Buyer Information--------");
+		lblbuyerInformation.setBounds(117, 104, 242, 15);
+		tabTransaction.add(lblbuyerInformation);
+		
+		JLabel label_18 = new JLabel("Weight");
+		label_18.setBounds(12, 178, 70, 15);
+		tabTransaction.add(label_18);
+		
+		textField_9 = new JTextField();
+		textField_9.setEditable(false);
+		textField_9.setColumns(10);
+		textField_9.setBounds(12, 194, 114, 19);
+		tabTransaction.add(textField_9);
+		
+		JLabel label_19 = new JLabel("Eye Color");
+		label_19.setBounds(158, 178, 70, 15);
+		tabTransaction.add(label_19);
+		
+		textField_10 = new JTextField();
+		textField_10.setEditable(false);
+		textField_10.setColumns(10);
+		textField_10.setBounds(158, 194, 114, 19);
+		tabTransaction.add(textField_10);
+		
+		JLabel label_20 = new JLabel("Hair Color");
+		label_20.setBounds(302, 178, 92, 15);
+		tabTransaction.add(label_20);
+		
+		textField_11 = new JTextField();
+		textField_11.setEditable(false);
+		textField_11.setColumns(10);
+		textField_11.setBounds(302, 194, 114, 19);
+		tabTransaction.add(textField_11);
+		
+		JRadioButton radioButton = new JRadioButton("F");
+		radioButton.setEnabled(false);
+		radioButton.setBounds(223, 239, 61, 23);
+		tabTransaction.add(radioButton);
+		
+		JRadioButton radioButton_1 = new JRadioButton("M");
+		radioButton_1.setEnabled(false);
+		radioButton_1.setBounds(158, 239, 56, 23);
+		tabTransaction.add(radioButton_1);
+		
+		JLabel label_21 = new JLabel("Gender");
+		label_21.setBounds(158, 225, 70, 15);
+		tabTransaction.add(label_21);
+		
+		textField_12 = new JTextField();
+		textField_12.setEditable(false);
+		textField_12.setColumns(10);
+		textField_12.setBounds(12, 241, 114, 19);
+		tabTransaction.add(textField_12);
+		
+		JLabel label_22 = new JLabel("Address");
+		label_22.setBounds(12, 225, 70, 15);
+		tabTransaction.add(label_22);
+		
+		JLabel lblsellerInformation = new JLabel("--------Seller Information--------");
+		lblsellerInformation.setBounds(117, 272, 235, 15);
+		tabTransaction.add(lblsellerInformation);
+		
+		JLabel label_23 = new JLabel("SIN");
+		label_23.setBounds(12, 299, 114, 15);
+		tabTransaction.add(label_23);
+		
+		textField_13 = new JTextField();
+		textField_13.setColumns(10);
+		textField_13.setBounds(12, 315, 114, 19);
+		tabTransaction.add(textField_13);
+		
+		JLabel label_24 = new JLabel("Name");
+		label_24.setBounds(158, 299, 114, 15);
+		tabTransaction.add(label_24);
+		
+		textField_14 = new JTextField();
+		textField_14.setEditable(false);
+		textField_14.setColumns(10);
+		textField_14.setBounds(158, 315, 114, 19);
+		tabTransaction.add(textField_14);
+		
+		JLabel label_25 = new JLabel("Height");
+		label_25.setBounds(302, 299, 70, 15);
+		tabTransaction.add(label_25);
+		
+		textField_15 = new JTextField();
+		textField_15.setEditable(false);
+		textField_15.setColumns(10);
+		textField_15.setBounds(302, 315, 114, 19);
+		tabTransaction.add(textField_15);
+		
+		JLabel label_26 = new JLabel("Weight");
+		label_26.setBounds(12, 346, 70, 15);
+		tabTransaction.add(label_26);
+		
+		textField_16 = new JTextField();
+		textField_16.setEditable(false);
+		textField_16.setColumns(10);
+		textField_16.setBounds(12, 368, 114, 19);
+		tabTransaction.add(textField_16);
+		
+		JLabel label_27 = new JLabel("Eye Color");
+		label_27.setBounds(158, 346, 70, 15);
+		tabTransaction.add(label_27);
+		
+		textField_17 = new JTextField();
+		textField_17.setEditable(false);
+		textField_17.setColumns(10);
+		textField_17.setBounds(158, 368, 114, 19);
+		tabTransaction.add(textField_17);
+		
+		JLabel label_28 = new JLabel("Hair Color");
+		label_28.setBounds(302, 346, 92, 15);
+		tabTransaction.add(label_28);
+		
+		textField_18 = new JTextField();
+		textField_18.setEditable(false);
+		textField_18.setColumns(10);
+		textField_18.setBounds(302, 368, 114, 19);
+		tabTransaction.add(textField_18);
+		
+		JLabel label_29 = new JLabel("Address");
+		label_29.setBounds(12, 398, 70, 15);
+		tabTransaction.add(label_29);
+		
+		textField_19 = new JTextField();
+		textField_19.setEditable(false);
+		textField_19.setColumns(10);
+		textField_19.setBounds(12, 420, 114, 19);
+		tabTransaction.add(textField_19);
+		
+		JLabel label_30 = new JLabel("Gender");
+		label_30.setBounds(158, 398, 70, 15);
+		tabTransaction.add(label_30);
+		
+		JRadioButton radioButton_2 = new JRadioButton("M");
+		radioButton_2.setEnabled(false);
+		radioButton_2.setBounds(158, 418, 56, 23);
+		tabTransaction.add(radioButton_2);
+		
+		JRadioButton radioButton_3 = new JRadioButton("F");
+		radioButton_3.setEnabled(false);
+		radioButton_3.setBounds(211, 418, 61, 23);
+		tabTransaction.add(radioButton_3);
 		
 		// Login to SQLPlus server on click of Login Button
 		// Login button turns into logout button once successfully logged in
@@ -659,44 +894,50 @@ public class GroupProject1 {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Attempt to log in
-				if (!loggedIn) {
-					try {
-						// Establish a connection
-						String pw = new String(textPassword.getPassword());
-						m_con = DriverManager.getConnection(Constants.dbstring, textUserName.getText(), pw);
-						loggedIn = true;
-						btnLogin.setText("Logout");
-						Color green = new Color(0,255,0);
-						textUserName.setBackground(green);
-						textPassword.setBackground(green);
-						tabbedPane.setEnabled(true);
-					} catch(Exception e) {
-						System.out.println(e);
-						Color red = new Color(255,0,0);
-						textUserName.setBackground(red);
-						textPassword.setBackground(red);
-					}
-				} else {
-					try {
-						m_con.close();
-					}
-					catch(Exception e) {
-						// shouldn't be reached, unless connection has already closed
-					}
-					// Move to 'main' tab
-					tabbedPane.setSelectedIndex(0);
-					tabbedPane.setEnabled(false);
-					loggedIn = false;
-					btnLogin.setText("Login");
-					Color white = new Color(255,255,255);
-					textUserName.setBackground(white);
-					textPassword.setBackground(white);
-					textUserName.setText("");
-					textPassword.setText("");
-				}
+				Login();
 			}
 		});
 		btnLogin.setBounds(388, 33, 86, 19);
 		frame.getContentPane().add(btnLogin);
 	}
+	
+	public void Login() {
+		// Attempt to log in
+		if (!loggedIn) {
+			try {
+				// Establish a connection
+				String pw = new String(textPassword.getPassword());
+				m_con = DriverManager.getConnection(Constants.dbstring, textUserName.getText(), pw);
+				loggedIn = true;
+				btnLogin.setText("Logout");
+				Color green = new Color(0,255,0);
+				textUserName.setBackground(green);
+				textPassword.setBackground(green);
+				tabbedPane.setEnabled(true);
+			} catch(Exception e) {
+				System.out.println(e);
+				Color red = new Color(255,0,0);
+				textUserName.setBackground(red);
+				textPassword.setBackground(red);
+			}
+		} else {
+			try {
+				m_con.close();
+			}
+			catch(Exception e) {
+				// shouldn't be reached, unless connection has already closed
+			}
+			// Move to 'main' tab
+			tabbedPane.setSelectedIndex(0);
+			tabbedPane.setEnabled(false);
+			loggedIn = false;
+			btnLogin.setText("Login");
+			Color white = new Color(255,255,255);
+			textUserName.setBackground(white);
+			textPassword.setBackground(white);
+			textUserName.setText("");
+			textPassword.setText("");
+		}
+	}
+
 }
