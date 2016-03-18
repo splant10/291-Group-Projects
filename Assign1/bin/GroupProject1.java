@@ -743,15 +743,11 @@ public class GroupProject1 {
 			tabSearch.add(textSearchBar);
 			textSearchBar.setColumns(10);
 			
-			JButton btnSearch = new JButton("Search");
-			btnSearch.setBounds(328, 33, 117, 25);
-			tabSearch.add(btnSearch);
-			
 			JLabel lblNewLabel_2 = new JLabel("Search");
 			lblNewLabel_2.setBounds(12, 12, 70, 15);
 			tabSearch.add(lblNewLabel_2);
 			
-			JTextArea textSearchResult = new JTextArea();
+			final JTextArea textSearchResult = new JTextArea();
 			textSearchResult.setWrapStyleWord(true);
 			textSearchResult.setEditable(false);
 			textSearchResult.setBounds(12, 61, 433, 422);
@@ -760,6 +756,17 @@ public class GroupProject1 {
 			scrollResults.setSize(430, 416);
 			scrollResults.setLocation(15, 67);
 			tabSearch.add(scrollResults);
+			
+			JButton btnSearch = new JButton("Search");
+			btnSearch.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Search s = new Search(textSearchBar.getText());
+					String output = s.Run();
+					textSearchResult.setText(output);
+				}
+			});
+			btnSearch.setBounds(328, 33, 117, 25);
+			tabSearch.add(btnSearch);
 			// End Search Layout things
 			
 		JPanel tabTransaction = new JPanel();
