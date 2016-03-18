@@ -32,6 +32,7 @@ public class Search {
 		
 		// Do regex on search string to determine what kind of search to make
 		if (searchText.matches("^[0-9]{6}[-][0-9]{3}$")) {
+			
 			// We're dealing with a licence number (format '123456-789')
 			prependMessage = "Searching Database for Licence Number: "+searchText+"\n";
 			// Get licence_no, addr, birthday, driving class, driving_condition, and the expiring_date of a driver
@@ -60,6 +61,7 @@ public class Search {
 		}
 		
 		else if (searchText.matches("^[a-zA-Z]{1,40}$")) {
+			
 			// We're dealing with a given name
 			prependMessage = "Searching Database for Given name: "+searchText+"\n";
 			
@@ -91,9 +93,28 @@ public class Search {
 			// Get sin in format the DB looks for
 			String sin = searchText.substring(0, 3)+searchText.substring(4, 7)+searchText.substring(8);
 			// Get violation records received by the person
-			query = "select ";
 			
-			searchResult = prependMessage + "";
+			query = "SELECT ticket_no, vehicle_id, office_no, vtype, vdate, place, descriptions " +
+					"FROM ticket " +
+					"WHERE violator_no='"+sin+"'";
+			
+			try {
+				ResultSet rs = stmt.executeQuery(query);
+				while(rs.next()) {
+					searchResult += "Ticket Number: "+rs.getString("ticket_no")+"\n";
+					searchResult += "Vehicle Serial Number: "+rs.getString("vehicle_id")+"\n";
+					searchResult += "Office Number: "+rs.getString("office_no")+"\n";
+					searchResult += "Vehicle Type: "+rs.getString("vtype")+"\n";
+					searchResult += "Date: "+rs.getString("vdate")+"\n";
+					searchResult += "Place: "+rs.getString("place")+"\n";
+					searchResult += "Description: "+rs.getString("descriptions")+"\n";
+					searchResult += "==========================="+"\n";
+				}
+			}
+			catch (Exception e) {
+				System.out.println(e);
+			}
+			return prependMessage + searchResult;
 		}
 		
 		else if (searchText.matches("^[0-9]{1,15}$")) {
