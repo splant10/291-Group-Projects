@@ -69,14 +69,10 @@ public class GroupProject1 {
     private JTextField textVRegistrationSecEye;
     private JTextField textVRegistrationSecHair;
     private JTextField textVRegistrationSecAddr;
-    private JTextField textField_1;
-    private JTextField textField_2;
-    private JTextField textField_3;
-    private JTextField textField_4;
+    private JTextField textTransactionVSerial;
     private JTextField textTransactionBuyerSIN;
     private JTextField textTransactionBuyerName;
     private JTextField textTransactionBuyerHeight;
-    private JTextField textField_8;
     private JTextField textTransactionBuyerWeight;
     private JTextField textTransactionBuyerEye;
     private JTextField textTransactionBuyerHair;
@@ -89,7 +85,8 @@ public class GroupProject1 {
     private JTextField textTransactionSellerHair;
     private JTextField textTransactionSellerAddr;
     private JTextField textSearchBar;
-    private JTextField txtPrice;
+    private JTextField textTransactionPrice;
+    private JTextField textTransactionID;
     
 	
 	/**
@@ -400,6 +397,7 @@ public class GroupProject1 {
 			
 			///********** Second owner Layout things *****************
 			textVRegistrationSecSIN = new JTextField();
+			textVRegistrationSecSIN.setEditable(false);
 			textVRegistrationSecSIN.setColumns(10);
 			textVRegistrationSecSIN.setBounds(12, 322, 114, 19);
 			tabRegistration.add(textVRegistrationSecSIN);
@@ -554,91 +552,91 @@ public class GroupProject1 {
 			tabLicenceRegistration.add(lblExpiryDate);
 			
 			JTextField textDLRegistrationOwnerSIN = new JTextField();
-			textDLRegistrationOwnerSIN.setBounds(12, 147, 114, 19);
+			textDLRegistrationOwnerSIN.setBounds(12, 171, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOwnerSIN);
 			textDLRegistrationOwnerSIN.setColumns(10);
 
 			JLabel lblDLRegistrationOwnerSIN = new JLabel("SIN");
-			lblDLRegistrationOwnerSIN.setBounds(12, 130, 114, 15);
+			lblDLRegistrationOwnerSIN.setBounds(12, 154, 114, 15);
 			tabLicenceRegistration.add(lblDLRegistrationOwnerSIN);
 
 			JTextField textDLRegistrationOName = new JTextField();
 			textDLRegistrationOName.setEditable(false);
-			textDLRegistrationOName.setBounds(158, 147, 114, 19);
+			textDLRegistrationOName.setBounds(158, 171, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOName);
 			textDLRegistrationOName.setColumns(10);
 
 			JLabel lblOwnerNameDL = new JLabel("Name");
-			lblOwnerNameDL.setBounds(158, 130, 114, 15);
+			lblOwnerNameDL.setBounds(158, 154, 114, 15);
 			tabLicenceRegistration.add(lblOwnerNameDL);
 
 			JTextField textDLRegistrationOHeight = new JTextField();
 			textDLRegistrationOHeight.setEditable(false);
-			textDLRegistrationOHeight.setBounds(302, 147, 114, 19);
+			textDLRegistrationOHeight.setBounds(302, 171, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOHeight);
 			textDLRegistrationOHeight.setColumns(10);
 
 			JLabel lblDLRegistrationOHeight = new JLabel("Height");
-			lblDLRegistrationOHeight.setBounds(302, 130, 70, 15);
+			lblDLRegistrationOHeight.setBounds(302, 154, 70, 15);
 			tabLicenceRegistration.add(lblDLRegistrationOHeight);
 
 			JLabel lblNewLabelDL = new JLabel("Owner Information:");
-			lblNewLabelDL.setBounds(12, 104, 233, 15);
+			lblNewLabelDL.setBounds(12, 128, 233, 15);
 			
 			tabLicenceRegistration.add(lblNewLabelDL);
 
 			textField = new JTextField();
 			textField.setEditable(false);
-			textField.setBounds(12, 194, 114, 19);
+			textField.setBounds(12, 218, 114, 19);
 			tabLicenceRegistration.add(textField);
 			textField.setColumns(10);
 
 			JLabel lblDLRegistrationOWeight = new JLabel("Weight");
-			lblDLRegistrationOWeight.setBounds(12, 178, 70, 15);
+			lblDLRegistrationOWeight.setBounds(12, 202, 70, 15);
 			tabLicenceRegistration.add(lblDLRegistrationOWeight);
 
 			JTextField textDLRegistrationOEye = new JTextField();
 			textDLRegistrationOEye.setEditable(false);
-			textDLRegistrationOEye.setBounds(158, 194, 114, 19);
+			textDLRegistrationOEye.setBounds(158, 218, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOEye);
 			textDLRegistrationOEye.setColumns(10);
 
 			JLabel lblDLRegistrationOEye = new JLabel("Eye Color");
-			lblDLRegistrationOEye.setBounds(158, 178, 70, 15);
+			lblDLRegistrationOEye.setBounds(158, 202, 70, 15);
 			tabLicenceRegistration.add(lblDLRegistrationOEye);
 
 			JTextField textDLRegistrationOHair = new JTextField();
 			textDLRegistrationOHair.setEditable(false);
-			textDLRegistrationOHair.setBounds(302, 194, 114, 19);
+			textDLRegistrationOHair.setBounds(302, 218, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOHair);
 			textDLRegistrationOHair.setColumns(10);
 
 			JLabel lblDLRegistrationOHair = new JLabel("Hair Color");
-			lblDLRegistrationOHair.setBounds(302, 178, 92, 15);
+			lblDLRegistrationOHair.setBounds(302, 202, 92, 15);
 			tabLicenceRegistration.add(lblDLRegistrationOHair);
 
 			JTextField textDLRegistrationOAddress = new JTextField();
 			textDLRegistrationOAddress.setEditable(false);
-			textDLRegistrationOAddress.setBounds(12, 241, 114, 19);
+			textDLRegistrationOAddress.setBounds(12, 265, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOAddress);
 			textDLRegistrationOAddress.setColumns(10);
 
 			JLabel lblDLRegistrationOAddress = new JLabel("Address");
-			lblDLRegistrationOAddress.setBounds(12, 225, 70, 15);
+			lblDLRegistrationOAddress.setBounds(12, 249, 70, 15);
 			tabLicenceRegistration.add(lblDLRegistrationOAddress);
 
 			JLabel lblDLRegistrationOGender = new JLabel("Gender");
-			lblDLRegistrationOGender.setBounds(158, 225, 70, 15);
+			lblDLRegistrationOGender.setBounds(158, 249, 70, 15);
 			tabLicenceRegistration.add(lblDLRegistrationOGender);
 
 			JRadioButton rdbtnDLRegistrationMale = new JRadioButton("M");
 			rdbtnDLRegistrationMale.setEnabled(false);
-			rdbtnDLRegistrationMale.setBounds(158, 239, 56, 23);
+			rdbtnDLRegistrationMale.setBounds(158, 263, 56, 23);
 			tabLicenceRegistration.add(rdbtnDLRegistrationMale);
 
 			JRadioButton rdbtnDLRegistrationFemale = new JRadioButton("F");
 			rdbtnDLRegistrationFemale.setEnabled(false);
-			rdbtnDLRegistrationFemale.setBounds(223, 239, 61, 23);
+			rdbtnDLRegistrationFemale.setBounds(223, 263, 61, 23);
 			tabLicenceRegistration.add(rdbtnDLRegistrationFemale);
 
 			ButtonGroup genderGroupDL = new ButtonGroup();
@@ -691,242 +689,242 @@ public class GroupProject1 {
 		tabbedPane.addTab("Auto Transaction", null, tabTransaction, null);
 		tabTransaction.setLayout(null);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(12, 28, 114, 19);
-		tabTransaction.add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(158, 28, 114, 19);
-		tabTransaction.add(textField_2);
-		
-		JLabel label_8 = new JLabel("Vehicle Serial #");
-		label_8.setBounds(12, 12, 114, 15);
-		tabTransaction.add(label_8);
-		
-		JLabel label_9 = new JLabel("Make");
-		label_9.setBounds(158, 12, 70, 15);
-		tabTransaction.add(label_9);
-		
-		JLabel label_10 = new JLabel("Model");
-		label_10.setBounds(302, 12, 70, 15);
-		tabTransaction.add(label_10);
-		
-		JLabel label_11 = new JLabel("Year");
-		label_11.setBounds(12, 59, 70, 15);
-		tabTransaction.add(label_11);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(12, 73, 114, 19);
-		tabTransaction.add(textField_3);
-		
-		JLabel label_12 = new JLabel("Color");
-		label_12.setBounds(158, 59, 70, 15);
-		tabTransaction.add(label_12);
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(158, 73, 114, 19);
-		tabTransaction.add(textField_4);
-		
-		JLabel label_13 = new JLabel("Type");
-		label_13.setBounds(302, 59, 70, 15);
-		tabTransaction.add(label_13);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(302, 73, 114, 20);
-		tabTransaction.add(spinner);
-		
-		JLabel label_14 = new JLabel("SIN");
-		label_14.setBounds(12, 130, 114, 15);
-		tabTransaction.add(label_14);
-		
-		textTransactionBuyerSIN = new JTextField();
-		textTransactionBuyerSIN.setColumns(10);
-		textTransactionBuyerSIN.setBounds(12, 147, 114, 19);
-		tabTransaction.add(textTransactionBuyerSIN);
-		
-		JLabel label_15 = new JLabel("Name");
-		label_15.setBounds(158, 130, 114, 15);
-		tabTransaction.add(label_15);
-		
-		textTransactionBuyerName = new JTextField();
-		textTransactionBuyerName.setEditable(false);
-		textTransactionBuyerName.setColumns(10);
-		textTransactionBuyerName.setBounds(158, 147, 114, 19);
-		tabTransaction.add(textTransactionBuyerName);
-		
-		JLabel label_16 = new JLabel("Height");
-		label_16.setBounds(302, 130, 70, 15);
-		tabTransaction.add(label_16);
-		
-		textTransactionBuyerHeight = new JTextField();
-		textTransactionBuyerHeight.setEditable(false);
-		textTransactionBuyerHeight.setColumns(10);
-		textTransactionBuyerHeight.setBounds(302, 147, 114, 19);
-		tabTransaction.add(textTransactionBuyerHeight);
-		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(302, 28, 114, 19);
-		tabTransaction.add(textField_8);
-		
-		JLabel lblbuyerInformation = new JLabel("Buyer Information:-----------------------------------------------------");
-		lblbuyerInformation.setBounds(12, 103, 404, 15);
-		tabTransaction.add(lblbuyerInformation);
-		
-		JLabel label_18 = new JLabel("Weight");
-		label_18.setBounds(12, 178, 70, 15);
-		tabTransaction.add(label_18);
-		
-		textTransactionBuyerWeight = new JTextField();
-		textTransactionBuyerWeight.setEditable(false);
-		textTransactionBuyerWeight.setColumns(10);
-		textTransactionBuyerWeight.setBounds(12, 194, 114, 19);
-		tabTransaction.add(textTransactionBuyerWeight);
-		
-		JLabel label_19 = new JLabel("Eye Color");
-		label_19.setBounds(158, 178, 70, 15);
-		tabTransaction.add(label_19);
-		
-		textTransactionBuyerEye = new JTextField();
-		textTransactionBuyerEye.setEditable(false);
-		textTransactionBuyerEye.setColumns(10);
-		textTransactionBuyerEye.setBounds(158, 194, 114, 19);
-		tabTransaction.add(textTransactionBuyerEye);
-		
-		JLabel label_20 = new JLabel("Hair Color");
-		label_20.setBounds(302, 178, 92, 15);
-		tabTransaction.add(label_20);
-		
-		textTransactionBuyerHair = new JTextField();
-		textTransactionBuyerHair.setEditable(false);
-		textTransactionBuyerHair.setColumns(10);
-		textTransactionBuyerHair.setBounds(302, 194, 114, 19);
-		tabTransaction.add(textTransactionBuyerHair);
-		
-		JRadioButton rdbtnTransactionBuyerF = new JRadioButton("F");
-		rdbtnTransactionBuyerF.setEnabled(false);
-		rdbtnTransactionBuyerF.setBounds(223, 239, 61, 23);
-		tabTransaction.add(rdbtnTransactionBuyerF);
-		
-		JRadioButton rdbtnTransactionBuyerM = new JRadioButton("M");
-		rdbtnTransactionBuyerM.setEnabled(false);
-		rdbtnTransactionBuyerM.setBounds(158, 239, 56, 23);
-		tabTransaction.add(rdbtnTransactionBuyerM);
-		
-		JLabel label_21 = new JLabel("Gender");
-		label_21.setBounds(158, 225, 70, 15);
-		tabTransaction.add(label_21);
-		
-		textTransactionBuyerAddr = new JTextField();
-		textTransactionBuyerAddr.setEditable(false);
-		textTransactionBuyerAddr.setColumns(10);
-		textTransactionBuyerAddr.setBounds(12, 241, 114, 19);
-		tabTransaction.add(textTransactionBuyerAddr);
-		
-		JLabel label_22 = new JLabel("Address");
-		label_22.setBounds(12, 225, 70, 15);
-		tabTransaction.add(label_22);
-		
-		JLabel lblsellerInformation = new JLabel("Seller Information:");
-		lblsellerInformation.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblsellerInformation.setBounds(12, 272, 235, 15);
-		tabTransaction.add(lblsellerInformation);
-		
-		JLabel label_23 = new JLabel("SIN");
-		label_23.setBounds(12, 299, 114, 15);
-		tabTransaction.add(label_23);
-		
-		textTransactionSellerSIN = new JTextField();
-		textTransactionSellerSIN.setColumns(10);
-		textTransactionSellerSIN.setBounds(12, 315, 114, 19);
-		tabTransaction.add(textTransactionSellerSIN);
-		
-		JLabel label_24 = new JLabel("Name");
-		label_24.setBounds(158, 299, 114, 15);
-		tabTransaction.add(label_24);
-		
-		textTransactionSellerName = new JTextField();
-		textTransactionSellerName.setEditable(false);
-		textTransactionSellerName.setColumns(10);
-		textTransactionSellerName.setBounds(158, 315, 114, 19);
-		tabTransaction.add(textTransactionSellerName);
-		
-		JLabel label_25 = new JLabel("Height");
-		label_25.setBounds(302, 299, 70, 15);
-		tabTransaction.add(label_25);
-		
-		textTransactionSellerHeight = new JTextField();
-		textTransactionSellerHeight.setEditable(false);
-		textTransactionSellerHeight.setColumns(10);
-		textTransactionSellerHeight.setBounds(302, 315, 114, 19);
-		tabTransaction.add(textTransactionSellerHeight);
-		
-		JLabel label_26 = new JLabel("Weight");
-		label_26.setBounds(12, 346, 70, 15);
-		tabTransaction.add(label_26);
-		
-		textTransactionSellerWeight = new JTextField();
-		textTransactionSellerWeight.setEditable(false);
-		textTransactionSellerWeight.setColumns(10);
-		textTransactionSellerWeight.setBounds(12, 368, 114, 19);
-		tabTransaction.add(textTransactionSellerWeight);
-		
-		JLabel label_27 = new JLabel("Eye Color");
-		label_27.setBounds(158, 346, 70, 15);
-		tabTransaction.add(label_27);
-		
-		textTransactionSellerEye = new JTextField();
-		textTransactionSellerEye.setEditable(false);
-		textTransactionSellerEye.setColumns(10);
-		textTransactionSellerEye.setBounds(158, 368, 114, 19);
-		tabTransaction.add(textTransactionSellerEye);
-		
-		JLabel label_28 = new JLabel("Hair Color");
-		label_28.setBounds(302, 346, 92, 15);
-		tabTransaction.add(label_28);
-		
-		textTransactionSellerHair = new JTextField();
-		textTransactionSellerHair.setEditable(false);
-		textTransactionSellerHair.setColumns(10);
-		textTransactionSellerHair.setBounds(302, 368, 114, 19);
-		tabTransaction.add(textTransactionSellerHair);
-		
-		JLabel label_29 = new JLabel("Address");
-		label_29.setBounds(12, 398, 70, 15);
-		tabTransaction.add(label_29);
-		
-		textTransactionSellerAddr = new JTextField();
-		textTransactionSellerAddr.setEditable(false);
-		textTransactionSellerAddr.setColumns(10);
-		textTransactionSellerAddr.setBounds(12, 420, 114, 19);
-		tabTransaction.add(textTransactionSellerAddr);
-		
-		JLabel label_30 = new JLabel("Gender");
-		label_30.setBounds(158, 398, 70, 15);
-		tabTransaction.add(label_30);
-		
-		JRadioButton textTransactionSellerM = new JRadioButton("M");
-		textTransactionSellerM.setEnabled(false);
-		textTransactionSellerM.setBounds(158, 418, 56, 23);
-		tabTransaction.add(textTransactionSellerM);
-		
-		JRadioButton textTransactionSellerF = new JRadioButton("F");
-		textTransactionSellerF.setEnabled(false);
-		textTransactionSellerF.setBounds(211, 418, 61, 23);
-		tabTransaction.add(textTransactionSellerF);
-		
-		txtPrice = new JTextField();
-		txtPrice.setBounds(302, 270, 114, 19);
-		tabTransaction.add(txtPrice);
-		txtPrice.setColumns(10);
-		
-		JLabel lblPrice = new JLabel("Price:");
-		lblPrice.setBounds(259, 272, 70, 15);
-		tabTransaction.add(lblPrice);
+			textTransactionVSerial = new JTextField();
+			textTransactionVSerial.setColumns(10);
+			textTransactionVSerial.setBounds(12, 28, 143, 19);
+			tabTransaction.add(textTransactionVSerial);
+			
+			JLabel label_8 = new JLabel("Vehicle Serial #");
+			label_8.setBounds(12, 12, 114, 15);
+			tabTransaction.add(label_8);
+			
+			JLabel lblPrice = new JLabel("Price:");
+			lblPrice.setBounds(170, 12, 70, 15);
+			tabTransaction.add(lblPrice);
+			
+			SqlDateModel model5 = new SqlDateModel();
+			JDatePanelImpl sellDatePanel = new JDatePanelImpl(model5, p);
+			final JDatePickerImpl sellDatePicker = new JDatePickerImpl(sellDatePanel, new DateLabelFormatter());
+			sellDatePicker.setBounds(305, 30, 120, 30);
+			tabTransaction.add(sellDatePicker);
+			
+			JLabel lblNewLabel_3 = new JLabel("Sell Date");
+			lblNewLabel_3.setBounds(302, 12, 70, 15);
+			tabTransaction.add(lblNewLabel_3);
+			
+			textTransactionID = new JTextField();
+			textTransactionID.setBounds(12, 78, 143, 19);
+			tabTransaction.add(textTransactionID);
+			textTransactionID.setColumns(10);
+			
+			JLabel lblNewLabel_4 = new JLabel("Transaction ID");
+			lblNewLabel_4.setBounds(12, 56, 143, 15);
+			tabTransaction.add(lblNewLabel_4);
+			
+			JLabel label_14 = new JLabel("SIN");
+			label_14.setBounds(12, 126, 114, 15);
+			tabTransaction.add(label_14);
+			
+			textTransactionBuyerSIN = new JTextField();
+			textTransactionBuyerSIN.setColumns(10);
+			textTransactionBuyerSIN.setBounds(12, 143, 114, 19);
+			tabTransaction.add(textTransactionBuyerSIN);
+			
+			JLabel label_15 = new JLabel("Name");
+			label_15.setBounds(158, 126, 114, 15);
+			tabTransaction.add(label_15);
+			
+			textTransactionBuyerName = new JTextField();
+			textTransactionBuyerName.setEditable(false);
+			textTransactionBuyerName.setColumns(10);
+			textTransactionBuyerName.setBounds(158, 143, 114, 19);
+			tabTransaction.add(textTransactionBuyerName);
+			
+			JLabel label_16 = new JLabel("Height");
+			label_16.setBounds(302, 126, 70, 15);
+			tabTransaction.add(label_16);
+			
+			textTransactionBuyerHeight = new JTextField();
+			textTransactionBuyerHeight.setEditable(false);
+			textTransactionBuyerHeight.setColumns(10);
+			textTransactionBuyerHeight.setBounds(302, 143, 114, 19);
+			tabTransaction.add(textTransactionBuyerHeight);
+			
+			JLabel lblbuyerInformation = new JLabel("Buyer Information:-----------------------------------------------------");
+			lblbuyerInformation.setBounds(12, 99, 404, 15);
+			tabTransaction.add(lblbuyerInformation);
+			
+			JLabel label_18 = new JLabel("Weight");
+			label_18.setBounds(12, 174, 70, 15);
+			tabTransaction.add(label_18);
+			
+			textTransactionBuyerWeight = new JTextField();
+			textTransactionBuyerWeight.setEditable(false);
+			textTransactionBuyerWeight.setColumns(10);
+			textTransactionBuyerWeight.setBounds(12, 190, 114, 19);
+			tabTransaction.add(textTransactionBuyerWeight);
+			
+			JLabel label_19 = new JLabel("Eye Color");
+			label_19.setBounds(158, 174, 70, 15);
+			tabTransaction.add(label_19);
+			
+			textTransactionBuyerEye = new JTextField();
+			textTransactionBuyerEye.setEditable(false);
+			textTransactionBuyerEye.setColumns(10);
+			textTransactionBuyerEye.setBounds(158, 190, 114, 19);
+			tabTransaction.add(textTransactionBuyerEye);
+			
+			JLabel label_20 = new JLabel("Hair Color");
+			label_20.setBounds(302, 174, 92, 15);
+			tabTransaction.add(label_20);
+			
+			textTransactionBuyerHair = new JTextField();
+			textTransactionBuyerHair.setEditable(false);
+			textTransactionBuyerHair.setColumns(10);
+			textTransactionBuyerHair.setBounds(302, 190, 114, 19);
+			tabTransaction.add(textTransactionBuyerHair);
+			
+			JRadioButton rdbtnTransactionBuyerF = new JRadioButton("F");
+			rdbtnTransactionBuyerF.setEnabled(false);
+			rdbtnTransactionBuyerF.setBounds(223, 235, 61, 23);
+			tabTransaction.add(rdbtnTransactionBuyerF);
+			
+			JRadioButton rdbtnTransactionBuyerM = new JRadioButton("M");
+			rdbtnTransactionBuyerM.setEnabled(false);
+			rdbtnTransactionBuyerM.setBounds(158, 235, 56, 23);
+			tabTransaction.add(rdbtnTransactionBuyerM);
+			
+			JLabel label_21 = new JLabel("Gender");
+			label_21.setBounds(158, 221, 70, 15);
+			tabTransaction.add(label_21);
+			
+			textTransactionBuyerAddr = new JTextField();
+			textTransactionBuyerAddr.setEditable(false);
+			textTransactionBuyerAddr.setColumns(10);
+			textTransactionBuyerAddr.setBounds(12, 237, 114, 19);
+			tabTransaction.add(textTransactionBuyerAddr);
+			
+			JLabel label_22 = new JLabel("Address");
+			label_22.setBounds(12, 221, 70, 15);
+			tabTransaction.add(label_22);
+			
+			JLabel lblsellerInformation = new JLabel("Seller Information:-----------------------------------------------------");
+			lblsellerInformation.setFont(new Font("Dialog", Font.BOLD, 12));
+			lblsellerInformation.setBounds(12, 268, 404, 15);
+			tabTransaction.add(lblsellerInformation);
+			
+			JLabel label_23 = new JLabel("SIN");
+			label_23.setBounds(12, 295, 114, 15);
+			tabTransaction.add(label_23);
+			
+			textTransactionSellerSIN = new JTextField();
+			textTransactionSellerSIN.setColumns(10);
+			textTransactionSellerSIN.setBounds(12, 311, 114, 19);
+			tabTransaction.add(textTransactionSellerSIN);
+			
+			JLabel label_24 = new JLabel("Name");
+			label_24.setBounds(158, 295, 114, 15);
+			tabTransaction.add(label_24);
+			
+			textTransactionSellerName = new JTextField();
+			textTransactionSellerName.setEditable(false);
+			textTransactionSellerName.setColumns(10);
+			textTransactionSellerName.setBounds(158, 311, 114, 19);
+			tabTransaction.add(textTransactionSellerName);
+			
+			JLabel label_25 = new JLabel("Height");
+			label_25.setBounds(302, 295, 70, 15);
+			tabTransaction.add(label_25);
+			
+			textTransactionSellerHeight = new JTextField();
+			textTransactionSellerHeight.setEditable(false);
+			textTransactionSellerHeight.setColumns(10);
+			textTransactionSellerHeight.setBounds(302, 311, 114, 19);
+			tabTransaction.add(textTransactionSellerHeight);
+			
+			JLabel label_26 = new JLabel("Weight");
+			label_26.setBounds(12, 342, 70, 15);
+			tabTransaction.add(label_26);
+			
+			textTransactionSellerWeight = new JTextField();
+			textTransactionSellerWeight.setEditable(false);
+			textTransactionSellerWeight.setColumns(10);
+			textTransactionSellerWeight.setBounds(12, 364, 114, 19);
+			tabTransaction.add(textTransactionSellerWeight);
+			
+			JLabel label_27 = new JLabel("Eye Color");
+			label_27.setBounds(158, 342, 70, 15);
+			tabTransaction.add(label_27);
+			
+			textTransactionSellerEye = new JTextField();
+			textTransactionSellerEye.setEditable(false);
+			textTransactionSellerEye.setColumns(10);
+			textTransactionSellerEye.setBounds(158, 364, 114, 19);
+			tabTransaction.add(textTransactionSellerEye);
+			
+			JLabel label_28 = new JLabel("Hair Color");
+			label_28.setBounds(302, 342, 92, 15);
+			tabTransaction.add(label_28);
+			
+			textTransactionSellerHair = new JTextField();
+			textTransactionSellerHair.setEditable(false);
+			textTransactionSellerHair.setColumns(10);
+			textTransactionSellerHair.setBounds(302, 364, 114, 19);
+			tabTransaction.add(textTransactionSellerHair);
+			
+			JLabel label_29 = new JLabel("Address");
+			label_29.setBounds(12, 394, 70, 15);
+			tabTransaction.add(label_29);
+			
+			textTransactionSellerAddr = new JTextField();
+			textTransactionSellerAddr.setEditable(false);
+			textTransactionSellerAddr.setColumns(10);
+			textTransactionSellerAddr.setBounds(12, 416, 114, 19);
+			tabTransaction.add(textTransactionSellerAddr);
+			
+			JLabel label_30 = new JLabel("Gender");
+			label_30.setBounds(158, 394, 70, 15);
+			tabTransaction.add(label_30);
+			
+			JRadioButton textTransactionSellerM = new JRadioButton("M");
+			textTransactionSellerM.setEnabled(false);
+			textTransactionSellerM.setBounds(158, 414, 56, 23);
+			tabTransaction.add(textTransactionSellerM);
+			
+			JRadioButton textTransactionSellerF = new JRadioButton("F");
+			textTransactionSellerF.setEnabled(false);
+			textTransactionSellerF.setBounds(211, 414, 61, 23);
+			tabTransaction.add(textTransactionSellerF);
+			
+			textTransactionPrice = new JTextField();
+			textTransactionPrice.setBounds(170, 28, 114, 19);
+			tabTransaction.add(textTransactionPrice);
+			textTransactionPrice.setColumns(10);
+			
+			// On complete transaction button click:
+			JButton btnAutoTransComplete = new JButton("Complete Transaction");
+			btnAutoTransComplete.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String transaction_id = textTransactionID.getText();
+					String seller_id = textTransactionSellerSIN.getText();
+					String buyer_id = textTransactionBuyerSIN.getText();
+					String vehicle_id = textTransactionVSerial.getText();
+					String sellDate = sellDatePicker.getJFormattedTextField().getText();
+					float price;
+					try {
+						price = Float.parseFloat(textTransactionPrice.getText());
+					} catch (NumberFormatException exc) {
+						price = 0;
+					}
+					AutoTransaction at = new AutoTransaction(transaction_id, seller_id, buyer_id, vehicle_id, sellDate, price);
+					int result = at.MakeTransaction();
+					if (result==1) {
+						System.out.println("well that worked");
+					}
+				}
+			});
+			btnAutoTransComplete.setBounds(128, 458, 203, 25);
+			tabTransaction.add(btnAutoTransComplete);
 		
 		// Login to SQLPlus server on click of Login Button
 		// Login button turns into logout button once successfully logged in
