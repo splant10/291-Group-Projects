@@ -99,6 +99,19 @@ public class GroupProject1 {
     private JTextField textSearchBar;
     private JTextField textTransactionPrice;
     private JTextField textTransactionID;
+    private JTextField textTransactionDate;
+    private JTextField textDLRegistrationIssuing;
+    private JTextField textDLRegistrationExpiry;
+    private JTextField textDLRegistrationGender;
+    private JTextField textVRegistrationPrimGender;
+    private JTextField textVRegistrationSecGender;
+    private JTextField textTransactionBuyerGender;
+    private JTextField textTransactionSellerGender;
+    private JTextField textTransactionBuyerBirth;
+    private JTextField textTransactionSellerBirth;
+    private JTextField textVRegistrationSecBirth;
+    private JTextField textVRegistrationPrimBirth;
+    private JTextField textDLRegistrationBirth;
     
 	
 	/**
@@ -389,32 +402,7 @@ public class GroupProject1 {
 			lblVRegistrationOGender.setBounds(158, 225, 70, 15);
 			tabRegistration.add(lblVRegistrationOGender);
 			
-			JRadioButton rdbtnVRegistrationMale = new JRadioButton("M");
-			rdbtnVRegistrationMale.setEnabled(false);
-			rdbtnVRegistrationMale.setBounds(158, 239, 56, 23);
-			tabRegistration.add(rdbtnVRegistrationMale);
-			
-			JRadioButton rdbtnVRegistrationFemale = new JRadioButton("F");
-			rdbtnVRegistrationFemale.setEnabled(false);
-			rdbtnVRegistrationFemale.setBounds(223, 239, 61, 23);
-			tabRegistration.add(rdbtnVRegistrationFemale);
-			
 			ButtonGroup genderGroup = new ButtonGroup();
-			genderGroup.add(rdbtnVRegistrationMale);
-			genderGroup.add(rdbtnVRegistrationFemale);
-			
-			// Make a calendar picker for owner birthday
-			// Retrieved from http://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
-			// March 17
-			SqlDateModel model = new SqlDateModel();
-			Properties p = new Properties();
-			p.put("text.today", "Today");
-			p.put("text.month", "Month");
-			p.put("text.year", "Year");
-			JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-			JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-			 
-			tabRegistration.add(datePicker);
 			
 			JButton btnRegister = new JButton("Register");
 			btnRegister.addActionListener(new ActionListener() {
@@ -447,8 +435,6 @@ public class GroupProject1 {
 			});
 			btnRegister.setBounds(167, 458, 117, 25);
 			tabRegistration.add(btnRegister);
-			datePicker.setBounds(305, 239, 120, 30);
-			tabRegistration.add(datePicker);
 			
 			///********** Second owner Layout things *****************
 			textVRegistrationSecSIN = new JTextField();
@@ -573,19 +559,39 @@ public class GroupProject1 {
 			label_7.setBounds(158, 405, 70, 15);
 			tabRegistration.add(label_7);
 			
-			JRadioButton rdbtnVRegistrationSecM = new JRadioButton("M");
-			rdbtnVRegistrationSecM.setEnabled(false);
-			rdbtnVRegistrationSecM.setBounds(158, 425, 56, 23);
-			tabRegistration.add(rdbtnVRegistrationSecM);
-			
-			JRadioButton rdbtnVRegistrationSecF = new JRadioButton("F");
-			rdbtnVRegistrationSecF.setEnabled(false);
-			rdbtnVRegistrationSecF.setBounds(211, 425, 61, 23);
-			tabRegistration.add(rdbtnVRegistrationSecF);
-			
 			ButtonGroup genderGroupSecond = new ButtonGroup();
-			genderGroupSecond.add(rdbtnVRegistrationSecM);
-			genderGroupSecond.add(rdbtnVRegistrationSecF);
+			
+			textVRegistrationPrimGender = new JTextField();
+			textVRegistrationPrimGender.setEditable(false);
+			textVRegistrationPrimGender.setBounds(158, 241, 114, 19);
+			tabRegistration.add(textVRegistrationPrimGender);
+			textVRegistrationPrimGender.setColumns(10);
+			
+			textVRegistrationSecGender = new JTextField();
+			textVRegistrationSecGender.setEditable(false);
+			textVRegistrationSecGender.setBounds(158, 427, 114, 19);
+			tabRegistration.add(textVRegistrationSecGender);
+			textVRegistrationSecGender.setColumns(10);
+			
+			JLabel label_10 = new JLabel("Birthday");
+			label_10.setBounds(302, 225, 70, 15);
+			tabRegistration.add(label_10);
+			
+			JLabel label_11 = new JLabel("Birthday");
+			label_11.setBounds(302, 405, 70, 15);
+			tabRegistration.add(label_11);
+			
+			textVRegistrationSecBirth = new JTextField();
+			textVRegistrationSecBirth.setEditable(false);
+			textVRegistrationSecBirth.setBounds(302, 427, 114, 19);
+			tabRegistration.add(textVRegistrationSecBirth);
+			textVRegistrationSecBirth.setColumns(10);
+			
+			textVRegistrationPrimBirth = new JTextField();
+			textVRegistrationPrimBirth.setEditable(false);
+			textVRegistrationPrimBirth.setBounds(302, 241, 114, 19);
+			tabRegistration.add(textVRegistrationPrimBirth);
+			textVRegistrationPrimBirth.setColumns(10);
 			
 			///**************************************************
 
@@ -613,22 +619,6 @@ public class GroupProject1 {
 			JLabel lblDLRegistrationClass = new JLabel("Class");
 			lblDLRegistrationClass.setBounds(158, 12, 70, 15);
 			tabLicenceRegistration.add(lblDLRegistrationClass);
-			
-			// Make calendar pickers for issuing date and expiry date
-			// Retrieved from http://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
-			// March 17 - p defined above
-			SqlDateModel model2 = new SqlDateModel();
-			JDatePanelImpl issuingDatePanel = new JDatePanelImpl(model2, p);
-			JDatePickerImpl issuingPicker = new JDatePickerImpl(issuingDatePanel, new DateLabelFormatter());
-			tabLicenceRegistration.add(issuingPicker);
-			issuingPicker.setBounds(12, 80, 120, 30);
-			
-			SqlDateModel model3 = new SqlDateModel(); // need to specify new model for each calendar, else
-													  // all the calendars will match.
-			JDatePanelImpl expiryDatePanel = new JDatePanelImpl(model3, p);
-			JDatePickerImpl expiringPicker = new JDatePickerImpl(expiryDatePanel, new DateLabelFormatter());
-			tabLicenceRegistration.add(expiringPicker);
-			expiringPicker.setBounds(165, 80, 120, 30);
 			
 			JLabel lblIssuingDate = new JLabel("Issuing Date");
 			lblIssuingDate.setBounds(12, 65, 119, 15);
@@ -725,7 +715,7 @@ public class GroupProject1 {
 
 			textDLRegistrationOWeight = new JTextField();
 			textDLRegistrationOWeight.setEditable(false);
-			textDLRegistrationOWeight.setBounds(12, 194, 114, 19);
+			textDLRegistrationOWeight.setBounds(12, 218, 114, 19);
 			tabLicenceRegistration.add(textDLRegistrationOWeight);
 			textDLRegistrationOWeight.setColumns(10);
 
@@ -768,28 +758,7 @@ public class GroupProject1 {
 			lblDLRegistrationOGender.setBounds(158, 249, 70, 15);
 			tabLicenceRegistration.add(lblDLRegistrationOGender);
 
-			JRadioButton rdbtnDLRegistrationMale = new JRadioButton("M");
-			rdbtnDLRegistrationMale.setEnabled(false);
-			rdbtnDLRegistrationMale.setBounds(158, 263, 56, 23);
-			tabLicenceRegistration.add(rdbtnDLRegistrationMale);
-
-			JRadioButton rdbtnDLRegistrationFemale = new JRadioButton("F");
-			rdbtnDLRegistrationFemale.setEnabled(false);
-			rdbtnDLRegistrationFemale.setBounds(223, 263, 61, 23);
-			tabLicenceRegistration.add(rdbtnDLRegistrationFemale);
-
 			ButtonGroup genderGroupDL = new ButtonGroup();
-			genderGroupDL.add(rdbtnDLRegistrationMale);
-			genderGroupDL.add(rdbtnDLRegistrationFemale);
-
-			// Make a calendar picker for owner birthday
-			// Retrieved from http://stackoverflow.com/questions/26794698/how-do-i-implement-jdatepicker
-			// March 17
-			SqlDateModel model4 = new SqlDateModel();
-			JDatePanelImpl birthdatePanelDL = new JDatePanelImpl(model4, p);
-			JDatePickerImpl datePickerDL = new JDatePickerImpl(birthdatePanelDL, new DateLabelFormatter());
-			datePickerDL.setBounds(305, 239, 120, 30);
-			tabLicenceRegistration.add(datePickerDL);
 			
 			JButton licenceRegisterButton = new JButton("Register");
 			licenceRegisterButton.addActionListener(new ActionListener() {
@@ -806,6 +775,32 @@ public class GroupProject1 {
 			});
 			licenceRegisterButton.setBounds(168, 306, 117, 25);
 			tabLicenceRegistration.add(licenceRegisterButton);
+			
+			textDLRegistrationIssuing = new JTextField();
+			textDLRegistrationIssuing.setBounds(17, 92, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationIssuing);
+			textDLRegistrationIssuing.setColumns(10);
+			
+			textDLRegistrationExpiry = new JTextField();
+			textDLRegistrationExpiry.setBounds(158, 92, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationExpiry);
+			textDLRegistrationExpiry.setColumns(10);
+			
+			textDLRegistrationGender = new JTextField();
+			textDLRegistrationGender.setEditable(false);
+			textDLRegistrationGender.setBounds(158, 265, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationGender);
+			textDLRegistrationGender.setColumns(10);
+			
+			JLabel lblNewLabel_5 = new JLabel("Birthday");
+			lblNewLabel_5.setBounds(302, 249, 70, 15);
+			tabLicenceRegistration.add(lblNewLabel_5);
+			
+			textDLRegistrationBirth = new JTextField();
+			textDLRegistrationBirth.setEditable(false);
+			textDLRegistrationBirth.setBounds(302, 265, 114, 19);
+			tabLicenceRegistration.add(textDLRegistrationBirth);
+			textDLRegistrationBirth.setColumns(10);
 		
 		// End layout code for Driver's Licence Registration Tab //
 		JPanel tabViolationRecord = new JPanel();
@@ -863,12 +858,6 @@ public class GroupProject1 {
 			JLabel lblPrice = new JLabel("Price:");
 			lblPrice.setBounds(170, 12, 70, 15);
 			tabTransaction.add(lblPrice);
-			
-			SqlDateModel model5 = new SqlDateModel();
-			JDatePanelImpl sellDatePanel = new JDatePanelImpl(model5, p);
-			final JDatePickerImpl sellDatePicker = new JDatePickerImpl(sellDatePanel, new DateLabelFormatter());
-			sellDatePicker.setBounds(305, 30, 120, 30);
-			tabTransaction.add(sellDatePicker);
 			
 			JLabel lblNewLabel_3 = new JLabel("Sell Date");
 			lblNewLabel_3.setBounds(302, 12, 70, 15);
@@ -994,16 +983,6 @@ public class GroupProject1 {
 			textTransactionBuyerHair.setColumns(10);
 			textTransactionBuyerHair.setBounds(302, 190, 114, 19);
 			tabTransaction.add(textTransactionBuyerHair);
-			
-			JRadioButton rdbtnTransactionBuyerF = new JRadioButton("F");
-			rdbtnTransactionBuyerF.setEnabled(false);
-			rdbtnTransactionBuyerF.setBounds(223, 235, 61, 23);
-			tabTransaction.add(rdbtnTransactionBuyerF);
-			
-			JRadioButton rdbtnTransactionBuyerM = new JRadioButton("M");
-			rdbtnTransactionBuyerM.setEnabled(false);
-			rdbtnTransactionBuyerM.setBounds(158, 235, 56, 23);
-			tabTransaction.add(rdbtnTransactionBuyerM);
 			
 			JLabel label_21 = new JLabel("Gender");
 			label_21.setBounds(158, 221, 70, 15);
@@ -1147,16 +1126,6 @@ public class GroupProject1 {
 			label_30.setBounds(158, 394, 70, 15);
 			tabTransaction.add(label_30);
 			
-			JRadioButton textTransactionSellerM = new JRadioButton("M");
-			textTransactionSellerM.setEnabled(false);
-			textTransactionSellerM.setBounds(158, 414, 56, 23);
-			tabTransaction.add(textTransactionSellerM);
-			
-			JRadioButton textTransactionSellerF = new JRadioButton("F");
-			textTransactionSellerF.setEnabled(false);
-			textTransactionSellerF.setBounds(211, 414, 61, 23);
-			tabTransaction.add(textTransactionSellerF);
-			
 			textTransactionPrice = new JTextField();
 			textTransactionPrice.setBounds(170, 28, 114, 19);
 			tabTransaction.add(textTransactionPrice);
@@ -1170,7 +1139,7 @@ public class GroupProject1 {
 					String seller_id = textTransactionSellerSIN.getText();
 					String buyer_id = textTransactionBuyerSIN.getText();
 					String vehicle_id = textTransactionVSerial.getText();
-					String sellDate = sellDatePicker.getJFormattedTextField().getText();
+					String sellDate = textTransactionDate.getText();
 					float price;
 					try {
 						price = Float.parseFloat(textTransactionPrice.getText());
@@ -1186,6 +1155,43 @@ public class GroupProject1 {
 			});
 			btnAutoTransComplete.setBounds(128, 458, 203, 25);
 			tabTransaction.add(btnAutoTransComplete);
+			
+			textTransactionDate = new JTextField();
+			textTransactionDate.setBounds(302, 28, 114, 19);
+			tabTransaction.add(textTransactionDate);
+			textTransactionDate.setColumns(10);
+			
+			textTransactionBuyerGender = new JTextField();
+			textTransactionBuyerGender.setEditable(false);
+			textTransactionBuyerGender.setBounds(158, 237, 114, 19);
+			tabTransaction.add(textTransactionBuyerGender);
+			textTransactionBuyerGender.setColumns(10);
+			
+			textTransactionSellerGender = new JTextField();
+			textTransactionSellerGender.setEditable(false);
+			textTransactionSellerGender.setBounds(158, 416, 114, 19);
+			tabTransaction.add(textTransactionSellerGender);
+			textTransactionSellerGender.setColumns(10);
+			
+			textTransactionBuyerBirth = new JTextField();
+			textTransactionBuyerBirth.setEditable(false);
+			textTransactionBuyerBirth.setBounds(302, 237, 114, 19);
+			tabTransaction.add(textTransactionBuyerBirth);
+			textTransactionBuyerBirth.setColumns(10);
+			
+			textTransactionSellerBirth = new JTextField();
+			textTransactionSellerBirth.setEditable(false);
+			textTransactionSellerBirth.setBounds(302, 416, 114, 19);
+			tabTransaction.add(textTransactionSellerBirth);
+			textTransactionSellerBirth.setColumns(10);
+			
+			JLabel lblBirthday = new JLabel("Birthday");
+			lblBirthday.setBounds(302, 395, 70, 15);
+			tabTransaction.add(lblBirthday);
+			
+			JLabel label_9 = new JLabel("Birthday");
+			label_9.setBounds(302, 221, 70, 15);
+			tabTransaction.add(label_9);
 		
 		// Login to SQLPlus server on click of Login Button
 		// Login button turns into logout button once successfully logged in
