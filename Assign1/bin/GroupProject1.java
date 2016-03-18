@@ -99,6 +99,14 @@ public class GroupProject1 {
     private JTextField textSearchBar;
     private JTextField textTransactionPrice;
     private JTextField textTransactionID;
+    private JTextField textVRTicketNo;
+    private JTextField textVRViolatorNo;
+    private JTextField textVRVehicleId;
+    private JTextField textVROfficeNo;
+    private JTextField textVRViolationType;
+    private JTextField textVRViolationDate;
+    private JTextField textVRPlace;
+    private JTextField textVRDescription;
     
 	
 	/**
@@ -586,6 +594,93 @@ public class GroupProject1 {
 			ButtonGroup genderGroupSecond = new ButtonGroup();
 			genderGroupSecond.add(rdbtnVRegistrationSecM);
 			genderGroupSecond.add(rdbtnVRegistrationSecF);
+		
+		// End layout code for Driver's Licence Registration Tab //
+		JPanel tabViolationRecord = new JPanel();
+		tabbedPane.addTab("Violation Record", null, tabViolationRecord, null);
+		tabViolationRecord.setLayout(null);
+		
+		JLabel lblTicket = new JLabel("Ticket #");
+		lblTicket.setBounds(12, 12, 70, 15);
+		tabViolationRecord.add(lblTicket);
+		
+		JLabel lblViolator = new JLabel("Violator #");
+		lblViolator.setBounds(12, 85, 70, 15);
+		tabViolationRecord.add(lblViolator);
+		
+		JLabel lblOffice = new JLabel("Office #");
+		lblOffice.setBounds(12, 245, 70, 15);
+		tabViolationRecord.add(lblOffice);
+		
+		JLabel lblViolationType = new JLabel("Violation Type");
+		lblViolationType.setBounds(266, 12, 107, 15);
+		tabViolationRecord.add(lblViolationType);
+		
+		JLabel lblViolationDate = new JLabel("Violation Date");
+		lblViolationDate.setBounds(266, 85, 112, 15);
+		tabViolationRecord.add(lblViolationDate);
+		
+		JLabel lblPlace = new JLabel("Place");
+		lblPlace.setBounds(303, 149, 70, 15);
+		tabViolationRecord.add(lblPlace);
+		
+		JLabel lblVehicleId = new JLabel("Vehicle ID");
+		lblVehicleId.setBounds(12, 149, 70, 15);
+		tabViolationRecord.add(lblVehicleId);
+		
+		JLabel lblDescription = new JLabel("Description");
+		lblDescription.setBounds(283, 255, 90, 15);
+		tabViolationRecord.add(lblDescription);
+		
+		textVRTicketNo = new JTextField();
+		textVRTicketNo.setColumns(10);
+		textVRTicketNo.setBounds(12, 38, 114, 19);
+		tabViolationRecord.add(textVRTicketNo);
+		
+		textVRViolatorNo = new JTextField();
+		textVRViolatorNo.setColumns(10);
+		textVRViolatorNo.setBounds(12, 118, 114, 19);
+		tabViolationRecord.add(textVRViolatorNo);
+		
+		textVRVehicleId = new JTextField();
+		textVRVehicleId.setColumns(10);
+		textVRVehicleId.setBounds(12, 193, 114, 19);
+		tabViolationRecord.add(textVRVehicleId);
+		
+		textVROfficeNo = new JTextField();
+		textVROfficeNo.setColumns(10);
+		textVROfficeNo.setBounds(12, 282, 114, 19);
+		tabViolationRecord.add(textVROfficeNo);
+		
+		textVRViolationType = new JTextField();
+		textVRViolationType.setColumns(10);
+		textVRViolationType.setBounds(266, 51, 114, 19);
+		tabViolationRecord.add(textVRViolationType);
+		
+		textVRViolationDate = new JTextField();
+		textVRViolationDate.setColumns(10);
+		textVRViolationDate.setBounds(266, 112, 114, 19);
+		tabViolationRecord.add(textVRViolationDate);
+		
+		textVRPlace = new JTextField();
+		textVRPlace.setColumns(10);
+		textVRPlace.setBounds(264, 193, 114, 19);
+		tabViolationRecord.add(textVRPlace);
+		
+		textVRDescription = new JTextField();
+		textVRDescription.setColumns(10);
+		textVRDescription.setBounds(303, 282, 114, 19);
+		tabViolationRecord.add(textVRDescription);
+		
+		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViolationRecord violationRecord = new ViolationRecord(textVRTicketNo.getText(), textVRViolatorNo.getText(),textVRVehicleId.getText(),textVROfficeNo.getText(),textVRViolationType.getText(),textVRViolationDate.getText(),textVRPlace.getText(),textVRDescription.getText());
+				violationRecord.Run();
+			}
+		});
+		btnSubmit.setBounds(168, 346, 117, 25);
+		tabViolationRecord.add(btnSubmit);
 			
 			///**************************************************
 
@@ -806,10 +901,6 @@ public class GroupProject1 {
 			});
 			licenceRegisterButton.setBounds(168, 306, 117, 25);
 			tabLicenceRegistration.add(licenceRegisterButton);
-		
-		// End layout code for Driver's Licence Registration Tab //
-		JPanel tabViolationRecord = new JPanel();
-		tabbedPane.addTab("Violation Record", null, tabViolationRecord, null);
 		
 		JPanel tabSearch = new JPanel();
 		tabbedPane.addTab("Search", null, tabSearch, null);
