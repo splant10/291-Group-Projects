@@ -314,7 +314,8 @@ public class GroupProject1 {
 							textVRegistrationOEye.setEditable(false);
 							textVRegistrationOHair.setEditable(false);
 							textVRegistrationOAddress.setEditable(false);
-
+							textVRegistrationPrimGender.setEditable(false);
+							textVRegistrationPrimBirth.setEditable(false);
 	            			
 	            			textVRegistrationOName.setText(rs.getString("name"));
 	            			textVRegistrationOHeight.setText(rs.getString("height"));
@@ -322,6 +323,10 @@ public class GroupProject1 {
 	            			textVRegistrationOEye.setText(rs.getString("eyecolor"));
 	            			textVRegistrationOHair.setText(rs.getString("haircolor"));
 	            			textVRegistrationOAddress.setText(rs.getString("addr"));
+	            			textVRegistrationPrimGender.setText(rs.getString("gender"));
+	            			textVRegistrationPrimBirth.setText(rs.getString("birthday"));
+	            			textVRegistrationSecSIN.setEditable(true);
+	            			
 	            			//genderGroup. = rs.getString("gender");
 	            			//textVRegistrationOBirthday = rs.getString("birthday");
 						// try looking for and retrieving user info
@@ -333,6 +338,9 @@ public class GroupProject1 {
 							textVRegistrationOEye.setEditable(true);
 							textVRegistrationOHair.setEditable(true);
 							textVRegistrationOAddress.setEditable(true);
+							textVRegistrationPrimGender.setEditable(false);
+							textVRegistrationPrimBirth.setEditable(false);
+							
 						}
 					} catch (Exception err) {
 						// make text boxes fillable
@@ -426,10 +434,10 @@ public class GroupProject1 {
 					Person owner = null;
 					Person secondaryOwner = null;
 					if (textVRegistrationOName.isEditable()) {
-						owner = new Person(textVRegistrationOwnerSIN.getText(),textVRegistrationOName.getText(), textVRegistrationOHeight.getText(), textVRegistrationOWeight.getText(), textVRegistrationOEye.getText(), textVRegistrationOHair.getText(), textVRegistrationOAddress.getText(), "", "");
+						owner = new Person(textVRegistrationOwnerSIN.getText(),textVRegistrationOName.getText(), textVRegistrationOHeight.getText(), textVRegistrationOWeight.getText(), textVRegistrationOEye.getText(), textVRegistrationOHair.getText(), textVRegistrationOAddress.getText(), textVRegistrationPrimGender.getText(), textVRegistrationPrimBirth.getText());
 					}
 					if (textVRegistrationSecName.isEditable()){
-						secondaryOwner = new Person(textVRegistrationSecSIN.getText(),textVRegistrationSecName.getText(), textVRegistrationSecHeight.getText(), textVRegistrationSecWeight.getText(), textVRegistrationSecEye.getText(), textVRegistrationSecHair.getText(), textVRegistrationSecAddr.getText(), "", "");
+						secondaryOwner = new Person(textVRegistrationSecSIN.getText(),textVRegistrationSecName.getText(), textVRegistrationSecHeight.getText(), textVRegistrationSecWeight.getText(), textVRegistrationSecEye.getText(), textVRegistrationSecHair.getText(), textVRegistrationSecAddr.getText(), textVRegistrationSecGender.getText(), textVRegistrationSecBirth.getText());
 
 					}
 					VehicleRegistration vehicleRegistration = new VehicleRegistration(serial,
@@ -471,6 +479,8 @@ public class GroupProject1 {
 							textVRegistrationSecEye.setEditable(false);
 							textVRegistrationSecHair.setEditable(false);
 							textVRegistrationSecAddr.setEditable(false);
+							textVRegistrationSecGender.setEditable(false);
+							textVRegistrationSecBirth.setEditable(false);
 
 	            			
 							textVRegistrationSecName.setText(rs.getString("name"));
@@ -479,6 +489,8 @@ public class GroupProject1 {
 	            			textVRegistrationSecEye.setText(rs.getString("eyecolor"));
 	            			textVRegistrationSecHair.setText(rs.getString("haircolor"));
 	            			textVRegistrationSecAddr.setText(rs.getString("addr"));
+	            			textVRegistrationSecGender.setText(rs.getString("gender"));
+	            			textVRegistrationSecBirth.setText(rs.getString("birthday"));
 	            			//genderGroup. = rs.getString("gender");
 	            			//textVRegistrationOBirthday = rs.getString("birthday");
 						// try looking for and retrieving user info
@@ -490,6 +502,8 @@ public class GroupProject1 {
 							textVRegistrationSecEye.setEditable(true);
 							textVRegistrationSecHair.setEditable(true);
 							textVRegistrationSecAddr.setEditable(true);
+							textVRegistrationSecGender.setEditable(true);
+							textVRegistrationSecBirth.setEditable(true);
 						}
 					} catch (Exception err) {
 						// make text boxes fillable
@@ -741,6 +755,8 @@ public class GroupProject1 {
 							textDLRegistrationOEye.setEditable(false);
 							textDLRegistrationOHair.setEditable(false);
 							textDLRegistrationOAddress.setEditable(false);
+							textDLRegistrationGender.setEditable(false);
+							textDLRegistrationBirth.setEditable(false);
 
 	            			
 							textDLRegistrationOName.setText(rs.getString("name"));
@@ -749,8 +765,8 @@ public class GroupProject1 {
 							textDLRegistrationOEye.setText(rs.getString("eyecolor"));
 							textDLRegistrationOHair.setText(rs.getString("haircolor"));
 							textDLRegistrationOAddress.setText(rs.getString("addr"));
-	            			//genderGroup. = rs.getString("gender");
-	            			//textVRegistrationOBirthday = rs.getString("birthday");
+							textDLRegistrationGender.setText(rs.getString("gender"));
+							textDLRegistrationBirth.setText(rs.getString("birthday"));
 						// try looking for and retrieving user info
 						}
 						else {
@@ -760,6 +776,8 @@ public class GroupProject1 {
 							textDLRegistrationOEye.setEditable(true);
 							textDLRegistrationOHair.setEditable(true);
 							textDLRegistrationOAddress.setEditable(true);
+							textDLRegistrationGender.setEditable(true);
+							textDLRegistrationBirth.setEditable(true);
 							
 							textDLRegistrationOName.setText("");
 							textDLRegistrationOHeight.setText("");
@@ -767,6 +785,8 @@ public class GroupProject1 {
 							textDLRegistrationOEye.setText("");
 							textDLRegistrationOHair.setText("");
 							textDLRegistrationOAddress.setText("");
+							textDLRegistrationGender.setText("");
+							textDLRegistrationBirth.setText("");
 						}
 					} catch (Exception err) {
 						// make text boxes fillable
@@ -862,9 +882,9 @@ public class GroupProject1 {
 					Person owner = null;
 					if (textDLRegistrationOName.isEditable()) {
 						
-						owner = new Person(textDLRegistrationOwnerSIN.getText(), textDLRegistrationOName.getText(), textDLRegistrationOHeight.getText(), textDLRegistrationOWeight.getText(), textDLRegistrationOEye.getText(), textDLRegistrationOHair.getText(), textDLRegistrationOAddress.getText(), "m", "11-Nov-1999");
+						owner = new Person(textDLRegistrationOwnerSIN.getText(), textDLRegistrationOName.getText(), textDLRegistrationOHeight.getText(), textDLRegistrationOWeight.getText(), textDLRegistrationOEye.getText(), textDLRegistrationOHair.getText(), textDLRegistrationOAddress.getText(), textDLRegistrationGender.getText(), textDLRegistrationBirth.getText());
 					}
-					LicenceRegistration licenceRegistration = new LicenceRegistration(textDLRegistrationNum.getText(), textDLRegistrationOwnerSIN.getText(), textDLRegistrationClass.getText(), null, "11-Nov-1999", "11-Nov-2000", owner);
+					LicenceRegistration licenceRegistration = new LicenceRegistration(textDLRegistrationNum.getText(), textDLRegistrationOwnerSIN.getText(), textDLRegistrationClass.getText(), null, textDLRegistrationIssuing.getText(), textDLRegistrationExpiry.getText(), owner);
 					licenceRegistration.Run();
 				}
 			});
@@ -985,6 +1005,10 @@ public class GroupProject1 {
 	            			textTransactionBuyerEye.setEditable(false);
 	            			textTransactionBuyerHair.setEditable(false);
 	            			textTransactionBuyerAddr.setEditable(false);
+	            			textTransactionBuyerGender.setEditable(false);
+	            			textTransactionBuyerBirth.setEditable(false);
+	            			
+	            			
 
 	            			
 							textTransactionBuyerName.setText(rs.getString("name"));
@@ -993,6 +1017,8 @@ public class GroupProject1 {
 							textTransactionBuyerEye.setText(rs.getString("eyecolor"));
 							textTransactionBuyerHair.setText(rs.getString("haircolor"));
 							textTransactionBuyerAddr.setText(rs.getString("addr"));
+							textTransactionBuyerGender.setText(rs.getString("gender"));
+							textTransactionBuyerBirth.setText(rs.getString("birthday"));
 	            			//genderGroup. = rs.getString("gender");
 	            			//textVRegistrationOBirthday = rs.getString("birthday");
 						// try looking for and retrieving user info
@@ -1004,6 +1030,8 @@ public class GroupProject1 {
 							textTransactionBuyerEye.setEditable(true);
 							textTransactionBuyerHair.setEditable(true);
 							textTransactionBuyerAddr.setEditable(true);
+							textTransactionBuyerGender.setEditable(true);
+							textTransactionBuyerBirth.setEditable(true);
 							
 							textTransactionBuyerName.setText("");
 							textTransactionBuyerHeight.setText("");
@@ -1011,6 +1039,8 @@ public class GroupProject1 {
 							textTransactionBuyerEye.setText("");
 							textTransactionBuyerHair.setText("");
 							textTransactionBuyerAddr.setText("");
+							textTransactionBuyerGender.setText("");
+							textTransactionBuyerBirth.setText("");
 						}
 					} catch (Exception err) {
 						// make text boxes fillable
@@ -1116,6 +1146,8 @@ public class GroupProject1 {
 	            			textTransactionSellerEye.setEditable(false);
 	            			textTransactionSellerHair.setEditable(false);
 	            			textTransactionSellerAddr.setEditable(false);
+	            			textTransactionSellerGender.setEditable(false);
+	            			textTransactionSellerBirth.setEditable(false);
 
 	            			
 							textTransactionSellerName.setText(rs.getString("name"));
@@ -1124,6 +1156,8 @@ public class GroupProject1 {
 							textTransactionSellerEye.setText(rs.getString("eyecolor"));
 							textTransactionSellerHair.setText(rs.getString("haircolor"));
 							textTransactionSellerAddr.setText(rs.getString("addr"));
+							textTransactionSellerGender.setText(rs.getString("gender"));
+							textTransactionSellerBirth.setText(rs.getString("birthday"));
 	            			//genderGroup. = rs.getString("gender");
 	            			//textVRegistrationOBirthday = rs.getString("birthday");
 						// try looking for and retrieving user info
@@ -1135,6 +1169,8 @@ public class GroupProject1 {
 							textTransactionSellerEye.setEditable(true);
 							textTransactionSellerHair.setEditable(true);
 							textTransactionSellerAddr.setEditable(true);
+							textTransactionSellerGender.setEditable(true);
+							textTransactionSellerBirth.setEditable(true);
 							
 							textTransactionSellerName.setText("");
 							textTransactionSellerHeight.setText("");
@@ -1142,6 +1178,8 @@ public class GroupProject1 {
 							textTransactionSellerEye.setText("");
 							textTransactionSellerHair.setText("");
 							textTransactionSellerAddr.setText("");
+							textTransactionSellerGender.setText("");
+							textTransactionSellerBirth.setText("");
 						}
 					} catch (Exception err) {
 						// make text boxes fillablesad
