@@ -35,6 +35,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
 import javax.swing.JScrollBar; // Java package for accessing Oracle
 import javax.swing.JScrollPane;
+import java.awt.Font;
 
 public class GroupProject1 {
 
@@ -88,6 +89,7 @@ public class GroupProject1 {
     private JTextField textTransactionSellerHair;
     private JTextField textTransactionSellerAddr;
     private JTextField textSearchBar;
+    private JTextField txtPrice;
     
 	
 	/**
@@ -771,8 +773,8 @@ public class GroupProject1 {
 		textField_8.setBounds(302, 28, 114, 19);
 		tabTransaction.add(textField_8);
 		
-		JLabel lblbuyerInformation = new JLabel("--------Buyer Information--------");
-		lblbuyerInformation.setBounds(117, 104, 242, 15);
+		JLabel lblbuyerInformation = new JLabel("Buyer Information:-----------------------------------------------------");
+		lblbuyerInformation.setBounds(12, 103, 404, 15);
 		tabTransaction.add(lblbuyerInformation);
 		
 		JLabel label_18 = new JLabel("Weight");
@@ -829,8 +831,9 @@ public class GroupProject1 {
 		label_22.setBounds(12, 225, 70, 15);
 		tabTransaction.add(label_22);
 		
-		JLabel lblsellerInformation = new JLabel("--------Seller Information--------");
-		lblsellerInformation.setBounds(117, 272, 235, 15);
+		JLabel lblsellerInformation = new JLabel("Seller Information:");
+		lblsellerInformation.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblsellerInformation.setBounds(12, 272, 235, 15);
 		tabTransaction.add(lblsellerInformation);
 		
 		JLabel label_23 = new JLabel("SIN");
@@ -915,6 +918,15 @@ public class GroupProject1 {
 		textTransactionSellerF.setEnabled(false);
 		textTransactionSellerF.setBounds(211, 418, 61, 23);
 		tabTransaction.add(textTransactionSellerF);
+		
+		txtPrice = new JTextField();
+		txtPrice.setBounds(302, 270, 114, 19);
+		tabTransaction.add(txtPrice);
+		txtPrice.setColumns(10);
+		
+		JLabel lblPrice = new JLabel("Price:");
+		lblPrice.setBounds(259, 272, 70, 15);
+		tabTransaction.add(lblPrice);
 		
 		// Login to SQLPlus server on click of Login Button
 		// Login button turns into logout button once successfully logged in
