@@ -1074,7 +1074,7 @@ public class GroupProject1 {
 							textTransactionSellerAddr.setText("");
 						}
 					} catch (Exception err) {
-						// make text boxes fillable
+						// make text boxes fillablesad
 					}
 				}
 				
