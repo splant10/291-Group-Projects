@@ -794,6 +794,14 @@ public class GroupProject1 {
 			JButton licenceRegisterButton = new JButton("Register");
 			licenceRegisterButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					Person owner = null;
+					if (textDLRegistrationOName.isEditable()) {
+						
+						owner = new Person(textDLRegistrationOwnerSIN.getText(), textDLRegistrationOName.getText(), textDLRegistrationOHeight.getText(), textDLRegistrationOWeight.getText(), textDLRegistrationOEye.getText(), textDLRegistrationOHair.getText(), textDLRegistrationOAddress.getText(), "m", "11-Nov-1999");
+					}
+					LicenceRegistration licenceRegistration = new LicenceRegistration(textDLRegistrationNum.getText(), textDLRegistrationOwnerSIN.getText(), textDLRegistrationClass.getText(), null, "11-Nov-1999", "11-Nov-2000", owner);
+					licenceRegistration.Run();
 				}
 			});
 			licenceRegisterButton.setBounds(168, 306, 117, 25);
