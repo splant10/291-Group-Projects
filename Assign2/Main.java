@@ -10,6 +10,7 @@
  * 
  *  Modified on March 30, 2007 for Berkeley DB 4.3.28
  *
+ *  Modified on April 2, 2016 for Project 2 of CMPUT 291 by Spencer Plant
  */
 import com.sleepycat.db.*;
 import java.io.*;
@@ -30,50 +31,53 @@ public class Main{
      */
     public static void main(String[] args) {
     	
-        //TO-DO: read the db_type_option from command line
-    	String db_type_option = "1";
+        while(true) {
+            //TO-DO: read the db_type_option from command line
+        	String db_type_option = "1";
 
-    	MyDatabase myDatabase = new MyDatabase(db_type_option);
+        	MyDatabase myDatabase = new MyDatabase(db_type_option);
 
-    	Scanner in = new Scanner(System.in);
-    	
-    	printMenu();
-    
-    	String option = in.nextLine();
-    	
-    	switch(Integer.valueOf(option)){
+        	Scanner in = new Scanner(System.in);
+        	
+        	printMenu();
+        
+        	String option = in.nextLine();
+        	
+        	switch(Integer.valueOf(option)){
 
-    	case CREATE_POPULATE_DATABASE_OPTION:
-    		myDatabase.create();
-    		break;
-    	case RETRIEVE_RECORD_WITH_GIVEN_KEY_OPTION:
-    		System.out.println("Please enter the key and press enter");
-    		String key = in.nextLine();
-    		String value = myDatabase.getValue(key);
-    		System.out.println(value);
-    		break;
-    	case RETRIEVE_RECORD_WITH_GIVEN_DATA_OPTION:
-    		System.out.println("Please enter the value and press enter");
-    		String value1 = in.nextLine();
-    		String key1 = myDatabase.getKey(value1);
-    		System.out.println(key1);
-    		break;
-    	case RETRIEVE_RECORDS_WITH_GIVEN_RANGE_OF_KEY_OPTION:
-    		System.out.println("Please enter a list of keys to retrieve seperated by space");
-    		String keys[] = in.nextLine().split(" ");
-    		String values[] = new String[keys.length];
-    		
-            for (int i = 0; i < keys.length; i++){
-        		values[i] = myDatabase.getKey(keys[i]);
-        		System.out.println("key: " +  keys[i] + " value: " + values[i]);
-    		}
+        	case CREATE_POPULATE_DATABASE_OPTION:
+        		myDatabase.create();
+        		break;
+        	case RETRIEVE_RECORD_WITH_GIVEN_KEY_OPTION:
+        		System.out.println("Please enter the key and press enter");
+        		String key = in.nextLine();
+        		String value = myDatabase.getValue(key);
+        		System.out.println(value);
+        		break;
+        	case RETRIEVE_RECORD_WITH_GIVEN_DATA_OPTION:
+        		System.out.println("Please enter the value and press enter");
+        		String value1 = in.nextLine();
+        		String key1 = myDatabase.getKey(value1);
+        		System.out.println(key1);
+        		break;
+        	case RETRIEVE_RECORDS_WITH_GIVEN_RANGE_OF_KEY_OPTION:
+        		System.out.println("Please enter a list of keys to retrieve seperated by space");
+        		String keys[] = in.nextLine().split(" ");
+        		String values[] = new String[keys.length];
+        		
+                for (int i = 0; i < keys.length; i++){
+            		values[i] = myDatabase.getKey(keys[i]);
+            		System.out.println("key: " +  keys[i] + " value: " + values[i]);
+        		}
 
-    		break;
-    	case DESTROY_DATABASE_OPTION:
-    		break;
-    	case QUIT_OPTION:
-    		break;
-    	}
+        		break;
+        	case DESTROY_DATABASE_OPTION:
+        		break;
+        	case QUIT_OPTION:
+                System.exit(1);
+        		break;
+        	}
+        }
     }
 
     private static void printMenu() {

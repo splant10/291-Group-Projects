@@ -79,7 +79,7 @@ public class MyDatabase {
 		kdbt.setSize(s.length()); 
 
                 // to print out the key/data pair
-                System.out.println(s+"\n");	
+                // System.out.println(s);	
 
 		/* to generate a data string */
 		range = 64 + random.nextInt( 64 );
@@ -112,9 +112,6 @@ public class MyDatabase {
 		kdbt.setData(key.getBytes());
 		kdbt.setSize(key.length());
 		try {
-			if (my_table == null) {
-				System.out.println("yep, it's my_table that's the issue");
-			}
 			OperationStatus oprStatus = my_table.get(null, kdbt, data, LockMode.DEFAULT);
 			if (oprStatus == OperationStatus.SUCCESS) {
 				String b = new String (data.getData());
@@ -123,7 +120,7 @@ public class MyDatabase {
 				return null;
 			}	
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e);
 		}
 		return null;
 
