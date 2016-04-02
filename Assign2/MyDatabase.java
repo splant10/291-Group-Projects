@@ -50,7 +50,7 @@ public class MyDatabase {
 	}
 	
 	/*
-	 *  To pouplate the given table with nrecs records
+	 *  To poplate the given table with nrecs records
 	 */
 	static void populateTable(Database my_table, int nrecs ) {
 		int range;
@@ -68,33 +68,33 @@ public class MyDatabase {
 		try {
 			for (int i = 0; i < nrecs; i++) {
 
-		/* to generate a key string */
-		range = 64 + random.nextInt( 64 );
-		s = "";
-		for ( int j = 0; j < range; j++ ) 
-		  s+=(new Character((char)(97+random.nextInt(26)))).toString();
+				/* to generate a key string */
+				range = 64 + random.nextInt( 64 );
+				s = "";
+				for ( int j = 0; j < range; j++ ) 
+				  s+=(new Character((char)(97+random.nextInt(26)))).toString();
 
-		/* to create a DBT for key */
-		kdbt = new DatabaseEntry(s.getBytes());
-		kdbt.setSize(s.length()); 
+				/* to create a DBT for key */
+				kdbt = new DatabaseEntry(s.getBytes());
+				kdbt.setSize(s.length()); 
 
-				// to print out the key/data pair
-				System.out.println(s+"\n");	
+						// to print out the key/data pair
+						System.out.println(s+"\n");	
 
-		/* to generate a data string */
-		range = 64 + random.nextInt( 64 );
-		s = "";
-		for ( int j = 0; j < range; j++ ) 
-		  s+=(new Character((char)(97+random.nextInt(26)))).toString();
-				// to print out the key/data pair
-				// System.out.println(s);	
-				// System.out.println("");
-		
-		/* to create a DBT for data */
-		ddbt = new DatabaseEntry(s.getBytes());
-		ddbt.setSize(s.length()); 
+				/* to generate a data string */
+				range = 64 + random.nextInt( 64 );
+				s = "";
+				for ( int j = 0; j < range; j++ ) 
+				  s+=(new Character((char)(97+random.nextInt(26)))).toString();
+						// to print out the key/data pair
+						// System.out.println(s);	
+						// System.out.println("");
+				
+				/* to create a DBT for data */
+				ddbt = new DatabaseEntry(s.getBytes());
+				ddbt.setSize(s.length()); 
 
-		/* to insert the key/data pair into the database */
+				/* to insert the key/data pair into the database */
 				my_table.putNoOverwrite(null, kdbt, ddbt);
 			}
 		}
