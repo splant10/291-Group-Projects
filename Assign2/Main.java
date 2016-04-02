@@ -10,6 +10,7 @@
  * 
  *  Modified on March 30, 2007 for Berkeley DB 4.3.28
  *
+ *  Modified on April 2, 2016 for Project 2 of CMPUT 291 by Spencer Plant
  */
 import com.sleepycat.db.*;
 import java.io.*;
@@ -27,7 +28,6 @@ public class Main{
     
 
     
-
 
     /*
      *  the main function
@@ -86,16 +86,19 @@ public class Main{
     }
 
 
-    private static void printMenu() {
-        System.out.println("1 Create and populate a database\n"
-                + "2 Retrieve records with a given key\n"
-                + "3 Retrieve records with a given data\n"
-                + "4. Retrieve records with a given range of key values\n"
-                + "5. Destroy the database\n"
-                + "6. Quit");
-        
-    }
 
 
 
+
+
+
+	private static void printMenu() {
+		System.out.println("\n1 Create and populate a database\n"
+				+ "2 Retrieve records with a given key\n"
+				+ "3 Retrieve records with a given data\n"
+				+ "4. Retrieve records with a given range of key values\n"
+				+ "5. Destroy the database\n"
+				+ "6. Quit\n");
+		
+	}
 }
