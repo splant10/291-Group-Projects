@@ -19,8 +19,8 @@ public class MyDatabase {
 	}
 	
 	private void setDatabaseType(String db_type_option) {
-		if (db_type_option == null || Integer.valueOf(db_type_option) > 0 && Integer.valueOf(db_type_option) < 4) {
-			System.out.println("Please enter correct number of argument");
+		if (db_type_option == null || (Integer.valueOf(db_type_option) < 0 && Integer.valueOf(db_type_option) > 4)) {
+			System.out.println("Please enter correct number of argument " + db_type_option);
 		}
 		
 		switch (Integer.valueOf(db_type_option)){
@@ -83,16 +83,14 @@ public class MyDatabase {
 				  s+=(new Character((char)(97+random.nextInt(26)))).toString();
 
 
-        // to print out the key/data pair
-        System.out.println(s);	
-		//System.out.println(kdbt.getData().toString());
+
 
 				/* to create a DBT for key */
 				kdbt = new DatabaseEntry(s.getBytes());
 				kdbt.setSize(s.length()); 
 
-						// to print out the key/data pair
-						System.out.println(s+"\n");	
+				// to print out the key/data pair
+				System.out.println(s+"\n");	
 
 				/* to generate a data string */
 				range = 64 + random.nextInt( 64 );
@@ -128,7 +126,7 @@ public class MyDatabase {
 		 
 		    // Call get() to query the database
 		    if (my_table.get(null, theKey, theData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
-		 
+		    	System.out.println("SUCCESS");
 		        String foundData = new String(theData.getData());
 		        return foundData;
 		    } 
@@ -152,14 +150,40 @@ public class MyDatabase {
 	}
 	
 	// Returns the key for the specified value
-	public String getKey(String value) {
-		// TODO Auto-generated method stub
+	public String getKey(String data) {
+		Cursor myCursor = null;
+		 
+		try {
+		    myCursor = my_table.openCursor(null, null);
+		 
+		    DatabaseEntry foundKey = new DatabaseEntry();
+		    DatabaseEntry foundData = new DatabaseEntry();
+		 
+		    // Retrieve records with calls to getNext() until the return status is not OperationStatus.SUCCESS
+		    while (myCursor.getNext(foundKey, foundData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
+		        String keyString = new String(foundKey.getData());
+		        String dataString = new String(foundData.getData());
+		        if (dataString.equals(data)) {
+		        	return keyString;
+		        }
+		    }
+		} catch (DatabaseException de) {
+		    System.err.println("Error reading from database: " + de);
+		} finally {
+		    try {
+		        if (myCursor != null) {
+		            myCursor.close();
+		        }
+		    } catch(DatabaseException dbe) {
+		        System.err.println("Error closing cursor: " + dbe.toString());
+		    }
+		}
+		
 		return null;
 	}
 	
 	// for testing purposes only
 	public void printAll() {
-		System.out.println("hello");
 		Cursor myCursor = null;
 		 
 		try {

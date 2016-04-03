@@ -33,6 +33,7 @@ public class Main{
      *  the main function
      */
     public static void main(String[] args) {
+    	boolean quit = false;
         
         String db_type_option = "1";
 
@@ -40,7 +41,7 @@ public class Main{
 
         Scanner in = new Scanner(System.in);
         
-        while (true) {
+        while (!quit) {
             printMenu();
             
             String option = in.nextLine();
@@ -53,7 +54,7 @@ public class Main{
                 System.out.println("Please enter the key and press enter");
                 String key = in.nextLine();
                 String value = myDatabase.getValue(key);
-                System.out.println(value);
+                System.out.println("DATA: " + value);
                 break;
             case RETRIEVE_RECORD_WITH_GIVEN_DATA_OPTION:
                 System.out.println("Please enter the value and press enter");
@@ -66,7 +67,7 @@ public class Main{
                 String keys[] = in.nextLine().split(" ");
                 String values[] = new String[keys.length];
                 for (int i = 0; i < keys.length; i++){
-                    values[i] = myDatabase.getKey(keys[i]);
+                    values[i] = myDatabase.getValue(keys[i]);
                     System.out.println("key: " +  keys[i] + " value: " + values[i]);
                 }
                 break;
@@ -75,6 +76,7 @@ public class Main{
                 myDatabase.printAll();
                 break;
             case QUIT_OPTION:
+            	quit = true;
                 break;
             }
             
