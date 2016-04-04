@@ -26,6 +26,8 @@ public class Main {
 	private static final int DESTROY_DATABASE_OPTION = 5;
 	private static final int QUIT_OPTION = 6;
 
+	private static final int NO_RECORDS = 1000;
+
 	/*
 	 *  the main function
 	 */
@@ -44,42 +46,50 @@ public class Main {
 			printMenu();
 			
 			String option = in.nextLine();
-			 
-			switch(Integer.valueOf(option)){
-			case CREATE_POPULATE_DATABASE_OPTION:
-				myBTREEDatabase.create();
-				myHASHTDatabase.create();
-				break;
-			case RETRIEVE_RECORD_WITH_GIVEN_KEY_OPTION:
-				System.out.println("Please enter the key and press enter");
-				String key = in.nextLine();
-				String valueBT = myBTREEDatabase.getValue(key);
-				String valueHash = myBTREEDatabase.getValue(key);
-				System.out.println("DATA from BTREE: " + valueBT);
-				System.out.println("DATA from BTREE: " + valueHash);
-				break;
-			case RETRIEVE_RECORD_WITH_GIVEN_DATA_OPTION:
-				System.out.println("Please enter the value and press enter");
-				String value1 = in.nextLine();
-				String key1 = myBTREEDatabase.getKey(value1);
-				System.out.println(key1);
-				break;
-			case RETRIEVE_RECORDS_WITH_GIVEN_RANGE_OF_KEY_OPTION:
-				System.out.println("Please enter lower limit and upper limit of keys to retrieve seperated by space");
-				String keys[] = in.nextLine().split(" ");
-				String values[] = new String[keys.length];
-				for (int i = 0; i < keys.length; i++){
-					values[i] = myBTREEDatabase.getValue(keys[i]);
-					System.out.println("key: " +  keys[i] + " value: " + values[i]);
+		 	try {
+				switch(Integer.valueOf(option)){
+				case CREATE_POPULATE_DATABASE_OPTION:
+					myBTREEDatabase.create();
+					myHASHTDatabase.create();
+					MyDatabase.populateTables(myBTREEDatabase.getMyDB(), myHASHTDatabase.getMyDB(), NO_RECORDS);
+					System.out.println("1000 records inserted into Btree");
+					System.out.println("1000 records inserted into Hash");
+					break;
+				case RETRIEVE_RECORD_WITH_GIVEN_KEY_OPTION:
+					System.out.println("Please enter the key and press enter");
+					String key = in.nextLine();
+					String valueBT = myBTREEDatabase.getValue(key);
+					String valueHash = myBTREEDatabase.getValue(key);
+					System.out.println("DATA from BTREE: " + valueBT);
+					System.out.println("DATA from BTREE: " + valueHash);
+					break;
+				case RETRIEVE_RECORD_WITH_GIVEN_DATA_OPTION:
+					System.out.println("Please enter the value and press enter");
+					String value1 = in.nextLine();
+					String key1 = myBTREEDatabase.getKey(value1);
+					System.out.println(key1);
+					break;
+				case RETRIEVE_RECORDS_WITH_GIVEN_RANGE_OF_KEY_OPTION:
+					System.out.println("Please enter lower limit and upper limit of keys to retrieve seperated by space");
+					String keys[] = in.nextLine().split(" ");
+					String values[] = new String[keys.length];
+					for (int i = 0; i < keys.length; i++){
+						values[i] = myBTREEDatabase.getValue(keys[i]);
+						System.out.println("key: " +  keys[i] + " value: " + values[i]);
+					}
+					break;
+				case DESTROY_DATABASE_OPTION:
+					// Used to print the entire database. FOR TESTING ONLY. NEEDS TO BE REMOVED
+					myBTREEDatabase.printAll();
+					break;
+				case QUIT_OPTION:
+					quit = true;
+					break;
+			 	default:
+					System.out.println("That's not a valid option");
 				}
-				break;
-			case DESTROY_DATABASE_OPTION:
-				// Used to print the entire database. FOR TESTING ONLY. NEEDS TO BE REMOVED
-				myBTREEDatabase.printAll();
-				break;
-			case QUIT_OPTION:
-				quit = true;
-				break;
+			} catch (Exception e) {
+				System.out.println("That's not a valid option");
 			}
 		}
 	}

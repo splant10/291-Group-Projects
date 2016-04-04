@@ -12,8 +12,7 @@ public class MyDatabase {
 	private static final int NO_RECORDS = 1000;
 	
 	private DatabaseConfig dbConfig;
-	private Database BTREE;
-	private Database HASH;
+	private Database myDB;
 
 	private int dbType;
 	
@@ -65,32 +64,32 @@ public class MyDatabase {
 		dbConfig.setAllowCreate(true);
 		if (dbType == 1) {
 			try {
-				BTREE = new Database(btreeLoc, null, dbConfig);
+				myDB = new Database(btreeLoc, null, dbConfig);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			populateTable(BTREE,NO_RECORDS);
+			//populateTable(BTREE,NO_RECORDS);
 			/* populate the new database with NO_RECORDS records */
-			System.out.println("1000 records inserted into" + btreeLoc);
+			
 		} else if (dbType == 2) {
 			try {
-				HASH = new Database(hashLoc, null, dbConfig);
+				myDB = new Database(hashLoc, null, dbConfig);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			//populateTable(HASH,NO_RECORDS);
+			// Bad code below: HASH is created after BTREE, so we populate both here.
+			// so dirty
 			/* populate the new database with NO_RECORDS records */
-			//System.out.println("1000 records inserted into" + hashLoc);
 		}
 	}
 	
 	/*
-	 *  To poplate the given table with nrecs records
+	 *  To poplate the given tables with nrecs records
 	 */
-	static void populateTable(Database BTREE, int nrecs ) {
+	static void populateTables(Database btree, Database hash, int nrecs ) {
 		int range;
-			DatabaseEntry kdbt, ddbt;
+		DatabaseEntry kdbt, ddbt;
 		String s;
 
 		/*  
@@ -109,9 +108,6 @@ public class MyDatabase {
 				s = "";
 				for ( int j = 0; j < range; j++ ) 
 				  s+=(new Character((char)(97+random.nextInt(26)))).toString();
-
-
-
 
 				/* to create a DBT for key */
 				kdbt = new DatabaseEntry(s.getBytes());
@@ -134,7 +130,8 @@ public class MyDatabase {
 				ddbt.setSize(s.length()); 
 
 				/* to insert the key/data pair into the database */
-				BTREE.putNoOverwrite(null, kdbt, ddbt);
+				btree.putNoOverwrite(null, kdbt, ddbt);
+				hash.putNoOverwrite(null, kdbt, ddbt);
 			}
 		}
 		catch (DatabaseException dbe) {
@@ -153,7 +150,7 @@ public class MyDatabase {
 			DatabaseEntry theData = new DatabaseEntry();
 		 
 			// Call get() to query the database
-			if (BTREE.get(null, theKey, theData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
+			if (myDB.get(null, theKey, theData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
 				System.out.println("\nSUCCESS");
 				String foundData = new String(theData.getData());
 				return foundData;
@@ -171,7 +168,7 @@ public class MyDatabase {
 		try {
 			DatabaseEntry theKey = new DatabaseEntry(key.getBytes());
 			DatabaseEntry theData = new DatabaseEntry(data.getBytes());
-			BTREE.put(null, theKey, theData);
+			myDB.put(null, theKey, theData);
 		} catch (Exception e) {
 			// Exception handling
 			e.printStackTrace();
@@ -183,7 +180,7 @@ public class MyDatabase {
 		Cursor myCursor = null;
 		 
 		try {
-			myCursor = BTREE.openCursor(null, null);
+			myCursor = myDB.openCursor(null, null);
 		 
 			DatabaseEntry foundKey = new DatabaseEntry();
 			DatabaseEntry foundData = new DatabaseEntry();
@@ -216,7 +213,7 @@ public class MyDatabase {
 		Cursor myCursor = null;
 		 
 		try {
-			myCursor = BTREE.openCursor(null, null);
+			myCursor = myDB.openCursor(null, null);
 		 
 			DatabaseEntry foundKey = new DatabaseEntry();
 			DatabaseEntry foundData = new DatabaseEntry();
@@ -239,6 +236,10 @@ public class MyDatabase {
 			}
 		}
 		
+	}
+
+	public Database getMyDB() {
+		return myDB;
 	}
 
 }
