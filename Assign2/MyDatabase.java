@@ -23,17 +23,16 @@ public class MyDatabase {
 			System.out.println("Please enter correct number of argument " + db_type_option);
 		}
 		
-		switch (Integer.valueOf(db_type_option)){
-
-    	case 1:
-    		dbConfig.setType(DatabaseType.BTREE);
-    		break;
-    	case 2:
-    		dbConfig.setType(DatabaseType.HASH);
-    		break;
-    	case 3:
-    		break;
-    	}
+		switch (Integer.valueOf(db_type_option)) {
+			case 1:
+				dbConfig.setType(DatabaseType.BTREE);
+				break;
+			case 2:
+				dbConfig.setType(DatabaseType.HASH);
+				break;
+			case 3:
+				break;
+		}
 		
 		try {
 			my_table = new Database(SAMPLE_TABLE, null, dbConfig);
@@ -42,7 +41,7 @@ public class MyDatabase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (DatabaseException e) {
-
+			e.printStackTrace();
 		}
 	}
 
@@ -51,8 +50,8 @@ public class MyDatabase {
 	public void create() {
 		dbConfig.setAllowCreate(true);
 		/* populate the new database with NO_RECORDS records */
-	    populateTable(my_table,NO_RECORDS);
-	    System.out.println("1000 records inserted into" + SAMPLE_TABLE);
+		populateTable(my_table,NO_RECORDS);
+		System.out.println("1000 records inserted into" + SAMPLE_TABLE);
 		
 		
 	}
@@ -118,21 +117,21 @@ public class MyDatabase {
 	// Returns the value for the specified key
 	public String getValue(String key) {
 		try {
-		    // Create two DatabaseEntry instances:
-		    // theKey is used to perform the search
-		    // theData will hold the value associated to the key, if found
-		    DatabaseEntry theKey = new DatabaseEntry(key.getBytes());
-		    DatabaseEntry theData = new DatabaseEntry();
+			// Create two DatabaseEntry instances:
+			// theKey is used to perform the search
+			// theData will hold the value associated to the key, if found
+			DatabaseEntry theKey = new DatabaseEntry(key.getBytes());
+			DatabaseEntry theData = new DatabaseEntry();
 		 
-		    // Call get() to query the database
-		    if (my_table.get(null, theKey, theData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
-		    	System.out.println("SUCCESS");
-		        String foundData = new String(theData.getData());
-		        return foundData;
-		    } 
+			// Call get() to query the database
+			if (my_table.get(null, theKey, theData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
+				System.out.println("\nSUCCESS");
+				String foundData = new String(theData.getData());
+				return foundData;
+			} 
 		} catch (Exception e) {
-		    // Exception handling
-
+			// Exception handling
+			e.printStackTrace();
 		}
 		return null;
 
@@ -141,11 +140,12 @@ public class MyDatabase {
 	//For testing purposes only
 	public void put(String key, String data) {
 		try {
-		    DatabaseEntry theKey = new DatabaseEntry(key.getBytes());
-		    DatabaseEntry theData = new DatabaseEntry(data.getBytes());
-		    my_table.put(null, theKey, theData);
+			DatabaseEntry theKey = new DatabaseEntry(key.getBytes());
+			DatabaseEntry theData = new DatabaseEntry(data.getBytes());
+			my_table.put(null, theKey, theData);
 		} catch (Exception e) {
-		    // Exception handling
+			// Exception handling
+			e.printStackTrace();
 		}
 	}
 	
@@ -154,29 +154,29 @@ public class MyDatabase {
 		Cursor myCursor = null;
 		 
 		try {
-		    myCursor = my_table.openCursor(null, null);
+			myCursor = my_table.openCursor(null, null);
 		 
-		    DatabaseEntry foundKey = new DatabaseEntry();
-		    DatabaseEntry foundData = new DatabaseEntry();
+			DatabaseEntry foundKey = new DatabaseEntry();
+			DatabaseEntry foundData = new DatabaseEntry();
 		 
-		    // Retrieve records with calls to getNext() until the return status is not OperationStatus.SUCCESS
-		    while (myCursor.getNext(foundKey, foundData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
-		        String keyString = new String(foundKey.getData());
-		        String dataString = new String(foundData.getData());
-		        if (dataString.equals(data)) {
-		        	return keyString;
-		        }
-		    }
+			// Retrieve records with calls to getNext() until the return status is not OperationStatus.SUCCESS
+			while (myCursor.getNext(foundKey, foundData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
+				String keyString = new String(foundKey.getData());
+				String dataString = new String(foundData.getData());
+				if (dataString.equals(data)) {
+					return keyString;
+				}
+			}
 		} catch (DatabaseException de) {
-		    System.err.println("Error reading from database: " + de);
+			System.err.println("Error reading from database: " + de);
 		} finally {
-		    try {
-		        if (myCursor != null) {
-		            myCursor.close();
-		        }
-		    } catch(DatabaseException dbe) {
-		        System.err.println("Error closing cursor: " + dbe.toString());
-		    }
+			try {
+				if (myCursor != null) {
+					myCursor.close();
+				}
+			} catch(DatabaseException dbe) {
+				System.err.println("Error closing cursor: " + dbe.toString());
+			}
 		}
 		
 		return null;
@@ -187,27 +187,27 @@ public class MyDatabase {
 		Cursor myCursor = null;
 		 
 		try {
-		    myCursor = my_table.openCursor(null, null);
+			myCursor = my_table.openCursor(null, null);
 		 
-		    DatabaseEntry foundKey = new DatabaseEntry();
-		    DatabaseEntry foundData = new DatabaseEntry();
+			DatabaseEntry foundKey = new DatabaseEntry();
+			DatabaseEntry foundData = new DatabaseEntry();
 		 
-		    // Retrieve records with calls to getNext() until the return status is not OperationStatus.SUCCESS
-		    while (myCursor.getNext(foundKey, foundData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
-		        String keyString = new String(foundKey.getData());
-		        String dataString = new String(foundData.getData());
-		        System.out.println("Key| Data : " + keyString + " | " + dataString + "");
-		    }
+			// Retrieve records with calls to getNext() until the return status is not OperationStatus.SUCCESS
+			while (myCursor.getNext(foundKey, foundData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
+				String keyString = new String(foundKey.getData());
+				String dataString = new String(foundData.getData());
+				System.out.println("Key| Data : " + keyString + " | " + dataString + "");
+			}
 		} catch (DatabaseException de) {
-		    System.err.println("Error reading from database: " + de);
+			System.err.println("Error reading from database: " + de);
 		} finally {
-		    try {
-		        if (myCursor != null) {
-		            myCursor.close();
-		        }
-		    } catch(DatabaseException dbe) {
-		        System.err.println("Error closing cursor: " + dbe.toString());
-		    }
+			try {
+				if (myCursor != null) {
+					myCursor.close();
+				}
+			} catch(DatabaseException dbe) {
+				System.err.println("Error closing cursor: " + dbe.toString());
+			}
 		}
 		
 	}
