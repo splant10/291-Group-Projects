@@ -6,12 +6,14 @@ import com.sleepycat.db.*;
 
 public class MyDatabase {
 	// to specify the file name for the table
-	private static final String SAMPLE_TABLE = "tmp/ahmirza_db/sample_table";
+	private static final String btreeLoc = "tmp/ahmirza_db/DB_BTREE";
+	private static final String hashLoc = "tmp/ahmirza_db/DB_HASH";
 	// number of records to populate
 	private static final int NO_RECORDS = 1000;
 	
 	private DatabaseConfig dbConfig;
-	private Database my_table;
+	private Database BTREE;
+	private Database HASH;
 	
 	public MyDatabase(String db_type_option) {
 		dbConfig = new DatabaseConfig();
@@ -35,8 +37,14 @@ public class MyDatabase {
 		}
 		
 		try {
-			my_table = new Database(SAMPLE_TABLE, null, dbConfig);
-			System.out.println(SAMPLE_TABLE + " has been created");
+			//if (db_type_option.equals("1")) {
+				BTREE = new Database(btreeLoc, null, dbConfig);
+				System.out.println(btreeLoc + " has been created");
+			//} else {
+			//	BTREE = new Database(hashLoc, null, dbConfig);
+			//	System.out.println(hashLoc + " has been created");
+			//}
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,9 +57,15 @@ public class MyDatabase {
 
 	public void create() {
 		dbConfig.setAllowCreate(true);
+		try {
+			BTREE = new Database(btreeLoc, null, dbConfig);
+			HASH = new Database(hashLoc, null, dbConfig);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		/* populate the new database with NO_RECORDS records */
-		populateTable(my_table,NO_RECORDS);
-		System.out.println("1000 records inserted into" + SAMPLE_TABLE);
+		populateTable(BTREE,NO_RECORDS);
+		System.out.println("1000 records inserted into" + btreeLoc);
 		
 		
 	}
@@ -59,7 +73,7 @@ public class MyDatabase {
 	/*
 	 *  To poplate the given table with nrecs records
 	 */
-	static void populateTable(Database my_table, int nrecs ) {
+	static void populateTable(Database BTREE, int nrecs ) {
 		int range;
 			DatabaseEntry kdbt, ddbt;
 		String s;
@@ -105,7 +119,7 @@ public class MyDatabase {
 				ddbt.setSize(s.length()); 
 
 				/* to insert the key/data pair into the database */
-				my_table.putNoOverwrite(null, kdbt, ddbt);
+				BTREE.putNoOverwrite(null, kdbt, ddbt);
 			}
 		}
 		catch (DatabaseException dbe) {
@@ -124,7 +138,7 @@ public class MyDatabase {
 			DatabaseEntry theData = new DatabaseEntry();
 		 
 			// Call get() to query the database
-			if (my_table.get(null, theKey, theData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
+			if (BTREE.get(null, theKey, theData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
 				System.out.println("\nSUCCESS");
 				String foundData = new String(theData.getData());
 				return foundData;
@@ -142,7 +156,7 @@ public class MyDatabase {
 		try {
 			DatabaseEntry theKey = new DatabaseEntry(key.getBytes());
 			DatabaseEntry theData = new DatabaseEntry(data.getBytes());
-			my_table.put(null, theKey, theData);
+			BTREE.put(null, theKey, theData);
 		} catch (Exception e) {
 			// Exception handling
 			e.printStackTrace();
@@ -154,7 +168,7 @@ public class MyDatabase {
 		Cursor myCursor = null;
 		 
 		try {
-			myCursor = my_table.openCursor(null, null);
+			myCursor = BTREE.openCursor(null, null);
 		 
 			DatabaseEntry foundKey = new DatabaseEntry();
 			DatabaseEntry foundData = new DatabaseEntry();
@@ -187,7 +201,7 @@ public class MyDatabase {
 		Cursor myCursor = null;
 		 
 		try {
-			myCursor = my_table.openCursor(null, null);
+			myCursor = BTREE.openCursor(null, null);
 		 
 			DatabaseEntry foundKey = new DatabaseEntry();
 			DatabaseEntry foundData = new DatabaseEntry();
