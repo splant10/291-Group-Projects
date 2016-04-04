@@ -98,8 +98,10 @@ public class Main {
 			db_type = "B-Tree";
 		} else if (db_opt_type.equals("2")) {
 			db_type = "Hash Table";
+		} else {
+			db_type = null;
 		}
 		// print relevant info
-		System.out.println("Results for " + db_type + ":")
+		System.out.println("Results for " + db_type + ":");
 	} 
 }
