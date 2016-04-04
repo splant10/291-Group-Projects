@@ -59,9 +59,9 @@ public class Main {
 					System.out.println("Please enter the key and press enter");
 					String key = in.nextLine();
 					String valueBT = myBTREEDatabase.getValue(key);
-					String valueHash = myBTREEDatabase.getValue(key);
+					String valueHash = myHASHTDatabase.getValue(key);
 					System.out.println("DATA from BTREE: " + valueBT);
-					System.out.println("DATA from BTREE: " + valueHash);
+					System.out.println("DATA from HASH: " + valueHash);
 					break;
 				case RETRIEVE_RECORD_WITH_GIVEN_DATA_OPTION:
 					System.out.println("Please enter the value and press enter");
