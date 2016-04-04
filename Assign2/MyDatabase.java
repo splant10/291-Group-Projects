@@ -36,6 +36,7 @@ public class MyDatabase {
 				break;
 		}
 		
+		/***** What is this try/catch block for? *****/ /*
 		try {
 			//if (db_type_option.equals("1")) {
 				BTREE = new Database(btreeLoc, null, dbConfig);
@@ -51,6 +52,7 @@ public class MyDatabase {
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
+		*/ /********************************************/
 	}
 
 
@@ -65,7 +67,9 @@ public class MyDatabase {
 		}
 		/* populate the new database with NO_RECORDS records */
 		populateTable(BTREE,NO_RECORDS);
+		populateTable(HASH,NO_RECORDS);
 		System.out.println("1000 records inserted into" + btreeLoc);
+		System.out.println("1000 records inserted into" + hashLoc);
 		
 		
 	}
