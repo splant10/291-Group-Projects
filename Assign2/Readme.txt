@@ -1,3 +1,6 @@
+To compile the program:
+
+./make.sh
 
 To compile and run the program:
 
@@ -9,6 +12,7 @@ To run the program:
 
 Note: if you're not allowed permission to run these scripts, give the commands:
 
+chmod +x make.sh
 chmod +x build-run.sh
 chmod +x run.sh
 
