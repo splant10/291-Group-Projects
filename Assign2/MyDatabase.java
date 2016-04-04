@@ -14,6 +14,8 @@ public class MyDatabase {
 	private DatabaseConfig dbConfig;
 	private Database BTREE;
 	private Database HASH;
+
+	private int dbType;
 	
 	public MyDatabase(String db_type_option) {
 		dbConfig = new DatabaseConfig();
@@ -28,9 +30,11 @@ public class MyDatabase {
 		switch (Integer.valueOf(db_type_option)) {
 			case 1:
 				dbConfig.setType(DatabaseType.BTREE);
+				dbType = 1;
 				break;
 			case 2:
 				dbConfig.setType(DatabaseType.HASH);
+				dbType = 2;
 				break;
 			case 3:
 				break;
@@ -59,19 +63,26 @@ public class MyDatabase {
 
 	public void create() {
 		dbConfig.setAllowCreate(true);
-		try {
-			BTREE = new Database(btreeLoc, null, dbConfig);
-			HASH = new Database(hashLoc, null, dbConfig);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (dbType == 1) {
+			try {
+				BTREE = new Database(btreeLoc, null, dbConfig);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			populateTable(BTREE,NO_RECORDS);
+			/* populate the new database with NO_RECORDS records */
+			System.out.println("1000 records inserted into" + btreeLoc);
+		} else if (dbType == 2) {
+			try {
+				HASH = new Database(hashLoc, null, dbConfig);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			//populateTable(HASH,NO_RECORDS);
+			/* populate the new database with NO_RECORDS records */
+			//System.out.println("1000 records inserted into" + hashLoc);
 		}
-		/* populate the new database with NO_RECORDS records */
-		populateTable(BTREE,NO_RECORDS);
-		populateTable(HASH,NO_RECORDS);
-		System.out.println("1000 records inserted into" + btreeLoc);
-		System.out.println("1000 records inserted into" + hashLoc);
-		
-		
 	}
 	
 	/*

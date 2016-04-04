@@ -36,7 +36,7 @@ public class Main {
 		String HASHT_option = "2";
 
 		MyDatabase myBTREEDatabase = new MyDatabase(BTREE_option);
-		//MyDatabase myHASHTDatabase = new MyDatabase(HASHT_option);
+		MyDatabase myHASHTDatabase = new MyDatabase(HASHT_option);
 
 		Scanner in = new Scanner(System.in);
 		
@@ -48,13 +48,15 @@ public class Main {
 			switch(Integer.valueOf(option)){
 			case CREATE_POPULATE_DATABASE_OPTION:
 				myBTREEDatabase.create();
-				//myHASHTDatabase.create();
+				myHASHTDatabase.create();
 				break;
 			case RETRIEVE_RECORD_WITH_GIVEN_KEY_OPTION:
 				System.out.println("Please enter the key and press enter");
 				String key = in.nextLine();
-				String value = myBTREEDatabase.getValue(key);
-				System.out.println("DATA: " + value);
+				String valueBT = myBTREEDatabase.getValue(key);
+				String valueHash = myBTREEDatabase.getValue(key);
+				System.out.println("DATA from BTREE: " + valueBT);
+				System.out.println("DATA from BTREE: " + valueHash);
 				break;
 			case RETRIEVE_RECORD_WITH_GIVEN_DATA_OPTION:
 				System.out.println("Please enter the value and press enter");
