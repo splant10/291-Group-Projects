@@ -28,6 +28,8 @@ public class Main {
 
 	private static final int NO_RECORDS = 1000;
 
+	private static File binDirectory = new File("./bin/");
+
 	/*
 	 *  the main function
 	 */
@@ -46,7 +48,7 @@ public class Main {
 			printMenu();
 			
 			String option = in.nextLine();
-		 	try {
+			try {
 				switch(Integer.valueOf(option)){
 				case CREATE_POPULATE_DATABASE_OPTION:
 					myBTREEDatabase.create();
@@ -80,12 +82,13 @@ public class Main {
 					break;
 				case DESTROY_DATABASE_OPTION:
 					// Used to print the entire database. FOR TESTING ONLY. NEEDS TO BE REMOVED
-					myBTREEDatabase.printAll();
+					//myBTREEDatabase.printAll();
+					clearFolder(binDirectory);
 					break;
 				case QUIT_OPTION:
 					quit = true;
 					break;
-			 	default:
+				default:
 					System.out.println("That's not a valid option");
 				}
 			} catch (Exception e) {
@@ -102,5 +105,17 @@ public class Main {
 				+ "5. Destroy the database\n"
 				+ "6. Quit\n");
 		
+	}
+
+	// From http://stackoverflow.com/questions/7768071/how-to-delete-directory-content-in-java
+	// Answered by NCode
+	// Retrieved April 4 2016
+	public static void clearFolder(File folder) {
+		File[] files = folder.listFiles();
+		if(files!=null) { //some JVMs return null for empty dirs
+			for(File f: files) {
+				f.delete();
+			}
+		}
 	}
 }

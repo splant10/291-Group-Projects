@@ -1,13 +1,14 @@
 import java.io.FileNotFoundException;
 import java.util.Random;
+import java.io.*;
 
 
 import com.sleepycat.db.*;
 
 public class MyDatabase {
 	// to specify the file name for the table
-	private static final String btreeLoc = "tmp/ahmirza_db/DB_BTREE";
-	private static final String hashLoc = "tmp/ahmirza_db/DB_HASH";
+	private static final String btreeLoc = "./bin/DB_BTREE";
+	private static final String hashLoc = "./bin/DB_HASH";
 	// number of records to populate
 	private static final int NO_RECORDS = 1000;
 	
@@ -15,6 +16,7 @@ public class MyDatabase {
 	private Database myDB;
 
 	private int dbType;
+
 	
 	public MyDatabase(String db_type_option) {
 		dbConfig = new DatabaseConfig();
@@ -50,19 +52,14 @@ public class MyDatabase {
 				
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
-			//populateTable(BTREE,NO_RECORDS);
-			/* populate the new database with NO_RECORDS records */
-			
+			}			
+
 		} else if (dbType == 2) {
 			try {
 				myDB = new Database(hashLoc, null, dbConfig);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// Bad code below: HASH is created after BTREE, so we populate both here.
-			// so dirty
-			/* populate the new database with NO_RECORDS records */
 		}
 	}
 	
@@ -81,6 +78,15 @@ public class MyDatabase {
 		 *
 		 *  Seed the random number once and once only.
 		 */
+
+		Writer writer;
+		try {
+			writer = new BufferedWriter(new OutputStreamWriter(
+				new FileOutputStream("./bin/key-data-pairs.txt"), "utf-8"));
+		} catch (Exception e) {
+			writer = null;
+		}
+
 		Random random = new Random(1000000);
 
 		try {
@@ -97,17 +103,22 @@ public class MyDatabase {
 				kdbt.setSize(s.length()); 
 
 				// to print out the key
-				System.out.println(s+"\n");	
-
+				// System.out.println(s+"\n");
+				try {
+					writer.write("Key:  "+s+"\n");
+				} catch (Exception e) {}
+				
 				/* to generate a data string */
 				range = 64 + random.nextInt( 64 );
 				s = "";
 				for ( int j = 0; j < range; j++ ) 
 				  s+=(new Character((char)(97+random.nextInt(26)))).toString();
-						// to print out the data
-						// System.out.println(s);	
-						// System.out.println("");
-				
+				// to print out the data
+				// System.out.println(s);	
+				// System.out.println("");
+				try {
+					writer.write("Data: "+s+"\n\n");
+				} catch (Exception e) {}
 				/* to create a DBT for data */
 				ddbt = new DatabaseEntry(s.getBytes());
 				ddbt.setSize(s.length()); 
