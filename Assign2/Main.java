@@ -75,6 +75,9 @@ public class Main {
 					System.out.println("Please enter lower limit and upper limit of keys to retrieve, seperated by space");
 					String keysString[] = in.nextLine().split(" ");
 					assert keysString.length == 2;
+					if (Integer.parseInt(keysString[0]) > Integer.parseInt(keysString[1])) {
+						System.out.println("Please ensure the lower bound is on the left, and the upper bound on the right");
+					}
 					int keys[] = new int[2];
 					for (int i = 0; i < 2; ++i) {
 						keys[i] = Integer.parseInt(keysString[i]);
@@ -83,7 +86,7 @@ public class Main {
 					int j = 0;
 					for (int i = keys[0]; i < keys[1]; i++){
 						values[j] = myBTREEDatabase.getValue(String.valueOf(i));
-						System.out.println("key: " +  i + " value: " + values[j]);
+						System.out.println("key: " +  i + "\nvalue: " + values[j]);
 						j += 1;
 					}
 					break;
