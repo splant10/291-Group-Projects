@@ -72,16 +72,24 @@ public class Main {
 					System.out.println(key1);
 					break;
 				case RETRIEVE_RECORDS_WITH_GIVEN_RANGE_OF_KEY_OPTION:
-					System.out.println("Please enter lower limit and upper limit of keys to retrieve seperated by space");
-					String keys[] = in.nextLine().split(" ");
-					String values[] = new String[keys.length];
-					for (int i = 0; i < keys.length; i++){
-						values[i] = myBTREEDatabase.getValue(keys[i]);
-						System.out.println("key: " +  keys[i] + " value: " + values[i]);
+					System.out.println("Please enter lower limit and upper limit of keys to retrieve, seperated by space");
+					String keysString[] = in.nextLine().split(" ");
+					assert keysString.length == 2;
+					int keys[] = new int[2];
+					for (int i = 0; i < 2; ++i) {
+						keys[i] = Integer.parseInt(keysString[i]);
+					}
+					String values[] = new String[1000];
+					int j = 0;
+					for (int i = keys[0]; i < keys[1]; i++){
+						values[j] = myBTREEDatabase.getValue(String.valueOf(i));
+						System.out.println("key: " +  i + " value: " + values[j]);
+						j += 1;
 					}
 					break;
 				case DESTROY_DATABASE_OPTION:
 					clearFolder(binDirectory);
+					System.out.println("Databases destroyed");
 					break;
 				case QUIT_OPTION:
 					quit = true;

@@ -111,7 +111,9 @@ public class MyDatabase {
 				// System.out.println(s+"\n");
 				try {
 					writer.write("Key:  "+key_num+"\n");
-				} catch (Exception e) {}
+				} catch (Exception e) {
+					System.out.println("key "+key_num+" couldn't be written");
+				}
 
 				/* to generate a data string */
 				range = 64 + random.nextInt( 64 );
@@ -121,16 +123,22 @@ public class MyDatabase {
 				// to print out the data
 				// System.out.println(s);	
 				// System.out.println("");
+
 				try {
 					writer.write("Data: "+s+"\n\n");
-				} catch (Exception e) {}
+				} catch (Exception e) {
+					System.out.println("data for key "+key_num+" couldn't be written");
+				}
+				
+
 				/* to create a DBT for data */
 				ddbt = new DatabaseEntry(s.getBytes());
 				ddbt.setSize(s.length()); 
 
 				/* to insert the key/data pair into the database */
-				btree.putNoOverwrite(null, kdbt, ddbt);
-				hash.putNoOverwrite(null, kdbt, ddbt);
+				OperationStatus resultB = btree.putNoOverwrite(null, kdbt, ddbt);
+				// I think our hash table is having collisions 
+				OperationStatus resultH = hash.putNoOverwrite(null, kdbt, ddbt);
 			}
 		}
 		catch (DatabaseException dbe) {
