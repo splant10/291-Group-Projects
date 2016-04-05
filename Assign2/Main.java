@@ -28,7 +28,7 @@ public class Main {
 
 	private static final int NO_RECORDS = 1000;
 
-	private static File binDirectory = new File("./bin/");
+	private static File outputDirectory = new File("./tmp/ahmirza_db/");
 
 	/*
 	 *  the main function
@@ -91,11 +91,13 @@ public class Main {
 					}
 					break;
 				case DESTROY_DATABASE_OPTION:
-					clearFolder(binDirectory);
+					clearResults(outputDirectory);
 					System.out.println("Databases destroyed");
 					break;
 				case QUIT_OPTION:
 					quit = true;
+					clearResults(outputDirectory);
+					// need to delete "answers" file
 					break;
 				default:
 					System.out.println("That's not a valid option");
@@ -119,12 +121,15 @@ public class Main {
 	// From http://stackoverflow.com/questions/7768071/how-to-delete-directory-content-in-java
 	// Answered by NCode
 	// Retrieved April 4 2016
-	public static void clearFolder(File folder) {
+	public static void clearResults(File folder) {
 		File[] files = folder.listFiles();
 		if(files!=null) { //some JVMs return null for empty dirs
 			for(File f: files) {
 				f.delete();
 			}
 		}
+		try {
+			new File ("./answers").delete();
+		} catch (Exception e) {}
 	}
 }

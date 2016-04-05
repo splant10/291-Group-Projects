@@ -7,8 +7,8 @@ import com.sleepycat.db.*;
 
 public class MyDatabase {
 	// to specify the file name for the table
-	private static final String btreeLoc = "./bin/DB_BTREE";
-	private static final String hashLoc = "./bin/DB_HASH";
+	private static final String btreeLoc = "./tmp/ahmirza_db/DB_BTREE";
+	private static final String hashLoc = "./tmp/ahmirza_db/DB_HASH";
 	// number of records to populate
 	private static final int NO_RECORDS = 1000;
 	
@@ -82,7 +82,7 @@ public class MyDatabase {
 		Writer writer;
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream("./bin/key-data-pairs.txt"), "utf-8"));
+				new FileOutputStream("./answers"), "utf-8"));
 		} catch (Exception e) {
 			writer = null;
 		}
