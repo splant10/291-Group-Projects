@@ -38,24 +38,6 @@ public class MyDatabase {
 			case 3:
 				break;
 		}
-		
-		/***** What is this try/catch block for? *****/ /*
-		try {
-			//if (db_type_option.equals("1")) {
-				BTREE = new Database(btreeLoc, null, dbConfig);
-				System.out.println(btreeLoc + " has been created");
-			//} else {
-			//	BTREE = new Database(hashLoc, null, dbConfig);
-			//	System.out.println(hashLoc + " has been created");
-			//}
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (DatabaseException e) {
-			e.printStackTrace();
-		}
-		*/ /********************************************/
 	}
 
 
@@ -86,6 +68,7 @@ public class MyDatabase {
 	
 	/*
 	 *  To poplate the given tables with nrecs records
+	 *  This could really be in Main.java
 	 */
 	static void populateTables(Database btree, Database hash, int nrecs ) {
 		int range;
@@ -113,7 +96,7 @@ public class MyDatabase {
 				kdbt = new DatabaseEntry(s.getBytes());
 				kdbt.setSize(s.length()); 
 
-				// to print out the key/data pair
+				// to print out the key
 				System.out.println(s+"\n");	
 
 				/* to generate a data string */
@@ -121,7 +104,7 @@ public class MyDatabase {
 				s = "";
 				for ( int j = 0; j < range; j++ ) 
 				  s+=(new Character((char)(97+random.nextInt(26)))).toString();
-						// to print out the key/data pair
+						// to print out the data
 						// System.out.println(s);	
 						// System.out.println("");
 				
@@ -163,23 +146,13 @@ public class MyDatabase {
 
 	}	
 	
-	//For testing purposes only
-	public void put(String key, String data) {
-		try {
-			DatabaseEntry theKey = new DatabaseEntry(key.getBytes());
-			DatabaseEntry theData = new DatabaseEntry(data.getBytes());
-			myDB.put(null, theKey, theData);
-		} catch (Exception e) {
-			// Exception handling
-			e.printStackTrace();
-		}
-	}
-	
 	// Returns the key for the specified value
 	public String getKey(String data) {
 		Cursor myCursor = null;
 		 
 		try {
+			// openCursor(Transaction txn, CursorConfig cc)
+			// Cursor config is DEFAULT when null is passed.
 			myCursor = myDB.openCursor(null, null);
 		 
 			DatabaseEntry foundKey = new DatabaseEntry();
@@ -208,6 +181,18 @@ public class MyDatabase {
 		return null;
 	}
 	
+	// For testing purposes only
+	public void put(String key, String data) {
+		try {
+			DatabaseEntry theKey = new DatabaseEntry(key.getBytes());
+			DatabaseEntry theData = new DatabaseEntry(data.getBytes());
+			myDB.put(null, theKey, theData);
+		} catch (Exception e) {
+			// Exception handling
+			e.printStackTrace();
+		}
+	}
+
 	// for testing purposes only
 	public void printAll() {
 		Cursor myCursor = null;

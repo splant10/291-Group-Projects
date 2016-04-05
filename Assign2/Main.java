@@ -103,17 +103,4 @@ public class Main {
 				+ "6. Quit\n");
 		
 	}
-
-	private static void pPrintRes(String db_opt_type) {
-		String db_type;
-		if (db_opt_type.equals("1")) {
-			db_type = "B-Tree";
-		} else if (db_opt_type.equals("2")) {
-			db_type = "Hash Table";
-		} else {
-			db_type = null;
-		}
-		// print relevant info
-		System.out.println("Results for " + db_type + ":");
-	} 
 }
