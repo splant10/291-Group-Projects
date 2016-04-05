@@ -81,8 +81,6 @@ public class Main {
 					}
 					break;
 				case DESTROY_DATABASE_OPTION:
-					// Used to print the entire database. FOR TESTING ONLY. NEEDS TO BE REMOVED
-					//myBTREEDatabase.printAll();
 					clearFolder(binDirectory);
 					break;
 				case QUIT_OPTION:

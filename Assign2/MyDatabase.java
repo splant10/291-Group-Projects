@@ -87,27 +87,32 @@ public class MyDatabase {
 			writer = null;
 		}
 
-		Random random = new Random(1000000);
+		Random random = new Random(System.currentTimeMillis());
 
 		try {
 			for (int i = 0; i < nrecs; i++) {
 
 				/* to generate a key string */
+				
+				/*
 				range = 64 + random.nextInt( 64 );
 				s = "";
 				for ( int j = 0; j < range; j++ ) 
 				  s+=(new Character((char)(97+random.nextInt(26)))).toString();
-
+				*/
 				/* to create a DBT for key */
-				kdbt = new DatabaseEntry(s.getBytes());
-				kdbt.setSize(s.length()); 
+
+				// Use a count as the key.
+				String key_num = Integer.toString(i);
+				kdbt = new DatabaseEntry(key_num.getBytes());
+				kdbt.setSize(key_num.length()); 
 
 				// to print out the key
 				// System.out.println(s+"\n");
 				try {
-					writer.write("Key:  "+s+"\n");
+					writer.write("Key:  "+key_num+"\n");
 				} catch (Exception e) {}
-				
+
 				/* to generate a data string */
 				range = 64 + random.nextInt( 64 );
 				s = "";
