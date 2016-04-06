@@ -13,7 +13,7 @@ public class MyDatabase {
 	private static final int NO_RECORDS = 1000;
 	
 	private DatabaseConfig dbConfig;
-	private Database myDB;
+	private static Database myDB;
 
 	private int dbType;
 
@@ -67,8 +67,9 @@ public class MyDatabase {
 	 *  To poplate the given tables with nrecs records
 	 *  This could really be in Main.java
 	 */
-	static void populateTables(Database btree, Database hash, int nrecs ) {
+	static void populateTable() {
 		int range;
+		int nrecs = NO_RECORDS;
 		DatabaseEntry kdbt, ddbt;
 		String s;
 
@@ -136,9 +137,7 @@ public class MyDatabase {
 				ddbt.setSize(s.length()); 
 
 				/* to insert the key/data pair into the database */
-				OperationStatus resultB = btree.putNoOverwrite(null, kdbt, ddbt);
-				// I think our hash table is having collisions 
-				OperationStatus resultH = hash.putNoOverwrite(null, kdbt, ddbt);
+				OperationStatus resultB = myDB.putNoOverwrite(null, kdbt, ddbt);
 			}
 		}
 		catch (DatabaseException dbe) {

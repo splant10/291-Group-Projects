@@ -1,3 +1,3 @@
 #!/bin/bash
 
-java -cp ".:lib/db.jar" Main MyDatabase
+java -cp ".:lib/db.jar" Main hash

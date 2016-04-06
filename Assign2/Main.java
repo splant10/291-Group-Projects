@@ -38,9 +38,28 @@ public class Main {
 		
 		String BTREE_option = "1";
 		String HASHT_option = "2";
+		String INDEX_option = "3";
 
-		MyDatabase myBTREEDatabase = new MyDatabase(BTREE_option);
-		MyDatabase myHASHTDatabase = new MyDatabase(HASHT_option);
+		//MyDatabase myBTREEDatabase = new MyDatabase(BTREE_option);
+		//MyDatabase myHASHTDatabase = new MyDatabase(HASHT_option);
+		String db_type_input = args[0];
+		String db_type_option = null;
+		
+		if (Objects.equals(db_type_input, "btree")) {
+			db_type_option = BTREE_option;
+			System.out.println("BTREE option provided");
+		} else if (Objects.equals(db_type_input, "hash")) {
+			db_type_option = HASHT_option;
+			System.out.println("HASH option provided");
+		} else if (Objects.equals(db_type_input, "indexfile")) {
+			db_type_option = INDEX_option;
+			System.out.println("INDEX option provided");
+		} else {
+			System.out.println("Please provide a proper argument");
+			System.exit(1);
+		}
+
+		MyDatabase myDatabase = new MyDatabase(db_type_option);
 
 		Scanner in = new Scanner(System.in);
 		
@@ -51,24 +70,20 @@ public class Main {
 			try {
 				switch(Integer.valueOf(option)){
 				case CREATE_POPULATE_DATABASE_OPTION:
-					myBTREEDatabase.create();
-					myHASHTDatabase.create();
-					MyDatabase.populateTables(myBTREEDatabase.getMyDB(), myHASHTDatabase.getMyDB(), NO_RECORDS);
-					System.out.println("1000 records inserted into Btree");
-					System.out.println("1000 records inserted into Hash");
+					myDatabase.create();
+					myDatabase.populateTable();
+					System.out.println("1000 records inserted into "+db_type_input);
 					break;
 				case RETRIEVE_RECORD_WITH_GIVEN_KEY_OPTION:
 					System.out.println("Please enter the key and press enter");
 					String key = in.nextLine();
-					String valueBT = myBTREEDatabase.getValue(key);
-					String valueHash = myHASHTDatabase.getValue(key);
-					System.out.println("DATA from BTREE: " + valueBT);
-					System.out.println("DATA from HASH: " + valueHash);
+					String value = myDatabase.getValue(key);
+					System.out.println("DATA from " + db_type_input + ": " + value);
 					break;
 				case RETRIEVE_RECORD_WITH_GIVEN_DATA_OPTION:
 					System.out.println("Please enter the value and press enter");
 					String value1 = in.nextLine();
-					String key1 = myBTREEDatabase.getKey(value1);
+					String key1 = myDatabase.getKey(value1);
 					System.out.println(key1);
 					break;
 				case RETRIEVE_RECORDS_WITH_GIVEN_RANGE_OF_KEY_OPTION:
@@ -85,14 +100,14 @@ public class Main {
 					String values[] = new String[1000];
 					int j = 0;
 					for (int i = keys[0]; i < keys[1]; i++){
-						values[j] = myBTREEDatabase.getValue(String.valueOf(i));
+						values[j] = myDatabase.getValue(String.valueOf(i));
 						System.out.println("key: " +  i + "\nvalue: " + values[j]);
 						j += 1;
 					}
 					break;
 				case DESTROY_DATABASE_OPTION:
 					clearResults(outputDirectory);
-					System.out.println("Databases destroyed");
+					System.out.println("Database destroyed");
 					break;
 				case QUIT_OPTION:
 					quit = true;
