@@ -40,8 +40,6 @@ public class Main {
 		String HASHT_option = "2";
 		String INDEX_option = "3";
 
-		//MyDatabase myBTREEDatabase = new MyDatabase(BTREE_option);
-		//MyDatabase myHASHTDatabase = new MyDatabase(HASHT_option);
 		String db_type_input = args[0];
 		String db_type_option = null;
 		
@@ -58,6 +56,10 @@ public class Main {
 			System.out.println("Please provide a proper argument");
 			System.exit(1);
 		}
+
+		long start;
+		long end;
+		long microseconds;
 
 		MyDatabase myDatabase = new MyDatabase(db_type_option);
 
@@ -77,14 +79,22 @@ public class Main {
 				case RETRIEVE_RECORD_WITH_GIVEN_KEY_OPTION:
 					System.out.println("Please enter the key and press enter");
 					String key = in.nextLine();
+					start = System.nanoTime();
 					String value = myDatabase.getValue(key);
+					end = System.nanoTime();
+					microseconds = (end-start)/1000;
 					System.out.println("DATA from " + db_type_input + ": " + value);
+					System.out.println("It took "+microseconds+" microseconds");
 					break;
 				case RETRIEVE_RECORD_WITH_GIVEN_DATA_OPTION:
 					System.out.println("Please enter the value and press enter");
 					String value1 = in.nextLine();
+					start = System.nanoTime();
 					String key1 = myDatabase.getKey(value1);
+					end = System.nanoTime();
+					microseconds = (end-start)/1000;
 					System.out.println(key1);
+					System.out.println("It took "+microseconds+" microseconds");
 					break;
 				case RETRIEVE_RECORDS_WITH_GIVEN_RANGE_OF_KEY_OPTION:
 					System.out.println("Please enter lower limit and upper limit of keys to retrieve, seperated by space");
@@ -99,11 +109,18 @@ public class Main {
 					}
 					String values[] = new String[1000];
 					int j = 0;
+
+					start = System.nanoTime();
+
 					for (int i = keys[0]; i < keys[1]; i++){
 						values[j] = myDatabase.getValue(String.valueOf(i));
 						System.out.println("key: " +  i + "\nvalue: " + values[j]);
 						j += 1;
 					}
+
+					end = System.nanoTime();
+					microseconds = (end-start)/1000;
+					System.out.println("It took "+microseconds+" microseconds");
 					break;
 				case DESTROY_DATABASE_OPTION:
 					clearResults(outputDirectory);
@@ -135,7 +152,7 @@ public class Main {
 
 	// From http://stackoverflow.com/questions/7768071/how-to-delete-directory-content-in-java
 	// Answered by NCode
-	// Retrieved April 4 2016
+	// Retrieved April 4 2016 by Spencer Plant
 	public static void clearResults(File folder) {
 		File[] files = folder.listFiles();
 		if(files!=null) { //some JVMs return null for empty dirs
