@@ -1,6 +1,6 @@
 To compile the program:
 
-./make.sh
+./build
 
 To compile and run the program:
 
@@ -8,16 +8,18 @@ To compile and run the program:
 
 To run the program:
 
-./run.sh
+./mydbtest
 
 Note: if you're not allowed permission to run these scripts, give the commands:
 
-chmod +x make.sh
+chmod +x build
 chmod +x build-run.sh
-chmod +x run.sh
+chmod +x mydbtest
 
 NOTE: SAMPLE_TABLE (in MyDatabase.java) variable may need to be changed to work on your account??
 
-On running option 1 (Create and populate DBs), one BTREE and one HASH database are created,
-populated, and placed in the 'bin' folder. A 'key-data-pairs.txt' is created and
-placed in the 'bin' folder as well.
+To change the type of database system used:
+
+vim mydbtest
+
+and change the parameter given to one of "btree", "hash", or "indexfile"

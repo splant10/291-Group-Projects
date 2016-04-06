@@ -26,8 +26,6 @@ public class Main {
 	private static final int DESTROY_DATABASE_OPTION = 5;
 	private static final int QUIT_OPTION = 6;
 
-	private static final int NO_RECORDS = 1000;
-
 	private static File outputDirectory = new File("./tmp/ahmirza_db/");
 
 	/*

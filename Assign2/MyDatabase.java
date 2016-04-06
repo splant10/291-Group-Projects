@@ -10,7 +10,7 @@ public class MyDatabase {
 	private static final String btreeLoc = "./tmp/ahmirza_db/DB_BTREE";
 	private static final String hashLoc = "./tmp/ahmirza_db/DB_HASH";
 	// number of records to populate
-	private static final int NO_RECORDS = 1000;
+	private static final int NO_RECORDS = 1000; // needs to be changed to 100000
 	
 	private DatabaseConfig dbConfig;
 	private static Database myDB;
@@ -38,6 +38,8 @@ public class MyDatabase {
 				dbType = 2;
 				break;
 			case 3:
+				dbConfig.setType(DatabaseType.HASH);
+				dbType = 2;
 				break;
 		}
 	}
@@ -64,8 +66,7 @@ public class MyDatabase {
 	}
 	
 	/*
-	 *  To poplate the given tables with nrecs records
-	 *  This could really be in Main.java
+	 *  To poplate the given table with nrecs records
 	 */
 	static void populateTable() {
 		int range;
@@ -104,16 +105,17 @@ public class MyDatabase {
 				/* to create a DBT for key */
 
 				// Use a count as the key.
-				String key_num = Integer.toString(i);
-				kdbt = new DatabaseEntry(key_num.getBytes());
-				kdbt.setSize(key_num.length()); 
+				s = Integer.toString(i);
+				String key = s;
+				kdbt = new DatabaseEntry(s.getBytes());
+				kdbt.setSize(s.length()); 
 
 				// to print out the key
 				// System.out.println(s+"\n");
 				try {
-					writer.write("Key:  "+key_num+"\n");
+					writer.write("Key:  "+s+"\n");
 				} catch (Exception e) {
-					System.out.println("key "+key_num+" couldn't be written");
+					System.out.println("key "+s+" couldn't be written");
 				}
 
 				/* to generate a data string */
@@ -128,7 +130,7 @@ public class MyDatabase {
 				try {
 					writer.write("Data: "+s+"\n\n");
 				} catch (Exception e) {
-					System.out.println("data for key "+key_num+" couldn't be written");
+					System.out.println("data for key "+key+" couldn't be written");
 				}
 				
 
@@ -200,7 +202,6 @@ public class MyDatabase {
 				System.err.println("Error closing cursor: " + dbe.toString());
 			}
 		}
-		
 		return null;
 	}
 	
@@ -245,9 +246,4 @@ public class MyDatabase {
 		}
 		
 	}
-
-	public Database getMyDB() {
-		return myDB;
-	}
-
 }
