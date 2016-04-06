@@ -1,5 +1,5 @@
 import java.io.FileNotFoundException;
-import java.util.Random;
+import java.util.*;
 import java.io.*;
 
 
@@ -66,13 +66,14 @@ public class MyDatabase {
 	}
 	
 	/*
-	 *  To poplate the given table with nrecs records
+	 *  To poplate the given table with nrecs records - returns size of database
 	 */
 	static void populateTable() {
 		int range;
 		int nrecs = NO_RECORDS;
 		DatabaseEntry kdbt, ddbt;
 		String s;
+		String key;
 
 		/*  
 		 *  generate a random string with the length between 64 and 127,
@@ -102,37 +103,18 @@ public class MyDatabase {
 				for ( int j = 0; j < range; j++ ) 
 				  s+=(new Character((char)(97+random.nextInt(26)))).toString();
 				*/
-				/* to create a DBT for key */
-
+				
 				// Use a count as the key.
-				s = Integer.toString(i);
-				String key = s;
-				kdbt = new DatabaseEntry(s.getBytes());
-				kdbt.setSize(s.length()); 
-
-				// to print out the key
-				// System.out.println(s+"\n");
-				try {
-					writer.write("Key:  "+s+"\n");
-				} catch (Exception e) {
-					System.out.println("key "+s+" couldn't be written");
-				}
+				/* to create a DBT for key */
+				key = Integer.toString(i);
+				kdbt = new DatabaseEntry(key.getBytes());
+				kdbt.setSize(key.length()); 
 
 				/* to generate a data string */
 				range = 64 + random.nextInt( 64 );
 				s = "";
 				for ( int j = 0; j < range; j++ ) 
 				  s+=(new Character((char)(97+random.nextInt(26)))).toString();
-				// to print out the data
-				// System.out.println(s);	
-				// System.out.println("");
-
-				try {
-					writer.write("Data: "+s+"\n\n");
-				} catch (Exception e) {
-					System.out.println("data for key "+key+" couldn't be written");
-				}
-				
 
 				/* to create a DBT for data */
 				ddbt = new DatabaseEntry(s.getBytes());
@@ -140,6 +122,12 @@ public class MyDatabase {
 
 				/* to insert the key/data pair into the database */
 				OperationStatus resultB = myDB.putNoOverwrite(null, kdbt, ddbt);
+				if (resultB == OperationStatus.SUCCESS) {
+					try {
+						writer.write("Key:  "+key+"\n");
+						writer.write("Data: "+s+"\n\n");
+					} catch (Exception e) {}
+				}
 			}
 		}
 		catch (DatabaseException dbe) {
@@ -159,7 +147,7 @@ public class MyDatabase {
 		 
 			// Call get() to query the database
 			if (myDB.get(null, theKey, theData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
-				System.out.println("\nSUCCESS");
+				//System.out.println("\nSUCCESS");
 				String foundData = new String(theData.getData());
 				return foundData;
 			} 
@@ -172,6 +160,7 @@ public class MyDatabase {
 	}	
 	
 	// Returns the key for the specified value
+	
 	public String getKey(String data) {
 		Cursor myCursor = null;
 		 
@@ -187,7 +176,10 @@ public class MyDatabase {
 			while (myCursor.getNext(foundKey, foundData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
 				String keyString = new String(foundKey.getData());
 				String dataString = new String(foundData.getData());
-				if (dataString.equals(data)) {
+				// For debugging purposes:
+				// System.out.println("Key:  "+keyString+"\nData: "+dataString+"\n\n");
+				// System.out.println("Key:  "+keyString+"\n");
+				if (Objects.equals(dataString, data)) {
 					return keyString;
 				}
 			}

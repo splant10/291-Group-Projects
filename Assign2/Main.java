@@ -26,6 +26,9 @@ public class Main {
 	private static final int DESTROY_DATABASE_OPTION = 5;
 	private static final int QUIT_OPTION = 6;
 
+	private static List<Integer> keys = new ArrayList<Integer>(); // Need to change this to account for string keys
+	private static List<String> values = new ArrayList<String>();
+
 	private static File outputDirectory = new File("./tmp/ahmirza_db/");
 
 	/*
@@ -77,12 +80,17 @@ public class Main {
 				case RETRIEVE_RECORD_WITH_GIVEN_KEY_OPTION:
 					System.out.println("Please enter the key and press enter");
 					String key = in.nextLine();
+
 					start = System.nanoTime();
-					String value = myDatabase.getValue(key);
+					keys.add(Integer.parseInt(key));
+					values.add(myDatabase.getValue(key));
 					end = System.nanoTime();
 					microseconds = (end-start)/1000;
-					System.out.println("DATA from " + db_type_input + ": " + value);
-					System.out.println("It took "+microseconds+" microseconds");
+
+					printResults(microseconds);
+
+					keys.clear();
+					values.clear();
 					break;
 				case RETRIEVE_RECORD_WITH_GIVEN_DATA_OPTION:
 					System.out.println("Please enter the value and press enter");
@@ -93,6 +101,8 @@ public class Main {
 					microseconds = (end-start)/1000;
 					System.out.println(key1);
 					System.out.println("It took "+microseconds+" microseconds");
+
+					values.clear();
 					break;
 				case RETRIEVE_RECORDS_WITH_GIVEN_RANGE_OF_KEY_OPTION:
 					System.out.println("Please enter lower limit and upper limit of keys to retrieve, seperated by space");
@@ -101,24 +111,24 @@ public class Main {
 					if (Integer.parseInt(keysString[0]) > Integer.parseInt(keysString[1])) {
 						System.out.println("Please ensure the lower bound is on the left, and the upper bound on the right");
 					}
-					int keys[] = new int[2];
+					// Need to change this to account for string keys
+					int keyBounds[] = new int[2];
 					for (int i = 0; i < 2; ++i) {
-						keys[i] = Integer.parseInt(keysString[i]);
+						keyBounds[i] = Integer.parseInt(keysString[i]);
 					}
-					String values[] = new String[1000];
-					int j = 0;
 
 					start = System.nanoTime();
-
-					for (int i = keys[0]; i < keys[1]; i++){
-						values[j] = myDatabase.getValue(String.valueOf(i));
-						System.out.println("key: " +  i + "\nvalue: " + values[j]);
-						j += 1;
+					for (int i = keyBounds[0]; i < keyBounds[1]; i++) {
+						keys.add(i);
+						values.add(myDatabase.getValue(String.valueOf(i)));
 					}
-
 					end = System.nanoTime();
 					microseconds = (end-start)/1000;
-					System.out.println("It took "+microseconds+" microseconds");
+
+					printResults(microseconds);
+
+					keys.clear();
+					values.clear();
 					break;
 				case DESTROY_DATABASE_OPTION:
 					clearResults(outputDirectory);
@@ -161,5 +171,22 @@ public class Main {
 		try {
 			new File ("./answers").delete();
 		} catch (Exception e) {}
+	}
+
+	public static void printResults(long time) {
+		int count = values.size();
+
+		if (count == 1) {
+			System.out.println("\nThere was 1 result\n");
+		} else {
+			System.out.println("\nThere were "+count+" results\n");
+		}
+		
+		for (int i = 0; i < count; ++i) {
+			System.out.println("Key:  "+keys.get(i));
+			System.out.println("Data: "+values.get(i)+"\n");
+		}
+
+		System.out.println("It took "+time+" microseconds");
 	}
 }
