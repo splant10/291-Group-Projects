@@ -14,12 +14,13 @@ public class MyDatabase {
 	
 	private DatabaseConfig dbConfig;
 	private static Database myDB;
+	private static Database sec_table;
 
 	private int dbType;
 
-	
 	public MyDatabase(String db_type_option) {
 		dbConfig = new DatabaseConfig();
+		dbConfig.setAllowCreate(true);
 		setDatabaseType(db_type_option);
 	}
 	
@@ -161,8 +162,10 @@ public class MyDatabase {
 	
 	// Returns the key for the specified value
 	
-	public String getKey(String data) {
+	public List<String> getKeys(String data) {
 		Cursor myCursor = null;
+
+		List<String> keys = new ArrayList<String>();
 		 
 		try {
 			// openCursor(Transaction txn, CursorConfig cc)
@@ -180,9 +183,10 @@ public class MyDatabase {
 				// System.out.println("Key:  "+keyString+"\nData: "+dataString+"\n\n");
 				// System.out.println("Key:  "+keyString+"\n");
 				if (Objects.equals(dataString, data)) {
-					return keyString;
+					keys.add(keyString);
 				}
 			}
+			return keys;
 		} catch (DatabaseException de) {
 			System.err.println("Error reading from database: " + de);
 		} finally {

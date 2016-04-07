@@ -1,8 +1,8 @@
 import java.util.*;
 
 public class KeyValue {
-	public final List<String> keys;
-	public final List<String> values;
+	public List<String> keys;
+	public List<String> values;
 
 	public KeyValue() {
 		this.keys = new ArrayList<String>();

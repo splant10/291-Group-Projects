@@ -26,11 +26,12 @@ public class Main {
 	private static final int DESTROY_DATABASE_OPTION = 5;
 	private static final int QUIT_OPTION = 6;
 
-	private static List<String> keys   = new ArrayList<String>();
 	private static List<String> values = new ArrayList<String>();
 	private static List<KeyValue> results = new ArrayList<KeyValue>();
 
 	private static File outputDirectory = new File("./tmp/ahmirza_db/");
+
+	private static Writer writer;
 
 	/*
 	 *  the main function
@@ -89,32 +90,32 @@ public class Main {
 						kv.AddKey(key);
 						kv.AddValue(retVal);
 						results.add(kv);
-						System.out.println("keys len: "+kv.keys.size());
-						System.out.println("vals len: "+kv.values.size());
 					}
 					end = System.nanoTime();
 					
 					microseconds = (end-start)/1000;
-					printResults(0, microseconds); // print, checking to see if any values were found
+					printResults(microseconds); // print, checking to see if any values were found
 
 					results.clear();
 					break;
 				case RETRIEVE_RECORD_WITH_GIVEN_DATA_OPTION:
 					System.out.println("Please enter the value and press enter");
 					String valueToSearch = in.nextLine();
-					values.add(valueToSearch);
+					List<String> retKeys = new ArrayList<String>();
 
 					start = System.nanoTime();
-					String key2 = myDatabase.getKey(valueToSearch);
+					retKeys = myDatabase.getKeys(valueToSearch);
 					end = System.nanoTime();
-
-					keys.add(key2);
+					if (retKeys != null) {
+						KeyValue kv = new KeyValue();
+						kv.keys = retKeys;
+						kv.AddValue(valueToSearch);
+						results.add(kv);						
+					}
 
 					microseconds = (end-start)/1000;
-					printResults(1, microseconds); // print, checking to see if any keys were found
+					printResults(microseconds);
 
-					values.clear();
-					keys.clear();
 					break;
 				case RETRIEVE_RECORDS_WITH_GIVEN_RANGE_OF_KEY_OPTION:
 					System.out.println("Please enter lower limit and upper limit of keys to retrieve, seperated by space");
@@ -129,10 +130,8 @@ public class Main {
 					end = System.nanoTime();
 					microseconds = (end-start)/1000;
 
-					printResults(0, microseconds);
+					printResults(microseconds);
 
-					keys.clear();
-					values.clear();
 					break;
 				case DESTROY_DATABASE_OPTION:
 					clearResults(outputDirectory);
@@ -178,7 +177,7 @@ public class Main {
 		} catch (Exception e) {}
 	}
 
-	public static void printResults(int opt, long time) {
+	public static void printResults(long time) {
 		int count = results.size();
 
 		if (count == 0) {
@@ -188,7 +187,7 @@ public class Main {
 		} else {
 			System.out.println("\nThere were "+count+" results:");
 		}
-		
+		/*
 		for (int i = 0; i < count; ++i) { 									// for each result
 			System.out.println("\n");							
 			for (int m = 0; m < results.get(i).keys.size(); ++m) { 			// for each key in a result
@@ -198,6 +197,26 @@ public class Main {
 				}
 			}
 		}
+		*/
 		System.out.println("\nIt took "+time+" microseconds");
+	}
+
+	private static void printToFile(String key, String data) {
+		if (writer == null) {
+			try {
+				writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("./answers"), "utf-8"));
+			} catch (Exception e) {
+				writer = null;
+			}
+		}
+		
+		try {
+			writer.write("Key:  "+key+"\n");
+			writer.write("Data: "+data+"\n\n");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }
