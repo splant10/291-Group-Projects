@@ -258,7 +258,9 @@ public class MyDatabase {
 				} else {
 					String keyString = new String(foundKey.getData());
 					String dataString = new String(foundData.getData());	
-					KeyValue kv = new KeyValue(keyString, dataString);		
+					KeyValue kv = new KeyValue();
+					kv.AddKey(keyString);
+					kv.AddValue(dataString);
 					keyValues.add(kv);
 				}
 

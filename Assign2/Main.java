@@ -83,15 +83,21 @@ public class Main {
 					String key = in.nextLine();
 
 					start = System.nanoTime();
-					keys.add(key);
-					values.add(myDatabase.getValue(key));
+					String retVal = myDatabase.getValue(key);
+					if (retVal != null) {
+						KeyValue kv = new KeyValue();
+						kv.AddKey(key);
+						kv.AddValue(retVal);
+						results.add(kv);
+						System.out.println("keys len: "+kv.keys.size());
+						System.out.println("vals len: "+kv.values.size());
+					}
 					end = System.nanoTime();
-
+					
 					microseconds = (end-start)/1000;
 					printResults(0, microseconds); // print, checking to see if any values were found
 
-					keys.clear();
-					values.clear();
+					results.clear();
 					break;
 				case RETRIEVE_RECORD_WITH_GIVEN_DATA_OPTION:
 					System.out.println("Please enter the value and press enter");
@@ -141,7 +147,8 @@ public class Main {
 					System.out.println("That's not a valid option");
 				}
 			} catch (Exception e) {
-				System.out.println("That's not a valid option");
+				System.out.println("That is not a valid option");
+				e.printStackTrace();
 			}
 		}
 	}
@@ -175,18 +182,22 @@ public class Main {
 		int count = results.size();
 
 		if (count == 0) {
-			System.out.println("\nThere were no results\n");
+			System.out.println("\nThere were no results");
 		} else if (count == 1) {
-			System.out.println("\nThere was 1 result\n");
+			System.out.println("\nThere was 1 result:");
 		} else {
-			System.out.println("\nThere were "+count+" results\n");
+			System.out.println("\nThere were "+count+" results:");
 		}
 		
-		for (int i = 0; i < count; ++i) {
-			System.out.println("Key:  "+results.get(i).key);
-			System.out.println("Data: "+results.get(i).value);
+		for (int i = 0; i < count; ++i) { 									// for each result
+			System.out.println("\n");							
+			for (int m = 0; m < results.get(i).keys.size(); ++m) { 			// for each key in a result
+				System.out.println("Key:  "+results.get(i).keys.get(m));
+				for (int j = 0; j < results.get(i).values.size(); ++j) { 	// for each value corresponding to that key
+					System.out.println("Data: "+results.get(i).values.get(j));
+				}
+			}
 		}
-
-		System.out.println("It took "+time+" microseconds");
+		System.out.println("\nIt took "+time+" microseconds");
 	}
 }

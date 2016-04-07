@@ -1,9 +1,19 @@
-public class KeyValue {
-	public final String key;
-	public final String value;
+import java.util.*;
 
-	public KeyValue(String key, String value) {
-		this.key = key;
-		this.value = value;
+public class KeyValue {
+	public final List<String> keys;
+	public final List<String> values;
+
+	public KeyValue() {
+		this.keys = new ArrayList<String>();
+		this.values = new ArrayList<String>();
+	}
+
+	public void AddKey(String key) {
+		this.keys.add(key);
+	}
+
+	public void AddValue(String value) {
+		this.values.add(value);
 	}
 }
