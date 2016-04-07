@@ -9,15 +9,24 @@ public class MyDatabase {
 	// to specify the file name for the table
 	private static final String btreeLoc = "./tmp/ahmirza_db/DB_BTREE";
 	private static final String hashLoc = "./tmp/ahmirza_db/DB_HASH";
+	private static final String indexLoc = "./tmp/ahmirza_db/indexfile";
 	// number of records to populate
 	private static final int NO_RECORDS = 1000; // needs to be changed to 100000
-	
-	private DatabaseConfig dbConfig;
+
+	private Environment myEnv = null;
+	EnvironmentConfig myEnvConfig;
+
 	private static Database myDB;
+	private DatabaseConfig dbConfig;
+
+	private static SecondaryDatabase indexDB;
+	private SecondaryConfig indexConfig;
 
 	private int dbType;
 
-	
+	private File envHome = new File("./tmp/ahmirza_db/");
+	//private String envHome = "./tmp/ahmirza_db/";
+
 	public MyDatabase(String db_type_option) {
 		dbConfig = new DatabaseConfig();
 		setDatabaseType(db_type_option);
@@ -39,7 +48,16 @@ public class MyDatabase {
 				break;
 			case 3:
 				dbConfig.setType(DatabaseType.HASH);
-				dbType = 2;
+
+				myEnvConfig = new EnvironmentConfig();
+				myEnvConfig.setTransactional(true);
+				myEnvConfig.setAllowCreate(true);
+				myEnvConfig.setCacheSize(1000000);
+				Environment newlyCreatedEnv = new Environment(envHome, myEnvConfig);
+
+				indexConfig = new SecondaryConfig();
+				indexConfig.setType(DatabaseType.BTREE);
+				dbType = 3;
 				break;
 		}
 	}
@@ -62,8 +80,61 @@ public class MyDatabase {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (dbType == 3) {
+			try {
+				myDB = new Database(hashLoc, null, dbConfig);
+
+				indexConfig.setAllowCreate(true);
+
+				// retrieved from https://docs.oracle.com/cd/E17277_02/html/GettingStartedGuide/indexusage.html
+				// Open the secondary database. We use this to create a
+		        // secondary index for the inventory database
+
+		        // We want to maintain an index for the inventory entries based
+		        // on the item name. So, instantiate the appropriate key creator
+		        // and open a secondary database.
+		        //ItemNameKeyCreator keyCreator = new ItemNameKeyCreator(new InventoryBinding());
+
+		        // Set up the secondary properties
+		        indexConfig.setAllowPopulate(true); // Allow autopopulate
+		        // indexConfig.setKeyCreator(keyCreator);
+		        // Need to allow duplicates for our secondary database
+		        indexConfig.setSortedDuplicates(true);
+
+		        // Now open it
+		        indexDB = myEnv.openSecondaryDatabase(
+		        			null,     
+		                    "itemIndex",    // Index name
+		                    "myDB",   		// Database name
+		                    myDB,     		// Primary database handle. This is the db that we're indexing. 
+		                    indexConfig);   // The secondary config
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
+
+	public SecondaryDatabase getNameIndexDB() {
+        return indexDB;
+    } 
+
+    public void close() {
+        if (myEnv != null) {
+            try {
+                //Close the secondary before closing the primaries
+                indexDB.close();
+                myDB.close();
+
+                // Finally, close the environment.
+                myEnv.close();
+            } catch(DatabaseException dbe) {
+                System.err.println("Error closing MyDbEnv: " +
+                                    dbe.toString());
+                System.exit(-1);
+            }
+        }
+    }
 	
 	/*
 	 *  To poplate the given table with nrecs records - returns size of database
@@ -97,16 +168,16 @@ public class MyDatabase {
 
 				/* to generate a key string */
 				
-				
+				/*
 				range = 64 + random.nextInt( 64 );
-				key = "";
+				s = "";
 				for ( int j = 0; j < range; j++ ) 
-				  key+=(new Character((char)(97+random.nextInt(26)))).toString();
-				
+				  s+=(new Character((char)(97+random.nextInt(26)))).toString();
+				*/
 				
 				// Use a count as the key.
 				/* to create a DBT for key */
-				//key = Integer.toString(i);
+				key = Integer.toString(i);
 				kdbt = new DatabaseEntry(key.getBytes());
 				kdbt.setSize(key.length()); 
 
@@ -236,44 +307,6 @@ public class MyDatabase {
 				System.err.println("Error closing cursor: " + dbe.toString());
 			}
 		}
-	}
-
-	public List<KeyValue> getRangeBetweenKeys(String lower, String upper) {
-		Cursor myCursor = null;
-		List<KeyValue> keyValues = new ArrayList<KeyValue>();
-
-		try {
-			myCursor = myDB.openCursor(null, null);
-			DatabaseEntry lowerKey = new DatabaseEntry(lower.getBytes());
-			DatabaseEntry upperKey = new DatabaseEntry(upper.getBytes());
-		 
-			DatabaseEntry foundKey = new DatabaseEntry();
-			DatabaseEntry foundData = new DatabaseEntry();
-		 
-			// Retrieve records with calls to getNext() until the return status is not OperationStatus.SUCCESS
-			// and below the upper limit
-			while (myCursor.getNext(foundKey, foundData, LockMode.DEFAULT) == OperationStatus.SUCCESS) {
-				if (foundKey==upperKey) {
-					return keyValues;
-				} else {
-					String keyString = new String(foundKey.getData());
-					String dataString = new String(foundData.getData());	
-					KeyValue kv = new KeyValue(keyString, dataString);		
-					keyValues.add(kv);
-				}
-
-			}
-		} catch (DatabaseException de) {
-			System.err.println("Error reading from database: " + de);
-		} finally {
-			try {
-				if (myCursor != null) {
-					myCursor.close();
-				}
-			} catch(DatabaseException dbe) {
-				System.err.println("Error closing cursor: " + dbe.toString());
-			}
-		}
-		return keyValues;
+		
 	}
 }
